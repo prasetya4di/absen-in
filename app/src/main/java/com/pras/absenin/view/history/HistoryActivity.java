@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pras.absenin.databinding.ActivityHistoryBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class HistoryActivity extends AppCompatActivity {
     private ActivityHistoryBinding binding;
 

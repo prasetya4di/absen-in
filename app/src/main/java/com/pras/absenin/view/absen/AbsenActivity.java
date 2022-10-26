@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pras.absenin.databinding.ActivityAbsenBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class AbsenActivity extends AppCompatActivity {
     private ActivityAbsenBinding binding;
 

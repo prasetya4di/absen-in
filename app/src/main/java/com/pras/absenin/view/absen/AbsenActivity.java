@@ -1,4 +1,4 @@
-package com.pras.absenin.view;
+package com.pras.absenin.view.absen;
 
 import android.os.Bundle;
 import android.view.View;

@@ -6,21 +6,29 @@ import com.pras.absenin.domain.GetAllAbsentHistory;
 import com.pras.absenin.domain.impl.DoAbsentImpl;
 import com.pras.absenin.domain.impl.GetAbsentHistoryByIdImpl;
 import com.pras.absenin.domain.impl.GetAllAbsentHistoryImpl;
+import com.pras.absenin.repository.AbsentRepository;
 
-import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.android.components.ViewModelComponent;
 
 @Module
-@InstallIn(ActivityComponent.class)
-public abstract class DomainModule {
-    @Binds
-    public abstract DoAbsent provideDoAbsent(DoAbsentImpl doAbsent);
+@InstallIn(ViewModelComponent.class)
+public class DomainModule {
 
-    @Binds
-    public abstract GetAllAbsentHistory provideGetAllAbsent(GetAllAbsentHistoryImpl getAllAbsentHistory);
+    @Provides
+    public DoAbsent provideDoAbsent(AbsentRepository absentRepository) {
+        return new DoAbsentImpl(absentRepository);
+    }
 
-    @Binds
-    public abstract GetAbsentHistoryById provideGetAbsentById(GetAbsentHistoryByIdImpl getAbsentHistoryById);
+    @Provides
+    public GetAllAbsentHistory provideGetAllAbsent(AbsentRepository absentRepository) {
+        return new GetAllAbsentHistoryImpl(absentRepository);
+    }
+
+    @Provides
+    public GetAbsentHistoryById provideGetAbsentById(AbsentRepository absentRepository) {
+        return new GetAbsentHistoryByIdImpl(absentRepository);
+    }
 }

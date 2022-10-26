@@ -10,11 +10,11 @@ import com.pras.absenin.data.source.local.AbsentDao;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.android.components.ViewModelComponent;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @Module
-@InstallIn(ActivityComponent.class)
+@InstallIn(ViewModelComponent.class)
 public class DatabaseModule {
 
     @Provides

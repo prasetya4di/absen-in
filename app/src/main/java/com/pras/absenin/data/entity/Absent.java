@@ -1,4 +1,4 @@
-package com.pras.absenin.view.data.entity;
+package com.pras.absenin.data.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

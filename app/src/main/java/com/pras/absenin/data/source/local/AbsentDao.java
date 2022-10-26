@@ -1,10 +1,10 @@
-package com.pras.absenin.view.data.source.local;
+package com.pras.absenin.data.source.local;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.pras.absenin.view.data.entity.Absent;
+import com.pras.absenin.data.entity.Absent;
 
 import java.util.List;
 

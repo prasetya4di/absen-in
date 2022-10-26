@@ -6,9 +6,12 @@ import com.pras.absenin.repository.AbsentRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class AbsentRepositoryImpl implements AbsentRepository {
     private final AbsentDao absentDao;
 
+    @Inject
     public AbsentRepositoryImpl(AbsentDao absentDao) {
         this.absentDao = absentDao;
     }

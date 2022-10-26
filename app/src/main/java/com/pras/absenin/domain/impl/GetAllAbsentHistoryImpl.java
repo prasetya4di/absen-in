@@ -6,9 +6,12 @@ import com.pras.absenin.repository.AbsentRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class GetAllAbsentHistoryImpl implements GetAllAbsentHistory {
     private final AbsentRepository absentRepository;
 
+    @Inject
     public GetAllAbsentHistoryImpl(AbsentRepository absentRepository) {
         this.absentRepository = absentRepository;
     }

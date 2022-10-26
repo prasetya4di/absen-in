@@ -6,9 +6,12 @@ import com.pras.absenin.data.entity.Absent;
 import com.pras.absenin.domain.DoAbsent;
 import com.pras.absenin.repository.AbsentRepository;
 
+import javax.inject.Inject;
+
 public class DoAbsentImpl implements DoAbsent {
     private final AbsentRepository absentRepository;
 
+    @Inject
     public DoAbsentImpl(AbsentRepository absentRepository) {
         this.absentRepository = absentRepository;
     }

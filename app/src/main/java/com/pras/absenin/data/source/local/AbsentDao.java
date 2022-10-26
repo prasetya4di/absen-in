@@ -14,7 +14,7 @@ public interface AbsentDao {
     List<Absent> getAll();
 
     @Query("SELECT * FROM absent WHERE uid = :absentId")
-    List<Absent> getById(int absentId);
+    Absent getById(int absentId);
 
     @Insert
     void insert(Absent absent);

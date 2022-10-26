@@ -3,4 +3,5 @@
     <string name="absen_text">Absen</string>
     <string name="see_history_text">Lihat History</string>
     <string name="exit_text">Exit</string>
+    <string name="show_location_text">Tampilkan lokasi</string>
 </resources>

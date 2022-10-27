@@ -1,5 +1,7 @@
 package com.pras.absenin.di;
 
+import android.content.Context;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.pras.absenin.domain.DoAbsent;
 import com.pras.absenin.domain.GetAbsentHistoryById;
@@ -13,14 +15,18 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @Module
 @InstallIn(ViewModelComponent.class)
 public class DomainModule {
 
     @Provides
-    public DoAbsent provideDoAbsent(AbsentRepository absentRepository, FusedLocationProviderClient fusedLocationProviderClient) {
-        return new DoAbsentImpl(absentRepository, fusedLocationProviderClient);
+    public DoAbsent provideDoAbsent(
+            @ApplicationContext Context context,
+            AbsentRepository absentRepository,
+            FusedLocationProviderClient fusedLocationProviderClient) {
+        return new DoAbsentImpl(context, absentRepository, fusedLocationProviderClient);
     }
 
     @Provides

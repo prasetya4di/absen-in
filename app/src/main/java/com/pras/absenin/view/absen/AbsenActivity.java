@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.pras.absenin.R;
 import com.pras.absenin.databinding.ActivityAbsenBinding;
 import com.pras.absenin.util.qrcode.QRCodeFoundListener;
 import com.pras.absenin.util.qrcode.QRCodeImageAnalyzer;
@@ -57,7 +58,7 @@ public class AbsenActivity extends AppCompatActivity {
                     startActivity(new Intent(this, AbsentSuccessActivity.class));
                     break;
                 case INVALID:
-                    Toast.makeText(this, "Code QR tidak valid, mohon lakukan scan ulang", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.invalid_qr_code_text), Toast.LENGTH_SHORT).show();
                     startCamera();
                     break;
                 case INVALID_LOCATION:

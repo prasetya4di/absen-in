@@ -1,5 +1,8 @@
 package com.pras.absenin.view.absen;
 
+import static com.pras.absenin.util.qrcode.QRCodeResultStatus.INVALID;
+import static com.pras.absenin.util.qrcode.QRCodeResultStatus.INVALID_LOCATION;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
@@ -21,7 +25,7 @@ import com.pras.absenin.R;
 import com.pras.absenin.databinding.ActivityAbsenBinding;
 import com.pras.absenin.util.qrcode.QRCodeFoundListener;
 import com.pras.absenin.util.qrcode.QRCodeImageAnalyzer;
-import com.pras.absenin.view.absent_result.AbsentFailedActivity;
+import com.pras.absenin.util.qrcode.QRCodeResultStatus;
 import com.pras.absenin.view.absent_result.AbsentSuccessActivity;
 
 import java.util.concurrent.ExecutionException;
@@ -58,11 +62,8 @@ public class AbsenActivity extends AppCompatActivity {
                     startActivity(new Intent(this, AbsentSuccessActivity.class));
                     break;
                 case INVALID:
-                    Toast.makeText(this, getString(R.string.invalid_qr_code_text), Toast.LENGTH_SHORT).show();
-                    startCamera();
-                    break;
                 case INVALID_LOCATION:
-                    startActivity(new Intent(this, AbsentFailedActivity.class));
+                    showAlertDialog(status);
                     break;
             }
         });
@@ -108,5 +109,28 @@ public class AbsenActivity extends AppCompatActivity {
         }));
 
         cameraProvider.bindToLifecycle(this, cameraSelector, imageAnalysis, preview);
+    }
+
+    private void showAlertDialog(QRCodeResultStatus status) {
+        int messageId = 0;
+        if (status == INVALID) {
+            messageId = R.string.invalid_qr_code_text;
+        } else if (status == INVALID_LOCATION) {
+            messageId = R.string.invalid_location_text;
+        }
+        new AlertDialog
+                .Builder(this)
+                .setMessage(messageId)
+                .setTitle(R.string.invalid_code_title_text)
+                .setPositiveButton(R.string.invalid_code_rescan, (dialog, which) -> {
+                    dialog.dismiss();
+                    startCamera();
+                })
+                .setNegativeButton(R.string.invalid_code_exit, (dialog, which) -> {
+                    dialog.dismiss();
+                    onBackPressed();
+                })
+                .create()
+                .show();
     }
 }

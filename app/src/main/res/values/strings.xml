@@ -7,4 +7,5 @@
     <string name="permission_denied_text">Program mungkin tidak berjalan dengan benar jika beberapa fungsi tidak diijinkan</string>
     <string name="invalid_qr_code_text">Code QR tidak valid, mohon lakukan scan ulang</string>
     <string name="invalid_location_text">Lokasi anda berbeda dengan lokasi event, mohon pastikan lokasi anda sama dengan lokasi event</string>
+    <string name="invalid_code_title_text">Gagal Absen</string>
 </resources>

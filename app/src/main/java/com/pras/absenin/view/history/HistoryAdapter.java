@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pras.absenin.data.entity.Absent;
 import com.pras.absenin.databinding.ItemHistoryBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
@@ -29,9 +30,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
         Absent absent = absentList.get(position);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        String formattedDate = dateFormat.format(absent.eventDate);
         holder.binding.eventTitle.setText(absent.eventTitle);
         holder.binding.eventDescription.setText(absent.eventDescription);
-        holder.binding.eventDate.setText(absent.eventDate.toString());
+        holder.binding.eventDate.setText(formattedDate);
         holder.binding.cardAbsent.setOnClickListener(v -> {
             historyAdapterCallback.onClick(absent);
         });

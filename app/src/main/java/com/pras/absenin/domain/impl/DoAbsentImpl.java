@@ -1,29 +1,24 @@
 package com.pras.absenin.domain.impl;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.SphericalUtil;
-import com.pras.absenin.data.entity.Absent;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.pras.absenin.domain.DoAbsent;
 import com.pras.absenin.repository.AbsentRepository;
+import com.pras.absenin.util.qrcode.QRCodeResultStatus;
 
 import javax.inject.Inject;
 
 public class DoAbsentImpl implements DoAbsent {
     private final AbsentRepository absentRepository;
+    private final FusedLocationProviderClient fusedLocationProviderClient;
 
     @Inject
-    public DoAbsentImpl(AbsentRepository absentRepository) {
+    public DoAbsentImpl(AbsentRepository absentRepository, FusedLocationProviderClient fusedLocationProviderClient) {
         this.absentRepository = absentRepository;
+        this.fusedLocationProviderClient = fusedLocationProviderClient;
     }
 
     @Override
-    public Boolean execute(Absent absent, LatLng currentLocation) {
-        double distance = SphericalUtil.computeDistanceBetween(absent.location, currentLocation) / 1000;
-        if (distance < 0.1) {
-            absentRepository.newAbsent(absent);
-            return true;
-        } else {
-            return false;
-        }
+    public QRCodeResultStatus execute(String qrResult) {
+        return QRCodeResultStatus.INVALID;
     }
 }

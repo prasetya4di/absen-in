@@ -8,4 +8,6 @@
     <string name="invalid_qr_code_text">Code QR tidak valid, mohon lakukan scan ulang</string>
     <string name="invalid_location_text">Lokasi anda berbeda dengan lokasi event, mohon pastikan lokasi anda sama dengan lokasi event</string>
     <string name="invalid_code_title_text">Gagal Absen</string>
+    <string name="invalid_code_rescan">Scan Ulang</string>
+    <string name="invalid_code_exit">Keluar</string>
 </resources>

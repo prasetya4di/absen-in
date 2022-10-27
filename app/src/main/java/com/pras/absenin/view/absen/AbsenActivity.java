@@ -27,6 +27,7 @@ import com.pras.absenin.util.qrcode.QRCodeFoundListener;
 import com.pras.absenin.util.qrcode.QRCodeImageAnalyzer;
 import com.pras.absenin.util.qrcode.QRCodeResultStatus;
 import com.pras.absenin.view.absent_result.AbsentSuccessActivity;
+import com.pras.absenin.view.loading.LoadingDialog;
 
 import java.util.concurrent.ExecutionException;
 
@@ -36,6 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class AbsenActivity extends AppCompatActivity {
     private ActivityAbsenBinding binding;
     private AbsenViewModel absenViewModel;
+    private LoadingDialog loadingDialog;
 
     private PreviewView cameraView;
     private ProcessCameraProvider processCameraProvider;
@@ -51,6 +53,7 @@ public class AbsenActivity extends AppCompatActivity {
         absenViewModel = new ViewModelProvider(this).get(AbsenViewModel.class);
 
         cameraView = binding.mainCameraView;
+        loadingDialog = new LoadingDialog(this);
 
         cameraProvider = ProcessCameraProvider.getInstance(this);
 
@@ -59,10 +62,12 @@ public class AbsenActivity extends AppCompatActivity {
         absenViewModel.resultStatus.observeForever(status -> {
             switch (status) {
                 case VALID:
+                    loadingDialog.dismisDialog();
                     startActivity(new Intent(this, AbsentSuccessActivity.class));
                     break;
                 case INVALID:
                 case INVALID_LOCATION:
+                    loadingDialog.dismisDialog();
                     showAlertDialog(status);
                     break;
             }
@@ -100,6 +105,7 @@ public class AbsenActivity extends AppCompatActivity {
             public void onQRCodeFound(String result) {
                 cameraProvider.unbindAll();
                 absenViewModel.doAbsent(result);
+                loadingDialog.startLoadingDialog();
             }
 
             @Override

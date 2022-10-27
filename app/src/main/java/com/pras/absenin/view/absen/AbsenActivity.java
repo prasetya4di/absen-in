@@ -23,6 +23,5 @@ public class AbsenActivity extends AppCompatActivity {
         setContentView(view);
 
         absenViewModel = new ViewModelProvider(this).get(AbsenViewModel.class);
-        absenViewModel.printKontol();
     }
 }

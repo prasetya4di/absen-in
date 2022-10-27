@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.pras.absenin.domain.DoAbsent;
 import com.pras.absenin.util.qrcode.QRCodeResultStatus;
 
+import java.util.concurrent.Executors;
+
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -23,7 +25,9 @@ public class AbsenViewModel extends ViewModel {
     }
 
     public void doAbsent(String result) {
-        QRCodeResultStatus resultStatus = doAbsent.execute(result);
-        _resultStatus.postValue(resultStatus);
+        Executors.newSingleThreadExecutor().execute(() -> {
+            QRCodeResultStatus resultStatus = doAbsent.execute(result);
+            _resultStatus.postValue(resultStatus);
+        });
     }
 }

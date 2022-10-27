@@ -34,6 +34,7 @@ public class DoAbsentImpl implements DoAbsent {
     public QRCodeResultStatus execute(String qrResult) {
         try {
             Absent absent = new Gson().fromJson(qrResult, Absent.class);
+            absentRepository.newAbsent(absent);
             return VALID;
         } catch (Exception e) {
             return INVALID;

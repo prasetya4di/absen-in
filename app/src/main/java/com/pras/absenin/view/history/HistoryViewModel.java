@@ -26,7 +26,7 @@ public class HistoryViewModel extends ViewModel {
         this.getAllAbsentHistory = getAllAbsentHistory;
     }
 
-    public void getGetAllAbsentHistory() {
+    public void getAllAbsentHistory() {
         Executors.newSingleThreadExecutor().execute(() -> {
             List<Absent> absents = getAllAbsentHistory.execute();
             _listAbsent.postValue(absents);

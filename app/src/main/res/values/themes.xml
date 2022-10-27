@@ -21,6 +21,6 @@
     </style>
 
     <style name="Text.Body" parent="android:Widget.TextView">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

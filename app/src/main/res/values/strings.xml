@@ -3,7 +3,7 @@
     <string name="absen_text">Absen</string>
     <string name="see_history_text">Lihat History</string>
     <string name="exit_text">Exit</string>
-    <string name="show_location_text">Tampilkan lokasi</string>
+    <string name="show_location_text">Klik untuk menampilkan lokasi</string>
     <string name="permission_denied_text">Program mungkin tidak berjalan dengan benar jika beberapa fungsi tidak diijinkan</string>
     <string name="invalid_qr_code_text">Code QR tidak valid, mohon lakukan scan ulang</string>
     <string name="invalid_location_text">Lokasi anda berbeda dengan lokasi event, mohon pastikan lokasi anda sama dengan lokasi event</string>

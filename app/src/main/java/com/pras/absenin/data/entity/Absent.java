@@ -1,5 +1,9 @@
 package com.pras.absenin.data.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -11,7 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Absent implements Serializable {
+public class Absent implements Serializable, Parcelable {
     @PrimaryKey
     public int uid;
 
@@ -28,4 +32,47 @@ public class Absent implements Serializable {
     public Date eventDate;
 
     public LatLng location;
+
+    public static final Creator<Absent> CREATOR = new Creator<Absent>() {
+        @Override
+        public Absent createFromParcel(Parcel in) {
+            return new Absent(in);
+        }
+
+        @Override
+        public Absent[] newArray(int size) {
+            return new Absent[size];
+        }
+    };
+
+    public Absent() {
+    }
+
+    public Absent(int uid, String eventTitle, String eventDescription, Date eventDate, LatLng location) {
+        this.uid = uid;
+        this.eventTitle = eventTitle;
+        this.eventDescription = eventDescription;
+        this.eventDate = eventDate;
+        this.location = location;
+    }
+
+    protected Absent(Parcel in) {
+        uid = in.readInt();
+        eventTitle = in.readString();
+        eventDescription = in.readString();
+        location = in.readParcelable(LatLng.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(uid);
+        dest.writeString(eventTitle);
+        dest.writeString(eventDescription);
+        dest.writeParcelable(location, flags);
+    }
 }

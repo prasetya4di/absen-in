@@ -5,9 +5,5 @@
     android:layout_height="match_parent"
     tools:context=".view.history_detail.HistoryDetailActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/detailMap"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <include layout="@layout/fragment_maps" />
 </androidx.constraintlayout.widget.ConstraintLayout>

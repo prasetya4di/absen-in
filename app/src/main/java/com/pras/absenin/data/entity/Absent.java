@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Entity
 public class Absent implements Serializable, Parcelable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int uid;
 
     @SerializedName("event_title")

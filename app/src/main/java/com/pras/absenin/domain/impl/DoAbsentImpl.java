@@ -3,9 +3,7 @@ package com.pras.absenin.domain.impl;
 import static com.pras.absenin.util.qrcode.QRCodeResultStatus.INVALID;
 import static com.pras.absenin.util.qrcode.QRCodeResultStatus.VALID;
 
-import android.content.Context;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.pras.absenin.data.entity.Absent;
 import com.pras.absenin.domain.DoAbsent;
@@ -16,27 +14,22 @@ import javax.inject.Inject;
 
 public class DoAbsentImpl implements DoAbsent {
     private final AbsentRepository absentRepository;
-    private final FusedLocationProviderClient fusedLocationProviderClient;
-    private final Context context;
 
     @Inject
     public DoAbsentImpl(
-            Context context,
-            AbsentRepository absentRepository,
-            FusedLocationProviderClient fusedLocationProviderClient
+            AbsentRepository absentRepository
     ) {
-        this.context = context;
         this.absentRepository = absentRepository;
-        this.fusedLocationProviderClient = fusedLocationProviderClient;
     }
 
     @Override
-    public QRCodeResultStatus execute(String qrResult) {
+    public QRCodeResultStatus execute(String qrResult, LatLng currentLoc) {
         try {
             Absent absent = new Gson().fromJson(qrResult, Absent.class);
             absentRepository.newAbsent(absent);
             return VALID;
         } catch (Exception e) {
+            e.printStackTrace();
             return INVALID;
         }
     }

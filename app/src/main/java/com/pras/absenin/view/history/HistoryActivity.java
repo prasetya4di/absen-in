@@ -2,6 +2,7 @@ package com.pras.absenin.view.history;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,9 @@ public class HistoryActivity extends AppCompatActivity {
 
         viewModel.listAbsent.observeForever(absents -> {
             HistoryAdapter historyAdapter = new HistoryAdapter(absents, absent -> {
-                startActivity(new Intent(this, HistoryDetailActivity.class));
+                Intent intent = new Intent(this, HistoryDetailActivity.class);
+                intent.putExtra("absent_data", (Parcelable) absent);
+                startActivity(intent);
             });
             binding.rvHistory.setAdapter(historyAdapter);
         });

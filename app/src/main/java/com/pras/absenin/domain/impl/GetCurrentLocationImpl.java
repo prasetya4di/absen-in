@@ -24,7 +24,7 @@ public class GetCurrentLocationImpl implements GetCurrentLocation {
 
     @SuppressLint("MissingPermission")
     @Override
-    public Task<Location> getCurrentLocation() {
+    public Task<Location> execute() {
         return fusedLocationProviderClient
                 .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, new CancellationToken() {
                     @NonNull

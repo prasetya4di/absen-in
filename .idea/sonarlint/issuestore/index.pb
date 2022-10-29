@@ -23,11 +23,17 @@ Aapp/src/main/java/com/pras/absenin/data/database/AppDatabase.java,a/c/ac9331b5
 Lapp/src/main/java/com/pras/absenin/domain/impl/GetAbsentHistoryByIdImpl.java,7/8/78451a0754cc42c8ea3e2befe4289ba820e5df82
 n
 >app/src/main/java/com/pras/absenin/view/main/MainActivity.java,b/3/b3931c9ef90683830f2c0786c5d72812353a8865
-r
-Bapp/src/main/java/com/pras/absenin/view/loading/LoadingDialog.java,4/1/41c439e0aa10813d5464e1fe71747eb7759f98a7
 u
 Eapp/src/main/java/com/pras/absenin/view/history/HistoryViewModel.java,5/d/5d8f47be20a5128d8dc1c799490fe51549471521
-p
-@app/src/main/java/com/pras/absenin/view/absen/AbsenActivity.java,2/3/23178e1d34487751144d667e77f3146cf127354d
 s
 Capp/src/main/java/com/pras/absenin/view/history/HistoryAdapter.java,0/d/0d3f385dc0d568931a2d8b539bf2dfa7ff7c9edb
+Å
+Qapp/src/main/java/com/pras/absenin/view/history_detail/HistoryDetailActivity.java,7/d/7ded622ef9e3a78790ef907443912d4ff106dbf7
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+t
+Dapp/src/main/java/com/pras/absenin/view/history/HistoryActivity.java,e/9/e97d303d79f6821d7bf8849baff26f755f9367ef
+v
+Fapp/src/main/java/com/pras/absenin/util/qrcode/QRCodeResultStatus.java,e/e/ee5d4f644e6c0d9ade21c90634ae54c61ef4265d
+j
+:app/src/main/java/com/pras/absenin/data/entity/Absent.java,4/a/4abeaa92ae1fc29f32100eaf1b92a3fd764628b3

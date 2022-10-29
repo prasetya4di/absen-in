@@ -27,7 +27,7 @@ import com.pras.absenin.util.qrcode.QRCodeFoundListener;
 import com.pras.absenin.util.qrcode.QRCodeImageAnalyzer;
 import com.pras.absenin.util.qrcode.QRCodeResultStatus;
 import com.pras.absenin.view.absent_result.AbsentSuccessActivity;
-import com.pras.absenin.view.loading.LoadingDialog;
+import com.pras.absenin.view.dialog.LoadingDialog;
 
 import java.util.concurrent.ExecutionException;
 

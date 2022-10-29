@@ -1,4 +1,4 @@
-package com.pras.absenin.view.loading;
+package com.pras.absenin.view.dialog;
 
 import android.app.Activity;
 import android.graphics.Color;

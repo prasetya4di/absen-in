@@ -1,28 +1,24 @@
 package com.pras.absenin.view.loading;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
+import android.graphics.Color;
 
-import androidx.appcompat.app.AlertDialog;
-
-import com.pras.absenin.R;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoadingDialog {
     private final Activity activity;
-    private AlertDialog alertDialog;
+    private SweetAlertDialog alertDialog;
 
     public LoadingDialog(Activity myactivity) {
         activity = myactivity;
     }
 
     public void startLoadingDialog() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(activity);
-        LayoutInflater inflater = activity.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.loading_dialog, null));
-        builder.setCancelable(false);
-
-
-        alertDialog = builder.create();
+        SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE);
+        loadingDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        loadingDialog.setTitleText("Loading");
+        loadingDialog.setCancelable(false);
+        alertDialog = loadingDialog;
         alertDialog.show();
     }
 

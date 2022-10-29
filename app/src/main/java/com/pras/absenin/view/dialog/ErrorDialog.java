@@ -17,7 +17,7 @@ public class ErrorDialog {
         this.confirmListener = confirmListener;
     }
 
-    public void showErrorDialog(String errorText) {
+    public void show(String errorText) {
         SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.SUCCESS_TYPE);
         loadingDialog.setTitleText(errorText);
         loadingDialog.setCancelable(false);

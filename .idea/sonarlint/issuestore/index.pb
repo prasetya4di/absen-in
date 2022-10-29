@@ -27,8 +27,6 @@ u
 Eapp/src/main/java/com/pras/absenin/view/history/HistoryViewModel.java,5/d/5d8f47be20a5128d8dc1c799490fe51549471521
 s
 Capp/src/main/java/com/pras/absenin/view/history/HistoryAdapter.java,0/d/0d3f385dc0d568931a2d8b539bf2dfa7ff7c9edb
-Å
-Qapp/src/main/java/com/pras/absenin/view/history_detail/HistoryDetailActivity.java,7/d/7ded622ef9e3a78790ef907443912d4ff106dbf7
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 t

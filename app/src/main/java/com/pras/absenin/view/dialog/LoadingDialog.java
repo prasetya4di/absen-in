@@ -13,7 +13,7 @@ public class LoadingDialog {
         activity = myactivity;
     }
 
-    public void startLoadingDialog() {
+    public void show() {
         SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE);
         loadingDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         loadingDialog.setTitleText("Loading");
@@ -23,7 +23,7 @@ public class LoadingDialog {
     }
 
 
-    public void dismisDialog() {
+    public void dismiss() {
         alertDialog.dismiss();
     }
 }

@@ -14,9 +14,9 @@ public class SuccessDialog {
         activity = myactivity;
     }
 
-    public void showSuccessDialog(String eventName) {
+    public void show() {
         SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.SUCCESS_TYPE);
-        loadingDialog.setTitleText(activity.getString(R.string.success_text, eventName));
+        loadingDialog.setTitleText(activity.getString(R.string.success_text));
         loadingDialog.setCancelable(false);
         loadingDialog.setConfirmButton(activity.getString(R.string.exit_text), Dialog::onBackPressed);
         loadingDialog.show();

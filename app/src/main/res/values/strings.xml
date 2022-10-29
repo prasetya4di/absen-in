@@ -11,4 +11,5 @@
     <string name="invalid_code_rescan">Scan Ulang</string>
     <string name="invalid_code_exit">Keluar</string>
     <string name="loading_text">Loading...</string>
+    <string name="success_text">Selamat anda telah dinyatakan hadir dalam event %1$s !! Selamat mengikuti event.</string>
 </resources>

@@ -16,6 +16,8 @@ import com.pras.absenin.R;
 import com.pras.absenin.data.entity.Absent;
 import com.pras.absenin.databinding.ActivityHistoryDetailBinding;
 
+import java.util.Objects;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -39,9 +41,9 @@ public class HistoryDetailActivity extends AppCompatActivity implements OnMapRea
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
         if (absent != null) {
-            googleMap.addMarker(new MarkerOptions()
+            Objects.requireNonNull(gMap.addMarker(new MarkerOptions()
                             .position(absent.location)
-                            .title(absent.eventTitle))
+                            .title(absent.eventTitle)))
                     .showInfoWindow();
             moveCamera(absent.location);
         }

@@ -18,7 +18,7 @@ public class ErrorDialog {
     }
 
     public void show(String errorText) {
-        SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.SUCCESS_TYPE);
+        SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE);
         loadingDialog.setTitleText(errorText);
         loadingDialog.setCancelable(false);
         loadingDialog.setCancelButton(activity.getString(R.string.invalid_code_exit), cancelListener);

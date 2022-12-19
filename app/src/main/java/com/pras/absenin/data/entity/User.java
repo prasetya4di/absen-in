@@ -4,14 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.room.Dao;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.pras.absenin.util.Role;
 
 import java.io.Serializable;
 
-@Dao
+@Entity
 public class User implements Serializable, Parcelable {
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
@@ -24,17 +24,29 @@ public class User implements Serializable, Parcelable {
             return new User[size];
         }
     };
-    @PrimaryKey
-    public String username;
     public String name;
     public String email;
     public Role role;
+    @PrimaryKey
+    @NonNull
+    public String username;
+
+    public User() {
+        username = "";
+    }
 
     protected User(Parcel in) {
         username = in.readString();
         name = in.readString();
         email = in.readString();
         role = Role.fromString(in.readString());
+    }
+
+    public User(String username, String name, String email, Role role) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.role = role;
     }
 
     @Override

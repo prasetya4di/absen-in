@@ -19,12 +19,12 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public List<Event> getAllEventHistory() {
+    public List<Event> getAllEvent() {
         return eventDao.getAll();
     }
 
     @Override
-    public Event getEventHistoryById(int id) {
+    public Event getEventById(int id) {
         return eventDao.getById(id);
     }
 }

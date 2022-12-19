@@ -7,7 +7,7 @@ import id.ac.stiki.doleno.absenin.data.entity.Event;
 public interface EventRepository {
     void newEvent(Event Event);
 
-    List<Event> getAllEventHistory();
+    List<Event> getAllEvent();
 
-    Event getEventHistoryById(int id);
+    Event getEventById(int id);
 }

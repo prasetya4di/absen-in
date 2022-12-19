@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyApplication"
+        android:name="id.ac.stiki.doleno.absenin.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -21,42 +21,35 @@
         android:theme="@style/Theme.AbsenIn"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.login.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".view.register.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.absent_result.AbsentSuccessActivity"
+            android:name="id.ac.stiki.doleno.absenin.view.history_detail.HistoryDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.history_detail.HistoryDetailActivity"
+            android:name="id.ac.stiki.doleno.absenin.view.history.HistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.history.HistoryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.absen.AbsenActivity"
+            android:name="id.ac.stiki.doleno.absenin.view.absen.AbsenActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -71,7 +64,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".view.main.MainActivity"
+            android:name="id.ac.stiki.doleno.absenin.view.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

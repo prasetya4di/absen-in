@@ -5,4 +5,4 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.history_detail.HistoryDetailActivity" />
+    tools:context="id.ac.stiki.doleno.absenin.view.history_detail.HistoryDetailActivity" />

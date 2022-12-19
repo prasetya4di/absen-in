@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.history_detail.HistoryDetailActivity">
+    tools:context="id.ac.stiki.doleno.absenin.view.history_detail.HistoryDetailActivity">
 
     <include layout="@layout/fragment_maps" />
 </androidx.constraintlayout.widget.ConstraintLayout>

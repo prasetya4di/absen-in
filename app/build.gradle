@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.pras.absenin'
+    namespace 'id.ac.stiki.doleno.absenin'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.pras.absenin"
+        applicationId "id.ac.stiki.doleno.absenin"
         minSdk 23
         targetSdk 33
         versionCode 1

@@ -1,0 +1,13 @@
+package id.ac.stiki.doleno.absenin.repository;
+
+import java.util.List;
+
+import id.ac.stiki.doleno.absenin.data.entity.Event;
+
+public interface EventRepository {
+    void newEvent(Event Event);
+
+    List<Event> getAllEventHistory();
+
+    Event getEventHistoryById(int id);
+}

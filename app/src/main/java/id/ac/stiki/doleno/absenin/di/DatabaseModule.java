@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.room.Room;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import dagger.Module;
@@ -32,6 +33,11 @@ public class DatabaseModule {
     @Provides
     public static FirebaseFirestore provideFireStore() {
         return FirebaseFirestore.getInstance();
+    }
+
+    @Provides
+    public static FirebaseAuth provideFireAuth() {
+        return FirebaseAuth.getInstance();
     }
 
     @Provides

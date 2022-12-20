@@ -2,7 +2,7 @@ package id.ac.stiki.doleno.absenin.util.converters;
 
 import androidx.room.TypeConverter;
 
-import id.ac.stiki.doleno.absenin.util.Role;
+import id.ac.stiki.doleno.absenin.util.enums.Role;
 
 public class RoleConverter {
     @TypeConverter

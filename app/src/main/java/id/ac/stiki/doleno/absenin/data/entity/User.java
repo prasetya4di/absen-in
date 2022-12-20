@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-import id.ac.stiki.doleno.absenin.util.Role;
+import id.ac.stiki.doleno.absenin.util.enums.Role;
 
 @Entity
 public class User implements Serializable, Parcelable {

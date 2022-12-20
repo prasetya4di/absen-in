@@ -1,4 +1,4 @@
-package id.ac.stiki.doleno.absenin.util;
+package id.ac.stiki.doleno.absenin.util.enums;
 
 public enum Role {
     EVENT_PLANNER("event_planner"),

@@ -1,7 +1,6 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
@@ -18,12 +17,14 @@ public class DoRegisterImpl implements DoRegister {
     }
 
     @Override
-    public Task<AuthResult> execute(String password, User user) {
+    public Task<Void> execute(String password, User user) {
         return authRepository
                 .register(user.email, password)
                 .addOnSuccessListener(documentSnapshot -> {
                     userRepository.delete();
                     userRepository.create(user);
-                });
+                })
+                .continueWith(task -> userRepository.post(user))
+                .getResult();
     }
 }

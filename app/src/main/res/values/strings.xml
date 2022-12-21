@@ -25,6 +25,7 @@
     <string name="txt_email_taken_error">Email kamu sudah terdaftar, mohon coba lagi menggunakan email yang lain, atau login kembali</string>
     <string name="txt_data_incomplete_error">Mohon lengkapi semua data</string>
     <string name="txt_invalid_credential_error">Email atau password yang anda masukkan masih belum benar. Mohon pastikan data anda sudah sesuai dan coba lagi.</string>
+    <string name="txt_checking_data">Memeriksa Data ....</string>
     <string-array name="list_role">
         <item>Penyelenggara Acara</item>
         <item>Peserta Acara</item>

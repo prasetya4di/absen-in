@@ -25,25 +25,22 @@ public class User implements Serializable, Parcelable {
         }
     };
     public String name;
-    public String email;
-    public Role role;
     @PrimaryKey
     @NonNull
-    public String username;
+    public String email;
+    public Role role;
 
     public User() {
-        username = "";
+        email = "";
     }
 
     protected User(Parcel in) {
-        username = in.readString();
         name = in.readString();
         email = in.readString();
         role = Role.fromString(in.readString());
     }
 
-    public User(String username, String name, String email, Role role) {
-        this.username = username;
+    public User(String name, String email, Role role) {
         this.name = name;
         this.email = email;
         this.role = role;
@@ -56,7 +53,6 @@ public class User implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(username);
         dest.writeString(name);
         dest.writeString(email);
         dest.writeString(role.getText());

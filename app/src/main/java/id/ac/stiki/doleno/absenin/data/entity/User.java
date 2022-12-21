@@ -48,10 +48,10 @@ public class User implements Serializable, Parcelable {
         this.role = role;
     }
 
-    public User(Map<String, String> data) {
-        this.email = data.get("email");
-        this.name = data.get("name");
-        this.role = Role.fromString(data.get("role"));
+    public User(Map<String, Object> data) {
+        this.email = (String) data.get("email");
+        this.name = (String) data.get("name");
+        this.role = Role.fromString((String) data.get("role"));
     }
 
     @Override

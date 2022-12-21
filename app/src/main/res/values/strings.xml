@@ -12,4 +12,6 @@
     <string name="invalid_code_exit">Keluar</string>
     <string name="loading_text">Loading...</string>
     <string name="success_text">Selamat anda telah dinyatakan hadir dalam event !! Selamat mengikuti event.</string>
+    <string name="placeholder_email">Email</string>
+    <string name="placeholder_password">Password</string>
 </resources>

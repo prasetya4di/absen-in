@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.room.Room;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import dagger.Module;
 import dagger.Provides;
@@ -28,11 +27,6 @@ public class DatabaseModule {
         return Room
                 .databaseBuilder(context, AppDatabase.class, "db_absenin")
                 .build();
-    }
-
-    @Provides
-    public static FirebaseFirestore provideFireStore() {
-        return FirebaseFirestore.getInstance();
     }
 
     @Provides

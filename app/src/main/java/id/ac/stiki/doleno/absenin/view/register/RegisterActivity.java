@@ -38,10 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         errorDialog = new ErrorDialog(
                 this,
                 getString(R.string.txt_try_again),
-                sweetAlertDialog -> {
-                    sweetAlertDialog.dismiss();
-                    onBackPressed();
-                },
+                Dialog::dismiss,
                 Dialog::dismiss);
 
         binding.btnRegister.setOnClickListener(v -> {
@@ -80,11 +77,17 @@ public class RegisterActivity extends AppCompatActivity {
                     break;
             }
         });
+
+        binding.imgBack.setOnClickListener(this::back);
     }
 
     private boolean isDataFullfilled() {
         return !binding.etEmail.getText().toString().isEmpty()
-                && binding.etPassword.getText().toString().isEmpty()
-                && binding.etName.getText().toString().isEmpty();
+                && !binding.etPassword.getText().toString().isEmpty()
+                && !binding.etName.getText().toString().isEmpty();
+    }
+
+    private void back(View v) {
+        onBackPressed();
     }
 }

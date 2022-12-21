@@ -4,5 +4,5 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 public interface DoLogin {
-    Task<AuthResult> login(String email, String password);
+    Task<AuthResult> execute(String email, String password);
 }

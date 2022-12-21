@@ -18,7 +18,7 @@ public class DoLoginImpl implements DoLogin {
     }
 
     @Override
-    public Task<AuthResult> login(String email, String password) {
+    public Task<AuthResult> execute(String email, String password) {
         return authRepository
                 .login(email, password)
                 .addOnSuccessListener(resultTask -> userRepository

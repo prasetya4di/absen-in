@@ -4,7 +4,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.repository.AuthRepository;
 
 public class AuthRepositoryImpl implements AuthRepository {
@@ -15,7 +14,7 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
-    public Task<AuthResult> register(String email, String password, User user) {
+    public Task<AuthResult> register(String email, String password) {
         return firebaseAuth.createUserWithEmailAndPassword(email, password);
     }
 

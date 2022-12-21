@@ -8,6 +8,8 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
 import id.ac.stiki.doleno.absenin.domain.AddEvent;
 import id.ac.stiki.doleno.absenin.domain.DoAbsent;
+import id.ac.stiki.doleno.absenin.domain.DoLogin;
+import id.ac.stiki.doleno.absenin.domain.DoRegister;
 import id.ac.stiki.doleno.absenin.domain.GetAbsentHistoryById;
 import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
 import id.ac.stiki.doleno.absenin.domain.GetAllEvent;
@@ -15,13 +17,17 @@ import id.ac.stiki.doleno.absenin.domain.GetCurrentLocation;
 import id.ac.stiki.doleno.absenin.domain.GetEventById;
 import id.ac.stiki.doleno.absenin.domain.impl.AddEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.DoRegisterImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentHistoryByIdImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAllAbsentHistoryImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAllEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetCurrentLocationImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetEventByIdImpl;
 import id.ac.stiki.doleno.absenin.repository.AbsentRepository;
+import id.ac.stiki.doleno.absenin.repository.AuthRepository;
 import id.ac.stiki.doleno.absenin.repository.EventRepository;
+import id.ac.stiki.doleno.absenin.repository.UserRepository;
 
 @Module
 @InstallIn(ViewModelComponent.class)
@@ -60,5 +66,15 @@ public class DomainModule {
     @Provides
     public AddEvent provideAddEvent(EventRepository eventRepository) {
         return new AddEventImpl(eventRepository);
+    }
+
+    @Provides
+    public DoLogin provideDoLogin(AuthRepository authRepository, UserRepository userRepository) {
+        return new DoLoginImpl(authRepository, userRepository);
+    }
+
+    @Provides
+    public DoRegister provideDoRegister(AuthRepository authRepository, UserRepository userRepository) {
+        return new DoRegisterImpl(authRepository, userRepository);
     }
 }

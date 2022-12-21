@@ -1,13 +1,20 @@
 package id.ac.stiki.doleno.absenin.repository;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.List;
 
 import id.ac.stiki.doleno.absenin.data.entity.Absent;
 
 public interface AbsentRepository {
-    void newAbsent(Absent absent);
+    void create(Absent absent);
 
-    List<Absent> getAllAbsentHistory();
+    List<Absent> read();
 
-    Absent getAbsentHistoryById(int id);
+    Absent read(int id);
+
+    Task<Void> post(Absent absent);
+
+    Task<QuerySnapshot> get();
 }

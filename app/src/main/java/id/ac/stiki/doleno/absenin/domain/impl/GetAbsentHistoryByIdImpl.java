@@ -16,6 +16,6 @@ public class GetAbsentHistoryByIdImpl implements GetAbsentHistoryById {
 
     @Override
     public Absent execute(int id) {
-        return absentRepository.getAbsentHistoryById(id);
+        return absentRepository.read(id);
     }
 }

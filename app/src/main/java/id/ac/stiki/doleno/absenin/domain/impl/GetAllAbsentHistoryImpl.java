@@ -18,6 +18,6 @@ public class GetAllAbsentHistoryImpl implements GetAllAbsentHistory {
 
     @Override
     public List<Absent> execute() {
-        return absentRepository.getAllAbsentHistory();
+        return absentRepository.read();
     }
 }

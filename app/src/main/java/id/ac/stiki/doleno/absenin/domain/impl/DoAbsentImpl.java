@@ -29,7 +29,7 @@ public class DoAbsentImpl implements DoAbsent {
     public QRCodeResultStatus execute(String qrResult, LatLng currentLoc) {
         try {
             Absent absent = new Gson().fromJson(qrResult, Absent.class);
-            absentRepository.newAbsent(absent);
+            absentRepository.create(absent);
             double distance = SphericalUtil.computeDistanceBetween(currentLoc, absent.location) / 1000;
             if (distance < 0.5) {
                 return VALID;

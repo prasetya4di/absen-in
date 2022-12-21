@@ -6,9 +6,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import id.ac.stiki.doleno.absenin.data.entity.Absent;
 
 public interface AbsentStore {
-    Task<Void> createAbsent(Absent event, String email);
+    Task<Void> createAbsent(Absent absent, String email);
 
-    Task<Void> updateAbsent(Absent event, String email);
+    Task<Void> updateAbsent(Absent absent, String email);
 
     Task<QuerySnapshot> get(String email);
 }

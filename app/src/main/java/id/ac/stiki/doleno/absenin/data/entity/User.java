@@ -42,7 +42,7 @@ public class User implements Serializable, Parcelable {
         role = Role.fromString(in.readString());
     }
 
-    public User(String name, @NonNull String email, Role role) {
+    public User(@NonNull String email, String name, Role role) {
         this.name = name;
         this.email = email;
         this.role = role;

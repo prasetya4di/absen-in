@@ -7,6 +7,7 @@ import id.ac.stiki.doleno.absenin.R;
 
 public class ErrorDialog {
     private final Activity activity;
+    private String confirmButtonText = "";
     private final SweetAlertDialog.OnSweetClickListener cancelListener;
     private final SweetAlertDialog.OnSweetClickListener confirmListener;
 
@@ -16,12 +17,24 @@ public class ErrorDialog {
         this.confirmListener = confirmListener;
     }
 
+    public ErrorDialog(Activity activity, String confirmButtonText, SweetAlertDialog.OnSweetClickListener cancelListener, SweetAlertDialog.OnSweetClickListener confirmListener) {
+        this.activity = activity;
+        this.confirmButtonText = confirmButtonText;
+        this.cancelListener = cancelListener;
+        this.confirmListener = confirmListener;
+    }
+
     public void show(String errorText) {
         SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE);
         loadingDialog.setTitleText(errorText);
         loadingDialog.setCancelable(false);
         loadingDialog.setCancelButton(activity.getString(R.string.invalid_code_exit), cancelListener);
-        loadingDialog.setConfirmButton(activity.getString(R.string.invalid_code_rescan), confirmListener);
+        if (confirmButtonText.isEmpty()) {
+            loadingDialog.setConfirmButton(activity.getString(R.string.invalid_code_rescan), confirmListener);
+        } else {
+            loadingDialog.setConfirmButton(confirmButtonText, confirmListener);
+        }
+
         loadingDialog.show();
     }
 }

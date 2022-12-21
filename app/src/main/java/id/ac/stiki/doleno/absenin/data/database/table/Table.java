@@ -1,4 +1,4 @@
-package id.ac.stiki.doleno.absenin.util.enums;
+package id.ac.stiki.doleno.absenin.data.database.table;
 
 public enum Table {
     EVENT("event"),

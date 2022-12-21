@@ -14,6 +14,8 @@ public interface EventRepository {
 
     Event readById(int id);
 
+    void delete();
+
     Task<Void> post(Event event);
 
     Task<QuerySnapshot> get();

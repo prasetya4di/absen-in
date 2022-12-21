@@ -33,6 +33,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void delete() {
+        userDao.delete();
+    }
+
+    @Override
     public Task<Void> post(User user) {
         return userStore.createUser(user);
     }

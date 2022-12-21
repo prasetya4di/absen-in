@@ -18,4 +18,7 @@ public interface AbsentDao {
 
     @Insert
     void insert(Absent absent);
+
+    @Query("DELETE FROM absent")
+    void delete();
 }

@@ -14,6 +14,8 @@ public interface AbsentRepository {
 
     Absent read(int id);
 
+    void delete();
+
     Task<Void> post(Absent absent);
 
     Task<QuerySnapshot> get();

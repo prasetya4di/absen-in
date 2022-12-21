@@ -41,6 +41,11 @@ public class AbsentRepositoryImpl implements AbsentRepository {
     }
 
     @Override
+    public void delete() {
+        absentDao.delete();
+    }
+
+    @Override
     public Task<Void> post(Absent absent) {
         return absentStore.createAbsent(absent, userDao.getUser().email);
     }

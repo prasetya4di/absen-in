@@ -35,6 +35,11 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
+    public void delete() {
+        eventDao.delete();
+    }
+
+    @Override
     public Task<Void> post(Event event) {
         return eventStore.createEvent(event);
     }

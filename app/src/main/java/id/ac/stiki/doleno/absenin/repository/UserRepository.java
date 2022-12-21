@@ -12,6 +12,8 @@ public interface UserRepository {
 
     User read();
 
+    void delete();
+
     Task<Void> post(User user);
 
     Task<Void> put(User user);

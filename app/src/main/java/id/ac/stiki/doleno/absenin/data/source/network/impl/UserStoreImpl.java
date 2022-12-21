@@ -5,9 +5,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import id.ac.stiki.doleno.absenin.data.database.table.Table;
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.data.source.network.UserStore;
-import id.ac.stiki.doleno.absenin.util.enums.Table;
 
 public class UserStoreImpl implements UserStore {
     private final FirebaseFirestore firestore;

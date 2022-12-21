@@ -10,6 +10,7 @@ import id.ac.stiki.doleno.absenin.domain.AddEvent;
 import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
 import id.ac.stiki.doleno.absenin.domain.DoAbsent;
 import id.ac.stiki.doleno.absenin.domain.DoLogin;
+import id.ac.stiki.doleno.absenin.domain.DoLogout;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
 import id.ac.stiki.doleno.absenin.domain.GetAbsentHistoryById;
 import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
@@ -20,6 +21,7 @@ import id.ac.stiki.doleno.absenin.domain.impl.AddEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.CheckLoggedInStatusImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.DoLogoutImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoRegisterImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentHistoryByIdImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAllAbsentHistoryImpl;
@@ -83,5 +85,10 @@ public class DomainModule {
     @Provides
     public CheckLoggedInStatus provideCheckLoggedIn(AuthRepository authRepository) {
         return new CheckLoggedInStatusImpl(authRepository);
+    }
+
+    @Provides
+    public DoLogout provideLogout(UserRepository userRepository, AbsentRepository absentRepository, EventRepository eventRepository) {
+        return new DoLogoutImpl(userRepository, absentRepository, eventRepository);
     }
 }

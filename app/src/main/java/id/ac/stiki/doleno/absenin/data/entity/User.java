@@ -8,6 +8,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import id.ac.stiki.doleno.absenin.util.enums.Role;
 
@@ -40,10 +42,16 @@ public class User implements Serializable, Parcelable {
         role = Role.fromString(in.readString());
     }
 
-    public User(String name, String email, Role role) {
+    public User(String name, @NonNull String email, Role role) {
         this.name = name;
         this.email = email;
         this.role = role;
+    }
+
+    public User(Map<String, String> data) {
+        this.email = data.get("email");
+        this.name = data.get("name");
+        this.role = Role.fromString(data.get("role"));
     }
 
     @Override
@@ -56,5 +64,17 @@ public class User implements Serializable, Parcelable {
         dest.writeString(name);
         dest.writeString(email);
         dest.writeString(role.getText());
+    }
+
+    public String getDocumentPath() {
+        return "user-" + email;
+    }
+
+    public Map<String, String> toMap() {
+        Map<String, String> mapUser = new HashMap<>();
+        mapUser.put("email", email);
+        mapUser.put("name", name);
+        mapUser.put("role", role.getText());
+        return mapUser;
     }
 }

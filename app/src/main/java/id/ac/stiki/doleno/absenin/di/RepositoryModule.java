@@ -1,7 +1,6 @@
 package id.ac.stiki.doleno.absenin.di;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import dagger.Module;
 import dagger.Provides;
@@ -42,7 +41,7 @@ public class RepositoryModule {
     }
 
     @Provides
-    public AuthRepository provideAuthRepository(FirebaseFirestore firestore, FirebaseAuth fireauth) {
-        return new AuthRepositoryImpl(fireauth, firestore);
+    public AuthRepository provideAuthRepository(FirebaseAuth fireauth) {
+        return new AuthRepositoryImpl(fireauth);
     }
 }

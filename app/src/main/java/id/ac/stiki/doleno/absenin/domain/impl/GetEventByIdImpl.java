@@ -13,6 +13,6 @@ public class GetEventByIdImpl implements GetEventById {
 
     @Override
     public Event execute(int id) {
-        return eventRepository.getEventById(id);
+        return eventRepository.readById(id);
     }
 }

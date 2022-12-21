@@ -15,6 +15,6 @@ public class GetAllEventImpl implements GetAllEvent {
 
     @Override
     public List<Event> execute() {
-        return eventRepository.getAllEvent();
+        return eventRepository.read();
     }
 }

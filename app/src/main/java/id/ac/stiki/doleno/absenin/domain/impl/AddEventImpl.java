@@ -13,6 +13,6 @@ public class AddEventImpl implements AddEvent {
 
     @Override
     public void execute(Event event) {
-        repository.newEvent(event);
+        repository.create(event);
     }
 }

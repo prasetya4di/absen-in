@@ -5,12 +5,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import id.ac.stiki.doleno.absenin.repository.AuthRepository;
+import id.ac.stiki.doleno.absenin.repository.UserRepository;
 
 public class AuthRepositoryImpl implements AuthRepository {
     private final FirebaseAuth firebaseAuth;
+    private final UserRepository userRepository;
 
-    public AuthRepositoryImpl(FirebaseAuth firebaseAuth) {
+    public AuthRepositoryImpl(FirebaseAuth firebaseAuth, UserRepository userRepository) {
         this.firebaseAuth = firebaseAuth;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -33,5 +36,10 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public Task<AuthResult> loginWithGmail() {
         return null;
+    }
+
+    @Override
+    public Boolean isLoggedIn() {
+        return userRepository.read() != null;
     }
 }

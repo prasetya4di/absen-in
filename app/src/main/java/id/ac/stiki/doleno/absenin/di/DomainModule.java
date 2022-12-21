@@ -7,6 +7,7 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
 import id.ac.stiki.doleno.absenin.domain.AddEvent;
+import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
 import id.ac.stiki.doleno.absenin.domain.DoAbsent;
 import id.ac.stiki.doleno.absenin.domain.DoLogin;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
@@ -16,6 +17,7 @@ import id.ac.stiki.doleno.absenin.domain.GetAllEvent;
 import id.ac.stiki.doleno.absenin.domain.GetCurrentLocation;
 import id.ac.stiki.doleno.absenin.domain.GetEventById;
 import id.ac.stiki.doleno.absenin.domain.impl.AddEventImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.CheckLoggedInStatusImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoRegisterImpl;
@@ -76,5 +78,10 @@ public class DomainModule {
     @Provides
     public DoRegister provideDoRegister(AuthRepository authRepository, UserRepository userRepository) {
         return new DoRegisterImpl(authRepository, userRepository);
+    }
+
+    @Provides
+    public CheckLoggedInStatus provideCheckLoggedIn(AuthRepository authRepository) {
+        return new CheckLoggedInStatusImpl(authRepository);
     }
 }

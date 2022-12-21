@@ -11,4 +11,6 @@ public interface AuthRepository {
     Task<AuthResult> registerWithGmail();
 
     Task<AuthResult> loginWithGmail();
+
+    Boolean isLoggedIn();
 }

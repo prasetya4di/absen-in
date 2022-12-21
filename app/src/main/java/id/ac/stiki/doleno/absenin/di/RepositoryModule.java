@@ -41,7 +41,7 @@ public class RepositoryModule {
     }
 
     @Provides
-    public AuthRepository provideAuthRepository(FirebaseAuth fireauth) {
-        return new AuthRepositoryImpl(fireauth);
+    public AuthRepository provideAuthRepository(FirebaseAuth fireauth, UserRepository userRepository) {
+        return new AuthRepositoryImpl(fireauth, userRepository);
     }
 }

@@ -27,11 +27,13 @@ public class AuthRepositoryImpl implements AuthRepository {
         return firebaseAuth.signInWithEmailAndPassword(email, password);
     }
 
+    //Future implementation
     @Override
     public Task<AuthResult> registerWithGmail() {
         return null;
     }
 
+    //Future implementation
     @Override
     public Task<AuthResult> loginWithGmail() {
         return null;

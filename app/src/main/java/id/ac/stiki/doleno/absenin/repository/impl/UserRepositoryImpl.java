@@ -1,7 +1,5 @@
 package id.ac.stiki.doleno.absenin.repository.impl;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,19 +23,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Task<AuthResult> register(String email, String password, OnCompleteListener<AuthResult> onCompleteListener, OnFailureListener onFailureListener) {
-        return firebaseAuth
-                .createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(onCompleteListener)
-                .addOnFailureListener(onFailureListener);
+    public Task<AuthResult> register(String email, String password, User user) {
+        return firebaseAuth.createUserWithEmailAndPassword(email, password);
     }
 
     @Override
-    public Task<AuthResult> login(String email, String password, OnCompleteListener<AuthResult> onCompleteListener, OnFailureListener onFailureListener) {
-        return firebaseAuth
-                .signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(onCompleteListener)
-                .addOnFailureListener(onFailureListener);
+    public Task<AuthResult> login(String email, String password) {
+        return firebaseAuth.signInWithEmailAndPassword(email, password);
     }
 
     @Override
@@ -51,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void updateUser(User user) {
-
+    public Task<AuthResult> updateUser(User user) {
+        return null;
     }
 }

@@ -6,20 +6,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import id.ac.stiki.doleno.absenin.data.entity.User;
-import id.ac.stiki.doleno.absenin.repository.UserRepository;
+import id.ac.stiki.doleno.absenin.repository.AuthRepository;
 
-public class UserRepositoryImpl implements UserRepository {
+public class AuthRepositoryImpl implements AuthRepository {
     private final FirebaseAuth firebaseAuth;
     private final FirebaseFirestore firebaseFirestore;
 
-    public UserRepositoryImpl(FirebaseAuth firebaseAuth, FirebaseFirestore firebaseFirestore) {
+    public AuthRepositoryImpl(FirebaseAuth firebaseAuth, FirebaseFirestore firebaseFirestore) {
         this.firebaseAuth = firebaseAuth;
         this.firebaseFirestore = firebaseFirestore;
-    }
-
-    @Override
-    public User getUser() {
-        return null;
     }
 
     @Override
@@ -39,11 +34,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Task<AuthResult> loginWithGmail() {
-        return null;
-    }
-
-    @Override
-    public Task<AuthResult> updateUser(User user) {
         return null;
     }
 }

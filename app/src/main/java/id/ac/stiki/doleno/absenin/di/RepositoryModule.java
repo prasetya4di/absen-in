@@ -10,11 +10,11 @@ import dagger.hilt.android.components.ViewModelComponent;
 import id.ac.stiki.doleno.absenin.data.source.local.AbsentDao;
 import id.ac.stiki.doleno.absenin.data.source.local.EventDao;
 import id.ac.stiki.doleno.absenin.repository.AbsentRepository;
+import id.ac.stiki.doleno.absenin.repository.AuthRepository;
 import id.ac.stiki.doleno.absenin.repository.EventRepository;
-import id.ac.stiki.doleno.absenin.repository.UserRepository;
 import id.ac.stiki.doleno.absenin.repository.impl.AbsentRepositoryImpl;
+import id.ac.stiki.doleno.absenin.repository.impl.AuthRepositoryImpl;
 import id.ac.stiki.doleno.absenin.repository.impl.EventRepositoryImpl;
-import id.ac.stiki.doleno.absenin.repository.impl.UserRepositoryImpl;
 
 @Module
 @InstallIn(ViewModelComponent.class)
@@ -31,7 +31,7 @@ public class RepositoryModule {
     }
 
     @Provides
-    public UserRepository provideUserRepository(FirebaseFirestore firestore, FirebaseAuth fireauth) {
-        return new UserRepositoryImpl(fireauth, firestore);
+    public AuthRepository provideAuthRepository(FirebaseFirestore firestore, FirebaseAuth fireauth) {
+        return new AuthRepositoryImpl(fireauth, firestore);
     }
 }

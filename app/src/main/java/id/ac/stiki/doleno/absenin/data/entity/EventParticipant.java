@@ -13,7 +13,7 @@ import java.util.Map;
 import id.ac.stiki.doleno.absenin.data.database.table.Column;
 import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 
-@Entity
+@Entity(tableName = "event_participant")
 public class EventParticipant implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int uid;

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import javax.inject.Inject;
+
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
 
@@ -14,6 +16,7 @@ public class SplashViewModel extends ViewModel {
     private final MutableLiveData<SplashState> _splashState = new MutableLiveData<>();
     LiveData<SplashState> splashState = _splashState;
 
+    @Inject
     public SplashViewModel(CheckLoggedInStatus checkLoggedInStatus) {
         this.checkLoggedInStatus = checkLoggedInStatus;
     }

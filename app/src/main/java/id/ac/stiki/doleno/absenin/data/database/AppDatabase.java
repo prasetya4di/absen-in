@@ -10,6 +10,7 @@ import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.data.source.local.AbsentDao;
 import id.ac.stiki.doleno.absenin.data.source.local.EventDao;
+import id.ac.stiki.doleno.absenin.data.source.local.EventParticipantDao;
 import id.ac.stiki.doleno.absenin.data.source.local.UserDao;
 import id.ac.stiki.doleno.absenin.util.converters.AbsentStatusConverter;
 import id.ac.stiki.doleno.absenin.util.converters.DateConverter;
@@ -24,4 +25,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 
     public abstract EventDao eventDao();
+
+    public abstract EventParticipantDao eventParticipantDao();
 }

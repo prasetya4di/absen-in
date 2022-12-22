@@ -60,4 +60,24 @@ public interface Column {
             return columnName;
         }
     }
+
+    enum EventParticipant implements Column {
+        UID("uid"),
+        EVENT_ID("event_id"),
+        TITLE("event_title"),
+        EMAIL("email"),
+        NAME("name"),
+        STATUS("absent_status");
+
+        private final String columnName;
+
+        EventParticipant(String text) {
+            this.columnName = text;
+        }
+
+        @Override
+        public String getColumnName() {
+            return columnName;
+        }
+    }
 }

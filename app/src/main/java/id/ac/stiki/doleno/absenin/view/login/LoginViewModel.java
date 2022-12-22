@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
+import javax.inject.Inject;
+
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import id.ac.stiki.doleno.absenin.domain.DoLogin;
 
@@ -16,6 +18,7 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<LoginState> _loginState = new MutableLiveData<>();
     LiveData<LoginState> loginState = _loginState;
 
+    @Inject
     public LoginViewModel(DoLogin doLogin) {
         this.doLogin = doLogin;
     }

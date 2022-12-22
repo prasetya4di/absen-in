@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+import javax.inject.Inject;
+
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
@@ -17,6 +19,7 @@ public class RegisterViewModel extends ViewModel {
     private final MutableLiveData<RegisterState> _registerState = new MutableLiveData<>();
     LiveData<RegisterState> registerState = _registerState;
 
+    @Inject
     public RegisterViewModel(DoRegister doRegister) {
         this.doRegister = doRegister;
     }

@@ -4,6 +4,7 @@ public enum Table {
     EVENT("event"),
     ABSENT("absent"),
     USERS("user"),
+    EVENT_PARTICIPANT("event_participant"),
     UNKNOWN("unknown");
 
     private final String text;

@@ -7,9 +7,11 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
 import id.ac.stiki.doleno.absenin.data.source.network.AbsentStore;
+import id.ac.stiki.doleno.absenin.data.source.network.EventParticipantStore;
 import id.ac.stiki.doleno.absenin.data.source.network.EventStore;
 import id.ac.stiki.doleno.absenin.data.source.network.UserStore;
 import id.ac.stiki.doleno.absenin.data.source.network.impl.AbsentStoreImpl;
+import id.ac.stiki.doleno.absenin.data.source.network.impl.EventParticipantStoreImpl;
 import id.ac.stiki.doleno.absenin.data.source.network.impl.EventStoreImpl;
 import id.ac.stiki.doleno.absenin.data.source.network.impl.UserStoreImpl;
 
@@ -35,5 +37,10 @@ public class FirestoreModule {
     @Provides
     public AbsentStore provideAbsentStore(FirebaseFirestore firestore) {
         return new AbsentStoreImpl(firestore);
+    }
+
+    @Provides
+    public EventParticipantStore provideEventParticipantStore(FirebaseFirestore firestore) {
+        return new EventParticipantStoreImpl(firestore);
     }
 }

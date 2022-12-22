@@ -14,6 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import id.ac.stiki.doleno.absenin.data.database.AppDatabase;
 import id.ac.stiki.doleno.absenin.data.source.local.AbsentDao;
 import id.ac.stiki.doleno.absenin.data.source.local.EventDao;
+import id.ac.stiki.doleno.absenin.data.source.local.EventParticipantDao;
 import id.ac.stiki.doleno.absenin.data.source.local.UserDao;
 
 @Module
@@ -47,5 +48,10 @@ public class DatabaseModule {
     @Provides
     public UserDao provideUserDao(AppDatabase appDatabase) {
         return appDatabase.userDao();
+    }
+
+    @Provides
+    public EventParticipantDao provideEventParticipantDao(AppDatabase appDatabase) {
+        return appDatabase.eventParticipantDao();
     }
 }

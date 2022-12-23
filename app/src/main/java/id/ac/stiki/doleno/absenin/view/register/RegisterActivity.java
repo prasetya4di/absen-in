@@ -32,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        getActionBar().hide();
 
         viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 

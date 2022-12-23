@@ -34,8 +34,6 @@ public class RegisterViewModel extends ViewModel {
                     userRole = user.role;
                 })
                 .addOnFailureListener(failure -> {
-                    System.out.println("failure happen");
-                    System.out.println(failure);
                     if (failure instanceof FirebaseAuthUserCollisionException) {
                         _registerState.postValue(RegisterState.EMAIL_TAKEN);
                     } else if (failure instanceof FirebaseAuthWeakPasswordException) {

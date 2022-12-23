@@ -1,7 +1,9 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
+import android.os.AsyncTask;
+
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.domain.DoLogin;
@@ -18,17 +20,17 @@ public class DoLoginImpl implements DoLogin {
     }
 
     @Override
-    public Task<AuthResult> execute(String email, String password) {
+    public Task<DocumentSnapshot> execute(String email, String password) {
         return authRepository
                 .login(email, password)
-                .addOnSuccessListener(resultTask -> userRepository
-                        .get()
-                        .addOnSuccessListener(documentSnapshot -> {
-                            if (documentSnapshot.exists()) {
-                                userRepository.delete();
-                                userRepository.create(new User(documentSnapshot.getData()));
-                            }
-                        })
-                );
+                .continueWithTask(task -> userRepository.get(email))
+                .addOnSuccessListener(dataUser -> {
+                    if (dataUser.exists()) {
+                        AsyncTask.execute(() -> {
+                            userRepository.delete();
+                            userRepository.create(new User(dataUser.getData()));
+                        });
+                    }
+                });
     }
 }

@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.view.login;
 
+import android.os.AsyncTask;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -31,11 +33,14 @@ public class LoginViewModel extends ViewModel {
     public void login(String email, String password) {
         _loginState.postValue(LoginState.LOADING);
         doLogin.execute(email, password)
-                .addOnSuccessListener(result -> {
+                .addOnSuccessListener(result -> AsyncTask.execute(() -> {
                     _loginState.postValue(LoginState.SUCCESS);
                     userRole = getUserRole.execute();
-                })
+                }))
                 .addOnFailureListener(failure -> {
+                    System.out.println("Failure happen anjaayy");
+                    System.out.println(failure);
+                    failure.printStackTrace();
                     if (failure instanceof FirebaseAuthInvalidUserException) {
                         _loginState.postValue(LoginState.INVALID_CREDENTIAL);
                     } else {

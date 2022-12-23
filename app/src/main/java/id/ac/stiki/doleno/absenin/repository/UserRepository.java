@@ -18,5 +18,5 @@ public interface UserRepository {
 
     Task<Void> put(User user);
 
-    Task<DocumentSnapshot> get();
+    Task<DocumentSnapshot> get(String email);
 }

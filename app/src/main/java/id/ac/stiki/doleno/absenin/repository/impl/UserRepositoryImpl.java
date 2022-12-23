@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Task<DocumentSnapshot> get() {
-        return userStore.getUser(userDao.getUser().email);
+    public Task<DocumentSnapshot> get(String email) {
+        return userStore.getUser(email);
     }
 }

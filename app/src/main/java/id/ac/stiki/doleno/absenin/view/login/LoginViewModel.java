@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 import javax.inject.Inject;
 
@@ -29,13 +29,14 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String email, String password) {
+        _loginState.postValue(LoginState.LOADING);
         doLogin.execute(email, password)
                 .addOnSuccessListener(result -> {
                     _loginState.postValue(LoginState.SUCCESS);
                     userRole = getUserRole.execute();
                 })
                 .addOnFailureListener(failure -> {
-                    if (failure instanceof FirebaseAuthInvalidCredentialsException) {
+                    if (failure instanceof FirebaseAuthInvalidUserException) {
                         _loginState.postValue(LoginState.INVALID_CREDENTIAL);
                     } else {
                         _loginState.postValue(LoginState.FAILED);

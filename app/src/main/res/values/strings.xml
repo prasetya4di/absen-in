@@ -9,7 +9,7 @@
     <string name="invalid_location_text">Lokasi anda berbeda dengan lokasi event, mohon pastikan lokasi anda sama dengan lokasi event</string>
     <string name="invalid_code_title_text">Gagal Absen</string>
     <string name="invalid_code_rescan">Scan Ulang</string>
-    <string name="invalid_code_exit">Keluar</string>
+    <string name="invalid_code_exit">Kembali</string>
     <string name="loading_text">Loading...</string>
     <string name="success_text">Selamat anda telah dinyatakan hadir dalam event !! Selamat mengikuti event.</string>
     <string name="placeholder_email">Email</string>

@@ -57,12 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         viewModel.loginState.observeForever(loginState -> {
-            loadingDialog.dismiss();
             switch (loginState) {
                 case LOADING:
                     loadingDialog.show();
                     break;
                 case SUCCESS:
+                    loadingDialog.dismiss();
                     Intent intent;
                     if (viewModel.getUserRole() == Role.EVENT_PLANNER) {
                         intent = new Intent(LoginActivity.this, AdminActivity.class);
@@ -72,9 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case FAILED:
+                    loadingDialog.dismiss();
                     errorDialog.show(getString(R.string.txt_general_error));
                     break;
                 case INVALID_CREDENTIAL:
+                    loadingDialog.dismiss();
                     errorDialog.show(getString(R.string.txt_invalid_credential_error));
                     break;
             }

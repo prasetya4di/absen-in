@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.databinding.ActivitySplashBinding;
+import id.ac.stiki.doleno.absenin.util.enums.Role;
+import id.ac.stiki.doleno.absenin.view.admin.AdminActivity;
 import id.ac.stiki.doleno.absenin.view.login.LoginActivity;
 import id.ac.stiki.doleno.absenin.view.main.MainActivity;
 
@@ -37,7 +39,11 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case LOGGED_IN:
-                    intent = new Intent(this, MainActivity.class);
+                    if (viewModel.getUserRole() == Role.EVENT_PLANNER) {
+                        intent = new Intent(this, AdminActivity.class);
+                    } else {
+                        intent = new Intent(this, MainActivity.class);
+                    }
                     startActivity(intent);
                     break;
             }

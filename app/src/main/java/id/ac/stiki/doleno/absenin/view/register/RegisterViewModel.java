@@ -12,11 +12,13 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
+import id.ac.stiki.doleno.absenin.util.enums.Role;
 
 @HiltViewModel
 public class RegisterViewModel extends ViewModel {
     private final DoRegister doRegister;
     private final MutableLiveData<RegisterState> _registerState = new MutableLiveData<>();
+    private Role userRole = Role.PARTICIPANT;
     LiveData<RegisterState> registerState = _registerState;
 
     @Inject
@@ -27,7 +29,10 @@ public class RegisterViewModel extends ViewModel {
     public void register(String password, User user) {
         _registerState.postValue(RegisterState.LOADING);
         doRegister.execute(password, user)
-                .addOnSuccessListener(task -> _registerState.postValue(RegisterState.SUCCESS))
+                .addOnSuccessListener(task -> {
+                    _registerState.postValue(RegisterState.SUCCESS);
+                    userRole = user.role;
+                })
                 .addOnFailureListener(failure -> {
                     if (failure instanceof FirebaseAuthUserCollisionException) {
                         _registerState.postValue(RegisterState.EMAIL_TAKEN);
@@ -37,5 +42,9 @@ public class RegisterViewModel extends ViewModel {
                         _registerState.postValue(RegisterState.FAILED);
                     }
                 });
+    }
+
+    public Role getUserRole() {
+        return userRole;
     }
 }

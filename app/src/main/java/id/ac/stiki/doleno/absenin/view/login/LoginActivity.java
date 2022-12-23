@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.R;
 import id.ac.stiki.doleno.absenin.databinding.ActivityLoginBinding;
+import id.ac.stiki.doleno.absenin.util.enums.Role;
+import id.ac.stiki.doleno.absenin.view.admin.AdminActivity;
 import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog;
 import id.ac.stiki.doleno.absenin.view.dialog.LoadingDialog;
 import id.ac.stiki.doleno.absenin.view.main.MainActivity;
@@ -61,7 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                     loadingDialog.show();
                     break;
                 case SUCCESS:
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent;
+                    if (viewModel.getUserRole() == Role.EVENT_PLANNER) {
+                        intent = new Intent(LoginActivity.this, AdminActivity.class);
+                    } else {
+                        intent = new Intent(LoginActivity.this, MainActivity.class);
+                    }
                     startActivity(intent);
                     break;
                 case FAILED:

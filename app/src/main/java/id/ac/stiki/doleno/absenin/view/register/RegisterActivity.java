@@ -13,6 +13,7 @@ import id.ac.stiki.doleno.absenin.R;
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.databinding.ActivityRegisterBinding;
 import id.ac.stiki.doleno.absenin.util.enums.Role;
+import id.ac.stiki.doleno.absenin.view.admin.AdminActivity;
 import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog;
 import id.ac.stiki.doleno.absenin.view.dialog.LoadingDialog;
 import id.ac.stiki.doleno.absenin.view.main.MainActivity;
@@ -63,7 +64,12 @@ public class RegisterActivity extends AppCompatActivity {
                     loadingDialog.show();
                     break;
                 case SUCCESS:
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    Intent intent;
+                    if (viewModel.getUserRole() == Role.EVENT_PLANNER) {
+                        intent = new Intent(RegisterActivity.this, AdminActivity.class);
+                    } else {
+                        intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    }
                     startActivity(intent);
                     break;
                 case FAILED:

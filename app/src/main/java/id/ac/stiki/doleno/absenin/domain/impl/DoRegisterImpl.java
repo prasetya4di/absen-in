@@ -2,6 +2,8 @@ package id.ac.stiki.doleno.absenin.domain.impl;
 
 import com.google.android.gms.tasks.Task;
 
+import java.util.concurrent.Executors;
+
 import id.ac.stiki.doleno.absenin.data.entity.User;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
 import id.ac.stiki.doleno.absenin.repository.AuthRepository;
@@ -21,10 +23,11 @@ public class DoRegisterImpl implements DoRegister {
         return authRepository
                 .register(user.email, password)
                 .addOnSuccessListener(documentSnapshot -> {
-                    userRepository.delete();
-                    userRepository.create(user);
+                    Executors.newSingleThreadExecutor().execute(() -> {
+                        userRepository.delete();
+                        userRepository.create(user);
+                    });
                 })
-                .continueWith(task -> userRepository.post(user))
-                .getResult();
+                .continueWithTask(task -> userRepository.post(user));
     }
 }

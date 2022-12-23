@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                         new User(
                                 binding.etEmail.getText().toString(),
                                 binding.etName.getText().toString(),
-                                Role.fromString(binding.spinnerRole.getSelectedItem().toString())
+                                Role.values()[binding.spinnerRole.getSelectedItemPosition()]
                         )
                 );
             } else {
@@ -58,12 +58,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         viewModel.registerState.observeForever(registerState -> {
-            loadingDialog.dismiss();
             switch (registerState) {
                 case LOADING:
                     loadingDialog.show();
                     break;
                 case SUCCESS:
+                    loadingDialog.dismiss();
                     Intent intent;
                     if (viewModel.getUserRole() == Role.EVENT_PLANNER) {
                         intent = new Intent(RegisterActivity.this, AdminActivity.class);
@@ -73,12 +73,15 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case FAILED:
+                    loadingDialog.dismiss();
                     errorDialog.show(getString(R.string.txt_general_error));
                     break;
                 case PASSWORD_WEAK:
+                    loadingDialog.dismiss();
                     errorDialog.show(getString(R.string.txt_password_error));
                     break;
                 case EMAIL_TAKEN:
+                    loadingDialog.dismiss();
                     errorDialog.show(getString(R.string.txt_email_taken_error));
                     break;
             }

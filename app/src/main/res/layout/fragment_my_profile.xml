@@ -47,6 +47,8 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/auth_text_border"
                 android:clickable="false"
+                android:enabled="false"
+                android:textColor="@color/black"
                 android:hint="@string/placeholder_email"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="12dp"
@@ -67,7 +69,9 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/auth_text_border"
                 android:hint="@string/placeholder_name"
+                android:enabled="false"
                 android:paddingHorizontal="12dp"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -88,7 +92,9 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/auth_text_border"
                 android:hint="@string/txt_role"
+                android:enabled="false"
                 android:paddingHorizontal="12dp"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <Button

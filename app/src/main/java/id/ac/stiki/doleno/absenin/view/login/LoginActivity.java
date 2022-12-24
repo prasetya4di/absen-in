@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        getActionBar().hide();
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 

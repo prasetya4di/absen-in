@@ -40,4 +40,7 @@
     <string name="txt_menu_profile">Profil</string>
     <string name="txt_logout">Logout</string>
     <string name="txt_role">Role</string>
+    <string name="txt_yes">Ya</string>
+    <string name="txt_no">Tidak</string>
+    <string name="logout_message">Apakah anda yakin ingin logout dari user saat ini ?"</string>
 </resources>

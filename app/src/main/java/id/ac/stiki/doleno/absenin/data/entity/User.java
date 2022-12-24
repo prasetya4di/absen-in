@@ -63,7 +63,7 @@ public class User implements Serializable, Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(email);
-        dest.writeString(role.getText());
+        dest.writeString(role.getValue());
     }
 
     public String getDocumentPath() {
@@ -74,7 +74,7 @@ public class User implements Serializable, Parcelable {
         Map<String, String> mapUser = new HashMap<>();
         mapUser.put("email", email);
         mapUser.put("name", name);
-        mapUser.put("role", role.getText());
+        mapUser.put("role", role.getValue());
         return mapUser;
     }
 }

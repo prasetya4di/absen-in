@@ -12,6 +12,6 @@ public class RoleConverter {
 
     @TypeConverter
     public String roleToString(Role role) {
-        return role.getText();
+        return role.getValue();
     }
 }

@@ -12,9 +12,9 @@ public enum Role {
         this.text = text;
     }
 
-    public static Role fromString(String text) {
+    public static Role fromString(String value) {
         for (Role role : Role.values()) {
-            if (role.value.equalsIgnoreCase(text)) {
+            if (role.value.equalsIgnoreCase(value)) {
                 return role;
             }
         }
@@ -23,5 +23,9 @@ public enum Role {
 
     public String getValue() {
         return value;
+    }
+
+    public String getText() {
+        return text;
     }
 }

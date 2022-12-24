@@ -1,10 +1,10 @@
 package id.ac.stiki.doleno.absenin.view.splash;
 
+import android.os.AsyncTask;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
@@ -30,10 +30,10 @@ public class SplashViewModel extends ViewModel {
 
     void checkLoggedInStatus() {
         _splashState.postValue(SplashState.LOADING);
-        Executors.newSingleThreadExecutor().execute(() -> {
+        AsyncTask.execute(() -> {
             if (checkLoggedInStatus.execute()) {
-                _splashState.postValue(SplashState.LOGGED_IN);
                 userRole = getUserRole.execute();
+                _splashState.postValue(SplashState.LOGGED_IN);
             } else {
                 _splashState.postValue(SplashState.NOT_LOGGED_IN);
             }

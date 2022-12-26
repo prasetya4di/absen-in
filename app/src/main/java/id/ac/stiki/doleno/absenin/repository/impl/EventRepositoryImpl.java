@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.repository.impl;
 
+import androidx.lifecycle.LiveData;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -25,7 +27,7 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public List<Event> read() {
+    public LiveData<List<Event>> read() {
         return eventDao.getAll();
     }
 

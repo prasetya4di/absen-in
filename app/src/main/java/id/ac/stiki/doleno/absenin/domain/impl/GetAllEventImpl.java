@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import id.ac.stiki.doleno.absenin.data.entity.Event;
@@ -14,7 +16,7 @@ public class GetAllEventImpl implements GetAllEvent {
     }
 
     @Override
-    public List<Event> execute() {
+    public LiveData<List<Event>> execute() {
         return eventRepository.read();
     }
 }

@@ -1,5 +1,6 @@
 package id.ac.stiki.doleno.absenin.data.source.local;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,7 +12,7 @@ import id.ac.stiki.doleno.absenin.data.entity.Event;
 @Dao
 public interface EventDao {
     @Query("SELECT * FROM event")
-    List<Event> getAll();
+    LiveData<List<Event>> getAll();
 
     @Query("SELECT * FROM event WHERE uid = :EventId")
     Event getById(int EventId);

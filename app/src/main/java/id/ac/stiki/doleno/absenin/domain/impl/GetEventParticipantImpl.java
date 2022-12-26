@@ -15,6 +15,10 @@ public class GetEventParticipantImpl implements GetEventParticipant {
 
     @Override
     public Task<QuerySnapshot> execute(int eventId) {
-        return repository.get(eventId);
+        return repository
+                .get(eventId)
+                .addOnSuccessListener(result -> {
+                    repository.create(result.getQuery());
+                });
     }
 }

@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,7 +19,7 @@ public class GetAllAbsentHistoryImpl implements GetAllAbsentHistory {
     }
 
     @Override
-    public List<Absent> execute() {
+    public LiveData<List<Absent>> execute() {
         return absentRepository.read();
     }
 }

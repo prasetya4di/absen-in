@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.repository.impl;
 
+import androidx.lifecycle.LiveData;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -31,7 +33,12 @@ public class AbsentRepositoryImpl implements AbsentRepository {
     }
 
     @Override
-    public List<Absent> read() {
+    public void create(List<Absent> absent) {
+        absentDao.insert(absent);
+    }
+
+    @Override
+    public LiveData<List<Absent>> read() {
         return absentDao.getAll();
     }
 

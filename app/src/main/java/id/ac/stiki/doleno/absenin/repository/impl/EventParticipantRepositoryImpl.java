@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.repository.impl;
 
+import androidx.lifecycle.LiveData;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -21,12 +23,17 @@ public class EventParticipantRepositoryImpl implements EventParticipantRepositor
     }
 
     @Override
-    public List<EventParticipant> read(int eventId) {
+    public LiveData<List<EventParticipant>> read(int eventId) {
         return eventParticipantDao.getAll(eventId);
     }
 
     @Override
     public void create(EventParticipant eventParticipant) {
+        eventParticipantDao.insert(eventParticipant);
+    }
+
+    @Override
+    public void create(List<EventParticipant> eventParticipant) {
         eventParticipantDao.insert(eventParticipant);
     }
 

@@ -1,8 +1,11 @@
 package id.ac.stiki.doleno.absenin.domain;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
+import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
 
 public interface GetEventParticipant {
-    Task<QuerySnapshot> execute(int eventId);
+    LiveData<List<EventParticipant>> execute(int eventId);
 }

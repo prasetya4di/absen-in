@@ -1,8 +1,10 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
+import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
+import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
 import id.ac.stiki.doleno.absenin.domain.GetEventParticipant;
 import id.ac.stiki.doleno.absenin.repository.EventParticipantRepository;
 
@@ -14,11 +16,7 @@ public class GetEventParticipantImpl implements GetEventParticipant {
     }
 
     @Override
-    public Task<QuerySnapshot> execute(int eventId) {
-        return repository
-                .get(eventId)
-                .addOnSuccessListener(result -> {
-                    repository.create(result.getQuery());
-                });
+    public LiveData<List<EventParticipant>> execute(int eventId) {
+        return repository.read(eventId);
     }
 }

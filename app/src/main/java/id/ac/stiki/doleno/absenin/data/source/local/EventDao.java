@@ -20,6 +20,9 @@ public interface EventDao {
     @Insert
     void insert(Event Event);
 
+    @Insert
+    void insert(List<Event> Event);
+
     @Query("DELETE FROM event")
     void delete();
 }

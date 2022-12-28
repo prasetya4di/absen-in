@@ -27,6 +27,11 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
+    public void create(List<Event> event) {
+        eventDao.insert(event);
+    }
+
+    @Override
     public LiveData<List<Event>> read() {
         return eventDao.getAll();
     }

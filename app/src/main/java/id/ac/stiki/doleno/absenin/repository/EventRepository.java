@@ -12,6 +12,8 @@ import id.ac.stiki.doleno.absenin.data.entity.Event;
 public interface EventRepository {
     void create(Event Event);
 
+    void create(List<Event> Event);
+
     LiveData<List<Event>> read();
 
     Event readById(int id);

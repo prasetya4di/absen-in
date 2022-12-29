@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.R;
 import id.ac.stiki.doleno.absenin.databinding.ActivityAdminBinding;
-import id.ac.stiki.doleno.absenin.view.admin.ui.MyEventFragment;
+import id.ac.stiki.doleno.absenin.view.admin.ui.my_event.MyEventFragment;
 import id.ac.stiki.doleno.absenin.view.admin.ui.my_profile.MyProfileFragment;
 
 @AndroidEntryPoint

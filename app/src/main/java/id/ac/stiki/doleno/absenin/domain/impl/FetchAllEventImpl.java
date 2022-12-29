@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
+import android.os.AsyncTask;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -20,10 +22,10 @@ public class FetchAllEventImpl implements FetchAllEvent {
     @Override
     public Task<QuerySnapshot> execute() {
         return eventRepository.get()
-                .addOnSuccessListener(querySnapshots -> {
+                .addOnSuccessListener(querySnapshots -> AsyncTask.execute(() -> {
                     List<Event> listEvent = new ArrayList<>();
                     querySnapshots.getDocuments().forEach(document -> listEvent.add(new Event(document.getData())));
                     eventRepository.create(listEvent);
-                });
+                }));
     }
 }

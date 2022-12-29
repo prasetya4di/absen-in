@@ -28,18 +28,15 @@ public class AdminActivity extends AppCompatActivity {
         MyProfileFragment myProfileFragment = new MyProfileFragment();
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.my_event_page:
-                    setCurrentPage(myEventFragment);
-                    return true;
-                case R.id.profile_page:
-                    setCurrentPage(myProfileFragment);
-                    return true;
-                default:
-                    setCurrentPage(myEventFragment);
+            if (item.getItemId() == R.id.profile_page) {
+                setCurrentPage(myProfileFragment);
+            } else {
+                setCurrentPage(myEventFragment);
             }
-            return false;
+            return true;
         });
+
+        setCurrentPage(myEventFragment);
     }
 
     private void setCurrentPage(Fragment fragment) {

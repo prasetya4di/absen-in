@@ -102,7 +102,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="12dp"
         android:layout_marginBottom="68dp"
         android:contentDescription="to add new event"
         android:src="@drawable/ic_add"

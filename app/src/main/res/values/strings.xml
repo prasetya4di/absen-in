@@ -43,4 +43,7 @@
     <string name="txt_yes">Ya</string>
     <string name="txt_no">Tidak</string>
     <string name="logout_message">Apakah anda yakin ingin logout dari user saat ini ?"</string>
+    <string name="txt_error">Oopss.. terjadi error, mohon coba beberapa saat lagi</string>
+    <string name="txt_loading">Memuat data, mohon tunggu...</string>
+    <string name="txt_empty_data">Ooopss anda masih belum menambahkan event apa apa, silahkan menambahkan event baru dengan klik tombol tambah di bawah</string>
 </resources>

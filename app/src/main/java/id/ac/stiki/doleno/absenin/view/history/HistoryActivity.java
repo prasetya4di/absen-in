@@ -26,7 +26,6 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(view);
 
         viewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
-        viewModel.getAllAbsentHistory();
 
         binding.rvHistory.setLayoutManager(new LinearLayoutManager(this));
 

@@ -1,11 +1,9 @@
 package id.ac.stiki.doleno.absenin.view.history;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
@@ -15,20 +13,11 @@ import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
 
 @HiltViewModel
 public class HistoryViewModel extends ViewModel {
-    private final GetAllAbsentHistory getAllAbsentHistory;
 
-    private final MutableLiveData<List<Absent>> _listAbsent = new MutableLiveData<>();
-    LiveData<List<Absent>> listAbsent = _listAbsent;
+    LiveData<List<Absent>> listAbsent;
 
     @Inject
     public HistoryViewModel(GetAllAbsentHistory getAllAbsentHistory) {
-        this.getAllAbsentHistory = getAllAbsentHistory;
-    }
-
-    public void getAllAbsentHistory() {
-        Executors.newSingleThreadExecutor().execute(() -> {
-            List<Absent> absents = getAllAbsentHistory.execute();
-            _listAbsent.postValue(absents);
-        });
+        listAbsent = getAllAbsentHistory.execute();
     }
 }

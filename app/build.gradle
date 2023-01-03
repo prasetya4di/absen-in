@@ -85,4 +85,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation "com.google.maps.android:android-maps-utils:0.4"
+
+    //Dexter dependencies
+    implementation 'com.karumi:dexter:6.2.3'
+
+    //Retrofit dependencies
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.1'
+
+    //Coroutine dependencies
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 }

@@ -43,7 +43,7 @@ public class HistoryDetailActivity extends AppCompatActivity implements OnMapRea
         if (absent != null) {
             Objects.requireNonNull(gMap.addMarker(new MarkerOptions()
                             .position(absent.location)
-                            .title(absent.eventTitle)))
+                            .title(absent.absentTitle)))
                     .showInfoWindow();
             moveCamera(absent.location);
         }

@@ -54,9 +54,6 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
             intent.getParcelableExtra("selected_location")
         }
 
-        println("Selected location")
-        println(selectedLocation)
-
         bottomSheet = BottomSheetBehavior.from(binding.bottomSheet.bottomSheet)
         bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
         binding.progressCircular.visibility = View.GONE

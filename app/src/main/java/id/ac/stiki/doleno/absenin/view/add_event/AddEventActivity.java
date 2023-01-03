@@ -2,6 +2,7 @@ package id.ac.stiki.doleno.absenin.view.add_event;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
@@ -28,6 +29,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import java.util.Calendar;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -58,8 +60,6 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
                     }
                     selectedLocation = selectedLocationModel.getLocation();
                     changeLocation(selectedLocationModel.getLocation());
-                    System.out.println("Selected location");
-                    System.out.println(selectedLocationModel.getLocationName());
                 }
             });
 
@@ -113,6 +113,10 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
                     }
                 }).check();
 
+        binding.etDate.setOnClickListener(v -> {
+            pickDate();
+        });
+
         binding.layoutSelectLocation.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapPickerActivity.class);
             intent.putExtra("selected_location", this.selectedLocation);
@@ -157,5 +161,20 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
 
     private void moveCamera(LatLng loc) {
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 15));
+    }
+
+    private void pickDate() {
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (DatePickerDialog.OnDateSetListener) (view, year, month, dayOfMonth) -> {
+
+                }, currentYear, currentMonth, currentDay);
+
+        datePickerDialog.show();
     }
 }

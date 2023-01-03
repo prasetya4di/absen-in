@@ -23,23 +23,26 @@ public class Absent implements Serializable, Parcelable {
     @PrimaryKey(autoGenerate = true)
     public int uid;
 
-    @SerializedName("event_title")
-    @ColumnInfo(name = "event_title")
-    public String eventTitle;
+    @SerializedName("absent_title")
+    @ColumnInfo(name = "absent_title")
+    public String absentTitle;
 
-    @SerializedName("event_description")
-    @ColumnInfo(name = "event_description")
-    public String eventDescription;
+    @SerializedName("absent_description")
+    @ColumnInfo(name = "absent_description")
+    public String absentDescription;
 
-    @SerializedName("event_organizer")
-    @ColumnInfo(name = "event_organizer")
-    public String eventOrganizer;
+    @SerializedName("absent_organizer")
+    @ColumnInfo(name = "absent_organizer")
+    public String absentOrganizer;
 
-    @SerializedName("event_date")
-    @ColumnInfo(name = "event_date")
-    public Date eventDate;
+    @SerializedName("absent_date")
+    @ColumnInfo(name = "absent_date")
+    public Date absentDate;
 
     public LatLng location;
+    @SerializedName("location_name")
+    @ColumnInfo(name = "location_name")
+    public String locationName;
 
     public static final Creator<Absent> CREATOR = new Creator<Absent>() {
         @Override
@@ -56,30 +59,33 @@ public class Absent implements Serializable, Parcelable {
     public Absent() {
     }
 
-    public Absent(int uid, String eventTitle, String eventDescription, String eventOrganizer, Date eventDate, LatLng location) {
+    public Absent(int uid, String absentTitle, String absentDescription, String absentOrganizer, Date absentDate, LatLng location, String locationName) {
         this.uid = uid;
-        this.eventTitle = eventTitle;
-        this.eventDescription = eventDescription;
-        this.eventOrganizer = eventOrganizer;
-        this.eventDate = eventDate;
+        this.absentTitle = absentTitle;
+        this.absentDescription = absentDescription;
+        this.absentOrganizer = absentOrganizer;
+        this.absentDate = absentDate;
         this.location = location;
+        this.locationName = locationName;
     }
 
     public Absent(Map<String, Object> data) {
-        this.uid = (int) data.get(Column.Event.UID.getColumnName());
-        this.eventTitle = (String) data.get(Column.Event.TITLE.getColumnName());
-        this.eventDescription = (String) data.get(Column.Event.DESCRIPTION.getColumnName());
-        this.eventOrganizer = (String) data.get(Column.Event.ORGANIZER.getColumnName());
-        this.eventDate = (Date) data.get(Column.Event.DATE.getColumnName());
-        this.location = (LatLng) data.get(Column.Event.LOCATION.getColumnName());
+        this.uid = (int) data.get(Column.Absent.UID.getColumnName());
+        this.absentTitle = (String) data.get(Column.Absent.TITLE.getColumnName());
+        this.absentDescription = (String) data.get(Column.Absent.DESCRIPTION.getColumnName());
+        this.absentOrganizer = (String) data.get(Column.Absent.ORGANIZER.getColumnName());
+        this.absentDate = (Date) data.get(Column.Absent.DATE.getColumnName());
+        this.location = (LatLng) data.get(Column.Absent.LOCATION.getColumnName());
+        this.locationName = (String) data.get(Column.Absent.LOCATION_NAME.getColumnName());
     }
 
     protected Absent(Parcel in) {
         uid = in.readInt();
-        eventTitle = in.readString();
-        eventDescription = in.readString();
-        eventOrganizer = in.readString();
+        absentTitle = in.readString();
+        absentDescription = in.readString();
+        absentOrganizer = in.readString();
         location = in.readParcelable(LatLng.class.getClassLoader());
+        locationName = in.readString();
     }
 
     @Override
@@ -90,10 +96,11 @@ public class Absent implements Serializable, Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(uid);
-        dest.writeString(eventTitle);
-        dest.writeString(eventDescription);
-        dest.writeString(eventOrganizer);
+        dest.writeString(absentTitle);
+        dest.writeString(absentDescription);
+        dest.writeString(absentOrganizer);
         dest.writeParcelable(location, flags);
+        dest.writeString(locationName);
     }
 
     public String getDocumentPath() {
@@ -101,13 +108,14 @@ public class Absent implements Serializable, Parcelable {
     }
 
     public Map<String, Object> toMap() {
-        Map<String, Object> event = new HashMap<>();
-        event.put(Column.Event.UID.getColumnName(), uid);
-        event.put(Column.Event.TITLE.getColumnName(), eventTitle);
-        event.put(Column.Event.DESCRIPTION.getColumnName(), eventDescription);
-        event.put(Column.Event.ORGANIZER.getColumnName(), eventOrganizer);
-        event.put(Column.Event.DATE.getColumnName(), eventDate);
-        event.put(Column.Event.LOCATION.getColumnName(), location);
-        return event;
+        Map<String, Object> Absent = new HashMap<>();
+        Absent.put(Column.Absent.UID.getColumnName(), uid);
+        Absent.put(Column.Absent.TITLE.getColumnName(), absentTitle);
+        Absent.put(Column.Absent.DESCRIPTION.getColumnName(), absentDescription);
+        Absent.put(Column.Absent.ORGANIZER.getColumnName(), absentOrganizer);
+        Absent.put(Column.Absent.DATE.getColumnName(), absentDate);
+        Absent.put(Column.Absent.LOCATION.getColumnName(), location);
+        Absent.put(Column.Absent.LOCATION_NAME.getColumnName(), locationName);
+        return Absent;
     }
 }

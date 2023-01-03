@@ -46,17 +46,21 @@ public class Event implements Serializable, Parcelable {
     @ColumnInfo(name = "event_date")
     public Date eventDate;
     public LatLng location;
+    @SerializedName("location_name")
+    @ColumnInfo(name = "location_name")
+    public String locationName;
 
     public Event() {
     }
 
-    public Event(int uid, String eventTitle, String eventDescription, String eventOrganizer, Date eventDate, LatLng location) {
+    public Event(int uid, String eventTitle, String eventDescription, String eventOrganizer, Date eventDate, LatLng location, String locationName) {
         this.uid = uid;
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;
         this.eventOrganizer = eventOrganizer;
         this.eventDate = eventDate;
         this.location = location;
+        this.locationName = locationName;
     }
 
     public Event(Map<String, Object> data) {
@@ -66,6 +70,7 @@ public class Event implements Serializable, Parcelable {
         this.eventOrganizer = (String) data.get(Column.Event.ORGANIZER.getColumnName());
         this.eventDate = (Date) data.get(Column.Event.DATE.getColumnName());
         this.location = (LatLng) data.get(Column.Event.LOCATION.getColumnName());
+        this.locationName = (String) data.get(Column.Event.LOCATION_NAME.getColumnName());
     }
 
     protected Event(Parcel in) {
@@ -74,6 +79,7 @@ public class Event implements Serializable, Parcelable {
         eventDescription = in.readString();
         eventOrganizer = in.readString();
         location = in.readParcelable(LatLng.class.getClassLoader());
+        locationName = in.readString();
     }
 
     @Override
@@ -88,6 +94,7 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(eventDescription);
         dest.writeString(eventOrganizer);
         dest.writeParcelable(location, flags);
+        dest.writeString(locationName);
     }
 
     public String getDocumentPath() {
@@ -102,6 +109,7 @@ public class Event implements Serializable, Parcelable {
         event.put(Column.Event.ORGANIZER.getColumnName(), eventOrganizer);
         event.put(Column.Event.DATE.getColumnName(), eventDate);
         event.put(Column.Event.LOCATION.getColumnName(), location);
+        event.put(Column.Event.LOCATION_NAME.getColumnName(), locationName);
         return event;
     }
 }

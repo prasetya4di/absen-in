@@ -27,7 +27,8 @@ public interface Column {
         DESCRIPTION("event_description"),
         ORGANIZER("event_organizer"),
         DATE("event_date"),
-        LOCATION("location");
+        LOCATION("location"),
+        LOCATION_NAME("location_name");
 
         private final String columnName;
 
@@ -47,7 +48,8 @@ public interface Column {
         DESCRIPTION("event_description"),
         ORGANIZER("event_organizer"),
         DATE("event_date"),
-        LOCATION("location");
+        LOCATION("location"),
+        LOCATION_NAME("location_name");
 
         private final String columnName;
 

@@ -9,6 +9,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.Timestamp;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -74,8 +75,10 @@ public class Absent implements Serializable, Parcelable {
         this.absentTitle = (String) data.get(Column.Absent.TITLE.getColumnName());
         this.absentDescription = (String) data.get(Column.Absent.DESCRIPTION.getColumnName());
         this.absentOrganizer = (String) data.get(Column.Absent.ORGANIZER.getColumnName());
-        this.absentDate = (Date) data.get(Column.Absent.DATE.getColumnName());
-        this.location = (LatLng) data.get(Column.Absent.LOCATION.getColumnName());
+        Timestamp absentDate = (Timestamp) data.get(Column.Absent.DATE.getColumnName());
+        this.absentDate = absentDate.toDate();
+        HashMap location = (HashMap) data.get(Column.Absent.LOCATION.getColumnName());
+        this.location = new LatLng((Double) location.get("latitude"), (double) location.get("longitude"));
         this.locationName = (String) data.get(Column.Absent.LOCATION_NAME.getColumnName());
     }
 

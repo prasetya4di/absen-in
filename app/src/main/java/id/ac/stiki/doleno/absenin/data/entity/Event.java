@@ -9,6 +9,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.Timestamp;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -77,8 +78,10 @@ public class Event implements Serializable, Parcelable {
         this.eventTitle = (String) data.get(Column.Event.TITLE.getColumnName());
         this.eventDescription = (String) data.get(Column.Event.DESCRIPTION.getColumnName());
         this.eventOrganizer = (String) data.get(Column.Event.ORGANIZER.getColumnName());
-        this.eventDate = (Date) data.get(Column.Event.DATE.getColumnName());
-        this.location = (LatLng) data.get(Column.Event.LOCATION.getColumnName());
+        Timestamp eventDate = (Timestamp) data.get(Column.Event.DATE.getColumnName());
+        this.eventDate = eventDate.toDate();
+        HashMap location = (HashMap) data.get(Column.Event.LOCATION.getColumnName());
+        this.location = new LatLng((Double) location.get("latitude"), (double) location.get("longitude"));
         this.locationName = (String) data.get(Column.Event.LOCATION_NAME.getColumnName());
     }
 

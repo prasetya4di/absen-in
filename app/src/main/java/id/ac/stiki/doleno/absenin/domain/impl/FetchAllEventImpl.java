@@ -24,6 +24,7 @@ public class FetchAllEventImpl implements FetchAllEvent {
         return eventRepository.get()
                 .addOnSuccessListener(querySnapshots -> AsyncTask.execute(() -> {
                     List<Event> listEvent = new ArrayList<>();
+                    eventRepository.delete();
                     querySnapshots.getDocuments().forEach(document -> listEvent.add(new Event(document.getData())));
                     eventRepository.create(listEvent);
                 }));

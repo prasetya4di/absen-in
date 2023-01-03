@@ -128,7 +128,16 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
         });
 
         binding.btnAddEvent.setOnClickListener(v -> {
-
+            if (isDataComplete()) {
+                viewModel.addEvent(
+                        binding.etTitle.getText().toString(),
+                        binding.etDescription.getText().toString(),
+                        selectedDate,
+                        selectedLocationModel
+                );
+            } else {
+                errorDialog.show(getString(R.string.txt_data_incomplete_error));
+            }
         });
     }
 
@@ -182,5 +191,12 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
                 }, currentYear, currentMonth, currentDay);
 
         datePickerDialog.show();
+    }
+
+    private Boolean isDataComplete() {
+        return !binding.etTitle.getText().toString().isEmpty()
+                && !binding.etDescription.getText().toString().isEmpty()
+                && selectedDate != null
+                && selectedLocationModel != null;
     }
 }

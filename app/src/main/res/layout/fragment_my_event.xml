@@ -106,6 +106,7 @@
         android:layout_marginBottom="68dp"
         android:contentDescription="to add new event"
         android:src="@drawable/ic_add"
+        android:id="@+id/btnAddEvent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

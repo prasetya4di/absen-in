@@ -1,5 +1,6 @@
 package id.ac.stiki.doleno.absenin.view.admin.ui.my_event;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.databinding.FragmentMyEventBinding;
+import id.ac.stiki.doleno.absenin.view.add_event.AddEventActivity;
 
 @AndroidEntryPoint
 public class MyEventFragment extends Fragment {
@@ -54,6 +56,11 @@ public class MyEventFragment extends Fragment {
                 //navigate to event detail
             });
             binding.rvMyEvent.setAdapter(adapter);
+        });
+
+        binding.btnAddEvent.setOnClickListener(v -> {
+            Intent intent = new Intent(this.getActivity(), AddEventActivity.class);
+            startActivity(intent);
         });
 
         return binding.getRoot();

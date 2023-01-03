@@ -46,4 +46,9 @@
     <string name="txt_error">Oopss.. terjadi error, mohon coba beberapa saat lagi</string>
     <string name="txt_loading">Mengambil data, mohon tunggu...</string>
     <string name="txt_empty_data">Ooopss anda masih belum menambahkan event, silahkan menambahkan event baru dengan klik tombol tambah di bawah</string>
+    <string name="txt_add_event">Tambah Event</string>
+    <string name="placeholder_title">Judul</string>
+    <string name="placeholder_description">Deskripsi</string>
+    <string name="placeholder_date">Tanggal</string>
+    <string name="placeholder_location">Lokasi</string>
 </resources>

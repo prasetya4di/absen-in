@@ -21,7 +21,7 @@ import id.ac.stiki.doleno.absenin.data.database.table.Column;
 @Entity
 public class Absent implements Serializable, Parcelable {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    public long uid;
 
     @SerializedName("absent_title")
     @ColumnInfo(name = "absent_title")
@@ -70,7 +70,7 @@ public class Absent implements Serializable, Parcelable {
     }
 
     public Absent(Map<String, Object> data) {
-        this.uid = (int) data.get(Column.Absent.UID.getColumnName());
+        this.uid = (long) data.get(Column.Absent.UID.getColumnName());
         this.absentTitle = (String) data.get(Column.Absent.TITLE.getColumnName());
         this.absentDescription = (String) data.get(Column.Absent.DESCRIPTION.getColumnName());
         this.absentOrganizer = (String) data.get(Column.Absent.ORGANIZER.getColumnName());
@@ -95,7 +95,7 @@ public class Absent implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(uid);
+        dest.writeLong(uid);
         dest.writeString(absentTitle);
         dest.writeString(absentDescription);
         dest.writeString(absentOrganizer);

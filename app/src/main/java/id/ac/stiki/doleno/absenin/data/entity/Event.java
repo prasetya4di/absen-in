@@ -32,7 +32,7 @@ public class Event implements Serializable, Parcelable {
         }
     };
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    public long uid;
     @SerializedName("event_title")
     @ColumnInfo(name = "event_title")
     public String eventTitle;
@@ -73,7 +73,7 @@ public class Event implements Serializable, Parcelable {
     }
 
     public Event(Map<String, Object> data) {
-        this.uid = (int) data.get(Column.Event.UID.getColumnName());
+        this.uid = (long) data.get(Column.Event.UID.getColumnName());
         this.eventTitle = (String) data.get(Column.Event.TITLE.getColumnName());
         this.eventDescription = (String) data.get(Column.Event.DESCRIPTION.getColumnName());
         this.eventOrganizer = (String) data.get(Column.Event.ORGANIZER.getColumnName());
@@ -98,7 +98,7 @@ public class Event implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(uid);
+        dest.writeLong(uid);
         dest.writeString(eventTitle);
         dest.writeString(eventDescription);
         dest.writeString(eventOrganizer);

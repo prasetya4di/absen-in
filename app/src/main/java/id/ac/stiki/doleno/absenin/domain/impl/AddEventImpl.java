@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
+import android.os.AsyncTask;
+
 import com.google.android.gms.tasks.Task;
 
 import id.ac.stiki.doleno.absenin.data.entity.Event;
@@ -18,7 +20,9 @@ public class AddEventImpl implements AddEvent {
         return repository
                 .post(event)
                 .addOnSuccessListener(result -> {
-                    repository.create(event);
+                    AsyncTask.execute(() -> {
+                        repository.create(event);
+                    });
                 });
     }
 }

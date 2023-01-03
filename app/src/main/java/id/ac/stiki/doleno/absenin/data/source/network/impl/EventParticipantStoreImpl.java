@@ -28,7 +28,7 @@ public class EventParticipantStoreImpl implements EventParticipantStore {
         return null;
     }
 
-    private CollectionReference getCollection(int eventId) {
+    private CollectionReference getCollection(long eventId) {
         return firestore.collection(Table.EVENT_PARTICIPANT.getText() + eventId);
     }
 }

@@ -16,10 +16,10 @@ import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 @Entity(tableName = "event_participant")
 public class EventParticipant implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    public long uid;
     @SerializedName("event_id")
     @ColumnInfo(name = "event_id")
-    public int eventId;
+    public long eventId;
     @SerializedName("event_title")
     @ColumnInfo(name = "event_title")
     public String eventTitle;
@@ -40,8 +40,8 @@ public class EventParticipant implements Serializable {
     }
 
     public EventParticipant(Map<String, Object> data) {
-        this.uid = (int) data.get(Column.EventParticipant.UID.getColumnName());
-        this.eventId = (int) data.get(Column.EventParticipant.EVENT_ID.getColumnName());
+        this.uid = (long) data.get(Column.EventParticipant.UID.getColumnName());
+        this.eventId = (long) data.get(Column.EventParticipant.EVENT_ID.getColumnName());
         this.eventTitle = (String) data.get(Column.EventParticipant.TITLE.getColumnName());
         this.email = (String) data.get(Column.EventParticipant.EMAIL.getColumnName());
         this.name = (String) data.get(Column.EventParticipant.NAME.getColumnName());

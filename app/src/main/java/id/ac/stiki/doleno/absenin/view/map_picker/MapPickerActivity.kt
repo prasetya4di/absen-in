@@ -2,6 +2,7 @@ package id.ac.stiki.doleno.absenin.view.map_picker
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -20,10 +21,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import id.ac.stiki.doleno.absenin.R
 import id.ac.stiki.doleno.absenin.databinding.ActivityMapPickerBinding
 import id.ac.stiki.doleno.absenin.util.model.Item
+import id.ac.stiki.doleno.absenin.util.model.SelectedLocationModel
 import id.ac.stiki.doleno.absenin.util.retrofit.RetrofitInstance
+import id.ac.stiki.doleno.absenin.view.dialog.ConfirmDialog
 import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapPickerBinding
@@ -33,6 +37,7 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
     private var animateMarker = true
 
     private lateinit var errorDialog: ErrorDialog
+    private lateinit var confirmDialog: ConfirmDialog
     private var selectedLocation: LatLng? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var bottomSheet: BottomSheetBehavior<View>
@@ -40,9 +45,8 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMapPickerBinding = ActivityMapPickerBinding.inflate(layoutInflater)
-        val view: View = binding.root
-        setContentView(view)
+        binding = ActivityMapPickerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         selectedLocation = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra("selected_location", LatLng::class.java)
@@ -50,20 +54,47 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
             intent.getParcelableExtra("selected_location")
         }
 
+        println("Selected location")
+        println(selectedLocation)
+
         bottomSheet = BottomSheetBehavior.from(binding.bottomSheet.bottomSheet)
         bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
         binding.progressCircular.visibility = View.GONE
 
         errorDialog = ErrorDialog(
             this,
+            "Pilih Ulang",
             Dialog::dismiss,
             Dialog::dismiss
         )
+
+        confirmDialog = ConfirmDialog(this)
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.bottomSheet.bottomSheet.setOnClickListener {
+            confirmDialog.show(
+                getString(
+                    R.string.txt_location_confirmation,
+                    binding.bottomSheet.textTitle.text
+                )
+            ) {
+                it.dismiss()
+                val intent = Intent()
+                intent.putExtra(
+                    "selected_location_model", SelectedLocationModel(
+                        binding.bottomSheet.textTitle.text.toString(),
+                        selectedLocation!!
+                    )
+                )
+                setResult(2, intent)
+                finish()
+            }
+
+        }
     }
 
     private fun getLocation(latLng: LatLng, done: (Item) -> Unit) {
@@ -81,7 +112,9 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
                         }
                     }
                 } catch (e: Throwable) {
-                    errorDialog.show(getString(R.string.txt_general_error))
+                    runOnUiThread {
+                        errorDialog.show(getString(R.string.txt_general_error))
+                    }
                     e.printStackTrace()
                 }
             }
@@ -99,12 +132,12 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
                             LatLng(
                                 it.latitude,
                                 it.longitude
-                            ), 18f
+                            ), 12f
                         )
                     )
                 }
         } else {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation!!, 18f))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation!!, 12f))
         }
 
         val oldPosition = map.cameraPosition.target
@@ -136,6 +169,7 @@ class MapPickerActivity : AppCompatActivity(), OnMapReadyCallback {
                     bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
                     val position = item.position
                     val findLocation = LatLng(position.lat, position.lng)
+                    selectedLocation = findLocation
 
                     map.animateCamera(CameraUpdateFactory.newLatLng(findLocation), 200,
                         object : GoogleMap.CancelableCallback {

@@ -63,6 +63,15 @@ public class Event implements Serializable, Parcelable {
         this.locationName = locationName;
     }
 
+    public Event(String eventTitle, String eventDescription, String eventOrganizer, Date eventDate, LatLng location, String locationName) {
+        this.eventTitle = eventTitle;
+        this.eventDescription = eventDescription;
+        this.eventOrganizer = eventOrganizer;
+        this.eventDate = eventDate;
+        this.location = location;
+        this.locationName = locationName;
+    }
+
     public Event(Map<String, Object> data) {
         this.uid = (int) data.get(Column.Event.UID.getColumnName());
         this.eventTitle = (String) data.get(Column.Event.TITLE.getColumnName());

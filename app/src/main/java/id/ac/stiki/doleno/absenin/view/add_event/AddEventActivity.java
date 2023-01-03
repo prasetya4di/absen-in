@@ -3,9 +3,13 @@ package id.ac.stiki.doleno.absenin.view.add_event;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,8 +33,10 @@ import java.util.List;
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.R;
 import id.ac.stiki.doleno.absenin.databinding.ActivityAddEventBinding;
+import id.ac.stiki.doleno.absenin.util.model.SelectedLocationModel;
 import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog;
 import id.ac.stiki.doleno.absenin.view.dialog.LoadingDialog;
+import id.ac.stiki.doleno.absenin.view.map_picker.MapPickerActivity;
 
 @SuppressLint("MissingPermission")
 @AndroidEntryPoint
@@ -38,8 +44,24 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
     private LoadingDialog loadingDialog;
     private ErrorDialog errorDialog;
     private LatLng selectedLocation;
+    private SelectedLocationModel selectedLocationModel;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private GoogleMap googleMap;
+    private final ActivityResultLauncher<Intent> selectLocation = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getData() != null) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        selectedLocationModel = result.getData().getParcelableExtra("selected_location_model", SelectedLocationModel.class);
+                    } else {
+                        selectedLocationModel = result.getData().getParcelableExtra("selected_location_model");
+                    }
+                    selectedLocation = selectedLocationModel.getLocation();
+                    changeLocation(selectedLocationModel.getLocation());
+                    System.out.println("Selected location");
+                    System.out.println(selectedLocationModel.getLocationName());
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +113,17 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
                     }
                 }).check();
 
-        binding.mapAddEvent.setOnClickListener(v -> {
-            // go to map picker activity
+        binding.layoutSelectLocation.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapPickerActivity.class);
+            intent.putExtra("selected_location", this.selectedLocation);
+            selectLocation.launch(intent);
+            System.out.println("Lokasii terpilih");
+            System.out.println(this.selectedLocationModel);
+            System.out.println(this.selectedLocation);
+        });
+
+        binding.btnAddEvent.setOnClickListener(v -> {
+
         });
     }
 

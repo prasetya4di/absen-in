@@ -102,19 +102,28 @@
                     android:paddingHorizontal="12dp"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:text="@string/placeholder_location"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/mapAddEvent"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                <LinearLayout
+                    android:id="@+id/layoutSelectLocation"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/placeholder_location"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/mapAddEvent"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/btnAddEvent"

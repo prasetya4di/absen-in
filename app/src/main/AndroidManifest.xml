@@ -21,6 +21,20 @@
         android:theme="@style/Theme.AbsenIn"
         tools:targetApi="31">
         <activity
+            android:name=".MapPickerActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.add_event.AddEventActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.admin.AdminActivity"
             android:exported="false">
             <meta-data
@@ -55,21 +69,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="id.ac.stiki.doleno.absenin.view.history_detail.HistoryDetailActivity"
+            android:name=".view.history_detail.HistoryDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="id.ac.stiki.doleno.absenin.view.history.HistoryActivity"
+            android:name=".view.history.HistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="id.ac.stiki.doleno.absenin.view.absen.AbsenActivity"
+            android:name=".view.absen.AbsenActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -84,7 +98,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="id.ac.stiki.doleno.absenin.view.main.MainActivity"
+            android:name=".view.main.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

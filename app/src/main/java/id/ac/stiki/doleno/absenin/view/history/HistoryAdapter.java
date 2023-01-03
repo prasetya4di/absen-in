@@ -31,9 +31,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
         Absent absent = absentList.get(position);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
-        String formattedDate = dateFormat.format(absent.eventDate);
-        holder.binding.eventTitle.setText(absent.eventTitle);
-        holder.binding.eventDescription.setText(absent.eventDescription);
+        String formattedDate = dateFormat.format(absent.absentDate);
+        holder.binding.eventTitle.setText(absent.absentTitle);
+        holder.binding.eventDescription.setText(absent.absentDescription);
         holder.binding.eventDate.setText(formattedDate);
         holder.binding.cardAbsent.setOnClickListener(v -> {
             historyAdapterCallback.onClick(absent);

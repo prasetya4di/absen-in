@@ -27,6 +27,7 @@
     <string name="txt_invalid_credential_error">Email atau password yang anda masukkan masih belum benar. Mohon pastikan data anda sudah sesuai dan coba lagi.</string>
     <string name="txt_checking_data">Memeriksa Data ....</string>
     <string name="txt_location_confirmation">Apakah anda yakin akan memilih lokasi %1$s ?</string>
+    <string name="txt_date">%1$d %2$s %3$d</string>
     <string-array name="list_role">
         <item>Penyelenggara Acara</item>
         <item>Peserta Acara</item>

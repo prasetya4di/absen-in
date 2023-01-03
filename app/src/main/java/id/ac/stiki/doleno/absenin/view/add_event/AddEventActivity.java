@@ -30,11 +30,13 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.R;
 import id.ac.stiki.doleno.absenin.databinding.ActivityAddEventBinding;
+import id.ac.stiki.doleno.absenin.util.date.DateUtil;
 import id.ac.stiki.doleno.absenin.util.model.SelectedLocationModel;
 import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog;
 import id.ac.stiki.doleno.absenin.view.dialog.LoadingDialog;
@@ -43,12 +45,14 @@ import id.ac.stiki.doleno.absenin.view.map_picker.MapPickerActivity;
 @SuppressLint("MissingPermission")
 @AndroidEntryPoint
 public class AddEventActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private ActivityAddEventBinding binding;
     private LoadingDialog loadingDialog;
     private ErrorDialog errorDialog;
     private LatLng selectedLocation;
     private SelectedLocationModel selectedLocationModel;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private GoogleMap googleMap;
+    private Date selectedDate;
     private final ActivityResultLauncher<Intent> selectLocation = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -66,7 +70,7 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityAddEventBinding binding = ActivityAddEventBinding.inflate(getLayoutInflater());
+        binding = ActivityAddEventBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -121,9 +125,6 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
             Intent intent = new Intent(this, MapPickerActivity.class);
             intent.putExtra("selected_location", this.selectedLocation);
             selectLocation.launch(intent);
-            System.out.println("Lokasii terpilih");
-            System.out.println(this.selectedLocationModel);
-            System.out.println(this.selectedLocation);
         });
 
         binding.btnAddEvent.setOnClickListener(v -> {
@@ -172,7 +173,12 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 (DatePickerDialog.OnDateSetListener) (view, year, month, dayOfMonth) -> {
-
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, month);
+                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    selectedDate = cal.getTime();
+                    binding.etDate.setText(getString(R.string.txt_date, dayOfMonth, DateUtil.Companion.getMonthName(month), year));
                 }, currentYear, currentMonth, currentDay);
 
         datePickerDialog.show();

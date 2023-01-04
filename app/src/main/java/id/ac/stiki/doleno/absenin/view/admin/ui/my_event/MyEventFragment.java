@@ -53,7 +53,7 @@ public class MyEventFragment extends Fragment {
 
         viewModel.listMyEvent.observeForever(listEvent -> {
             MyEventAdapter adapter = new MyEventAdapter(listEvent, event -> {
-                //navigate to event detail
+                // TODO("Not yet implemented");
             });
             binding.rvMyEvent.setAdapter(adapter);
         });

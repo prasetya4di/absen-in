@@ -52,7 +52,7 @@ class AllEventFragment : Fragment() {
             run {
                 val adapter = AllEventAdapter(it, object : AllEventAdapterCallback {
                     override fun onClick(event: Event) {
-                        // navigate to event detail
+                        TODO("Not yet implemented")
                     }
                 })
                 binding.rvAllevent.adapter = adapter

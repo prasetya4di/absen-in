@@ -14,6 +14,7 @@ import id.ac.stiki.doleno.absenin.domain.DoLogout;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
 import id.ac.stiki.doleno.absenin.domain.FetchAllAbsentHistory;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEvent;
+import id.ac.stiki.doleno.absenin.domain.FetchAllEventByEmail;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEventParticipant;
 import id.ac.stiki.doleno.absenin.domain.GetAbsentHistoryById;
 import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
@@ -29,6 +30,7 @@ import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLogoutImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoRegisterImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllAbsentHistoryImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventByEmailImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventParticipantImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentHistoryByIdImpl;
@@ -126,5 +128,10 @@ public class DomainModule {
     @Provides
     public FetchAllEventParticipant provideFetchAllEventParticipant(EventParticipantRepository repository) {
         return new FetchAllEventParticipantImpl(repository);
+    }
+
+    @Provides
+    public FetchAllEventByEmail provideFetchAllEventByEmail(EventRepository eventRepository) {
+        return new FetchAllEventByEmailImpl(eventRepository);
     }
 }

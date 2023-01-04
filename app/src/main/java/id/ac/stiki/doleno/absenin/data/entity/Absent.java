@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import id.ac.stiki.doleno.absenin.data.database.table.Column;
+import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 
 @Entity
 public class Absent implements Serializable, Parcelable {
@@ -49,6 +50,8 @@ public class Absent implements Serializable, Parcelable {
     @ColumnInfo(name = "location_name")
     public String locationName;
 
+    public AbsentStatus status;
+
     public static final Creator<Absent> CREATOR = new Creator<Absent>() {
         @Override
         public Absent createFromParcel(Parcel in) {
@@ -64,7 +67,7 @@ public class Absent implements Serializable, Parcelable {
     public Absent() {
     }
 
-    public Absent(int uid, String absentTitle, String absentDescription, String absentOrganizer, String absentOrganizerMail, Date absentDate, LatLng location, String locationName) {
+    public Absent(int uid, String absentTitle, String absentDescription, String absentOrganizer, String absentOrganizerMail, Date absentDate, LatLng location, String locationName, AbsentStatus status) {
         this.uid = uid;
         this.absentTitle = absentTitle;
         this.absentDescription = absentDescription;
@@ -73,6 +76,7 @@ public class Absent implements Serializable, Parcelable {
         this.absentDate = absentDate;
         this.location = location;
         this.locationName = locationName;
+        this.status = status;
     }
 
     public Absent(Map<String, Object> data) {
@@ -86,6 +90,7 @@ public class Absent implements Serializable, Parcelable {
         HashMap location = (HashMap) data.get(Column.Absent.LOCATION.getColumnName());
         this.location = new LatLng((Double) location.get("latitude"), (double) location.get("longitude"));
         this.locationName = (String) data.get(Column.Absent.LOCATION_NAME.getColumnName());
+        this.status = AbsentStatus.fromString((String) data.get(Column.Absent.STATUS.getColumnName()));
     }
 
     protected Absent(Parcel in) {
@@ -96,6 +101,7 @@ public class Absent implements Serializable, Parcelable {
         absentOrganizerMail = in.readString();
         location = in.readParcelable(LatLng.class.getClassLoader());
         locationName = in.readString();
+        status = AbsentStatus.fromString(in.readString());
     }
 
     @Override
@@ -112,6 +118,7 @@ public class Absent implements Serializable, Parcelable {
         dest.writeString(absentOrganizerMail);
         dest.writeParcelable(location, flags);
         dest.writeString(locationName);
+        dest.writeString(status.getText());
     }
 
     public String getDocumentPath() {
@@ -128,6 +135,7 @@ public class Absent implements Serializable, Parcelable {
         Absent.put(Column.Absent.DATE.getColumnName(), absentDate);
         Absent.put(Column.Absent.LOCATION.getColumnName(), location);
         Absent.put(Column.Absent.LOCATION_NAME.getColumnName(), locationName);
+        Absent.put(Column.Absent.STATUS.getColumnName(), status.getText());
         return Absent;
     }
 }

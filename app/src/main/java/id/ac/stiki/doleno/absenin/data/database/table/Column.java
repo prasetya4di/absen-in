@@ -29,7 +29,8 @@ public interface Column {
         ORGANIZER_MAIL("event_organizer_mail"),
         DATE("event_date"),
         LOCATION("location"),
-        LOCATION_NAME("location_name");
+        LOCATION_NAME("location_name"),
+        STATUS("status");
 
         private final String columnName;
 

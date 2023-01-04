@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/event_page"
+        android:enabled="true"
+        android:icon="@drawable/ic_event"
+        android:title="@string/txt_menu_event" />
+    <item
+        android:id="@+id/my_event_page"
+        android:enabled="true"
+        android:icon="@drawable/ic_event_available"
+        android:title="@string/txt_menu_my_event" />
+    <item
+        android:id="@+id/absent_page"
+        android:enabled="true"
+        android:icon="@drawable/ic_scan"
+        android:title="@string/txt_menu_absent" />
+    <item
+        android:id="@+id/history_page"
+        android:enabled="true"
+        android:icon="@drawable/ic_history"
+        android:title="@string/txt_menu_history" />
+    <item
+        android:id="@+id/profile_page"
+        android:enabled="true"
+        android:icon="@drawable/ic_account"
+        android:title="@string/txt_menu_profile" />
+</menu>

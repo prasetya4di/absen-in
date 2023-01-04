@@ -8,6 +8,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
+import id.ac.stiki.doleno.absenin.data.entity.Event;
 import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
 
 public interface EventParticipantRepository {
@@ -20,4 +21,6 @@ public interface EventParticipantRepository {
     Task<DocumentReference> post(EventParticipant eventParticipant);
 
     Task<QuerySnapshot> get(int eventId);
+
+    Long count(Event event, String email);
 }

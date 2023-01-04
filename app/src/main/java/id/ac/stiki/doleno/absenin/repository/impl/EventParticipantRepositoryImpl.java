@@ -8,6 +8,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
+import id.ac.stiki.doleno.absenin.data.entity.Event;
 import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
 import id.ac.stiki.doleno.absenin.data.source.local.EventParticipantDao;
 import id.ac.stiki.doleno.absenin.data.source.network.EventParticipantStore;
@@ -45,5 +46,10 @@ public class EventParticipantRepositoryImpl implements EventParticipantRepositor
     @Override
     public Task<QuerySnapshot> get(int eventId) {
         return eventParticipantStore.get(eventId);
+    }
+
+    @Override
+    public Long count(Event event, String email) {
+        return eventParticipantStore.count(event, email);
     }
 }

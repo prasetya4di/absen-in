@@ -13,4 +13,6 @@ public interface EventStore {
     Task<QuerySnapshot> getAllEvent();
 
     Task<QuerySnapshot> getAllActiveEvent();
+
+    Task<QuerySnapshot> getEventByEmail(String email);
 }

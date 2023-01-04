@@ -7,6 +7,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
 
+import id.ac.stiki.doleno.absenin.data.database.table.Column;
 import id.ac.stiki.doleno.absenin.data.database.table.Table;
 import id.ac.stiki.doleno.absenin.data.entity.Event;
 import id.ac.stiki.doleno.absenin.data.source.network.EventStore;
@@ -36,6 +37,11 @@ public class EventStoreImpl implements EventStore {
     @Override
     public Task<QuerySnapshot> getAllActiveEvent() {
         return getCollection().whereGreaterThan("event_date", new Date()).get();
+    }
+
+    @Override
+    public Task<QuerySnapshot> getEventByEmail(String email) {
+        return getCollection().whereEqualTo(Column.Event.ORGANIZER_MAIL.getColumnName(), email).get();
     }
 
     private CollectionReference getCollection() {

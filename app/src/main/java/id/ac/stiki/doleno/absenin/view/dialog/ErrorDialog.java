@@ -11,6 +11,12 @@ public class ErrorDialog {
     private final SweetAlertDialog.OnSweetClickListener cancelListener;
     private final SweetAlertDialog.OnSweetClickListener confirmListener;
 
+    public ErrorDialog(Activity myactivity, SweetAlertDialog.OnSweetClickListener cancelListener) {
+        activity = myactivity;
+        this.cancelListener = cancelListener;
+        this.confirmListener = cancelListener;
+    }
+
     public ErrorDialog(Activity myactivity, SweetAlertDialog.OnSweetClickListener cancelListener, SweetAlertDialog.OnSweetClickListener confirmListener) {
         activity = myactivity;
         this.cancelListener = cancelListener;
@@ -29,9 +35,7 @@ public class ErrorDialog {
         loadingDialog.setTitleText(errorText);
         loadingDialog.setCancelable(false);
         loadingDialog.setCancelButton(activity.getString(R.string.invalid_code_exit), cancelListener);
-        if (confirmButtonText.isEmpty()) {
-            loadingDialog.setConfirmButton(activity.getString(R.string.invalid_code_rescan), confirmListener);
-        } else {
+        if (!confirmButtonText.isEmpty()) {
             loadingDialog.setConfirmButton(confirmButtonText, confirmListener);
         }
 

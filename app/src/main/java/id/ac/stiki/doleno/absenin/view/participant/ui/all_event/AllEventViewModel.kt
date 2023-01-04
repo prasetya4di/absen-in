@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AllEventViewModel @Inject constructor(
-    private val getAllEvent: GetAllEvent,
+    getAllEvent: GetAllEvent,
     private val fetchAllEvent: FetchAllEvent
 ) : ViewModel() {
     private val _allEventState: MutableLiveData<AllEventState> = MutableLiveData()

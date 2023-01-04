@@ -1,7 +1,6 @@
 package id.ac.stiki.doleno.absenin.view.participant
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -18,8 +17,8 @@ import id.ac.stiki.doleno.absenin.view.participant.ui.my_profile.MyProfileFragme
 class ParticipantActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParticipantBinding
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityParticipantBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
@@ -45,6 +44,6 @@ class ParticipantActivity : AppCompatActivity() {
     }
 
     private fun setCurrentPage(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.flAdmin, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.flParticipant, fragment).commit()
     }
 }

@@ -16,8 +16,7 @@ import javax.inject.Inject
 class AbsentViewModel @Inject constructor(
     private val doAbsent: DoAbsent,
     private val getCurrentLocation: GetCurrentLocation
-) :
-    ViewModel() {
+) : ViewModel() {
     private val _resultStatus = MutableLiveData<QRCodeResultStatus>()
     var resultStatus: LiveData<QRCodeResultStatus> = _resultStatus
 

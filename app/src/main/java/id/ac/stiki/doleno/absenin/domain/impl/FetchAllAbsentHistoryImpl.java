@@ -1,5 +1,7 @@
 package id.ac.stiki.doleno.absenin.domain.impl;
 
+import android.os.AsyncTask;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -21,9 +23,11 @@ public class FetchAllAbsentHistoryImpl implements FetchAllAbsentHistory {
     public Task<QuerySnapshot> execute() {
         return absentRepository.get()
                 .addOnSuccessListener(result -> {
-                    List<Absent> absents = new ArrayList<>();
-                    result.getDocuments().forEach(rawAbsent -> absents.add(new Absent(rawAbsent.getData())));
-                    absentRepository.create(absents);
+                    AsyncTask.execute(() -> {
+                        List<Absent> absents = new ArrayList<>();
+                        result.getDocuments().forEach(rawAbsent -> absents.add(new Absent(rawAbsent.getData())));
+                        absentRepository.create(absents);
+                    });
                 });
     }
 }

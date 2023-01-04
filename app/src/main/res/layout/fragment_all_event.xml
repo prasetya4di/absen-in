@@ -15,10 +15,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_all_event" />
 
-    <include layout="@layout/general_layout_loading" />
+    <include
+        android:id="@+id/loading"
+        layout="@layout/general_layout_loading" />
 
-    <include layout="@layout/general_layout_empty" />
+    <include
+        android:id="@+id/empty"
+        layout="@layout/general_layout_empty" />
 
-    <include layout="@layout/general_layout_error" />
+    <include
+        android:id="@+id/error"
+        layout="@layout/general_layout_error" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

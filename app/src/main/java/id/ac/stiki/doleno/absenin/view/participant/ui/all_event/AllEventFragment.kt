@@ -5,56 +5,60 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import id.ac.stiki.doleno.absenin.R
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import id.ac.stiki.doleno.absenin.data.entity.Event
+import id.ac.stiki.doleno.absenin.databinding.FragmentAllEventBinding
+import id.ac.stiki.doleno.absenin.view.participant.ui.all_event.AllEventAdapter.AllEventAdapterCallback
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AllEventFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class AllEventFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentAllEventBinding
+    private lateinit var viewModel: AllEventViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_event, container, false)
-    }
+    ): View {
+        binding = FragmentAllEventBinding.inflate(inflater, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AllEventFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AllEventFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        viewModel = ViewModelProvider(this)[AllEventViewModel::class.java]
+        viewModel.fetchMyEvent()
+
+        binding.rvAllevent.layoutManager = LinearLayoutManager(this.requireContext())
+
+        viewModel.myEventState.observeForever {
+            run {
+                binding.loading.layoutLoading.visibility = View.GONE
+                binding.empty.layoutEmpty.visibility = View.GONE
+                binding.error.layoutError.visibility = View.GONE
+                binding.rvAllevent.visibility = View.GONE
+                when (it) {
+                    AllEventState.LOADING -> binding.loading.layoutLoading.visibility = View.VISIBLE
+                    AllEventState.SUCCESS -> {
+                        if (viewModel.isListEventEmpty()) {
+                            binding.empty.layoutEmpty.visibility = View.VISIBLE
+                        } else {
+                            binding.rvAllevent.visibility = View.VISIBLE
+                        }
+                    }
+                    AllEventState.FAILED -> binding.error.layoutError.visibility = View.VISIBLE
                 }
             }
+        }
+
+        viewModel.events.observeForever {
+            run {
+                val adapter = AllEventAdapter(it, object : AllEventAdapterCallback {
+                    override fun onClick(event: Event) {
+                        // navigate to event detail
+                    }
+                })
+                binding.rvAllevent.adapter = adapter
+            }
+        }
+
+        return binding.root
     }
 }

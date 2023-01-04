@@ -8,9 +8,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistory"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_history" />
+
+    <include
+        android:id="@+id/empty"
+        layout="@layout/general_layout_empty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,15 +30,23 @@ class HistoryFragment : Fragment() {
         viewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
         viewModel.listAbsent.observeForever { absents ->
             run {
-                val historyAdapter = HistoryAdapter(absents) { absent: Absent? ->
-                    val intent = Intent(
-                        this.activity,
-                        HistoryDetailActivity::class.java
-                    )
-                    intent.putExtra("absent_data", absent as Parcelable?)
-                    startActivity(intent)
+                if (absents.isEmpty()) {
+                    binding.empty.layoutEmpty.visibility = View.VISIBLE
+                    binding.rvHistory.visibility = View.GONE
+                } else {
+                    binding.empty.layoutEmpty.visibility = View.GONE
+                    binding.rvHistory.visibility = View.VISIBLE
+                    val historyAdapter = HistoryAdapter(absents) { absent: Absent? ->
+                        val intent = Intent(
+                            this.activity,
+                            HistoryDetailActivity::class.java
+                        )
+                        intent.putExtra("absent_data", absent as Parcelable?)
+                        startActivity(intent)
+                    }
+                    binding.rvHistory.adapter = historyAdapter
                 }
-                binding.rvHistory.adapter = historyAdapter
+
             }
         }
 

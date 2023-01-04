@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
 import id.ac.stiki.doleno.absenin.R
 import id.ac.stiki.doleno.absenin.databinding.FragmentParticipantProfileBinding
 import id.ac.stiki.doleno.absenin.view.dialog.ConfirmDialog
 import id.ac.stiki.doleno.absenin.view.login.LoginActivity
 
+@AndroidEntryPoint
 class MyProfileFragment : Fragment() {
     private lateinit var binding: FragmentParticipantProfileBinding
     private lateinit var viewModel: MyProfileViewModel

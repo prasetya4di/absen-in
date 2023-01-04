@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.participant.ui.all_event.AllEventFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAllevent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginBottom="48dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_all_event" />
 
-</FrameLayout>
+    <include layout="@layout/general_layout_loading" />
+
+    <include layout="@layout/general_layout_empty" />
+
+    <include layout="@layout/general_layout_error" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

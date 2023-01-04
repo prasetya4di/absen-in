@@ -30,8 +30,16 @@ public class EventParticipant implements Serializable {
     public EventParticipant() {
     }
 
-    public EventParticipant(int uid, int eventId, String eventTitle, String email, String name, AbsentStatus absentStatus) {
+    public EventParticipant(long uid, long eventId, String eventTitle, String email, String name, AbsentStatus absentStatus) {
         this.uid = uid;
+        this.eventId = eventId;
+        this.eventTitle = eventTitle;
+        this.email = email;
+        this.name = name;
+        this.absentStatus = absentStatus;
+    }
+
+    public EventParticipant(long eventId, String eventTitle, String email, String name, AbsentStatus absentStatus) {
         this.eventId = eventId;
         this.eventTitle = eventTitle;
         this.email = email;

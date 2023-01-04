@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import id.ac.stiki.doleno.absenin.data.entity.Absent
 import id.ac.stiki.doleno.absenin.databinding.FragmentHistoryBinding
 import id.ac.stiki.doleno.absenin.view.history_detail.HistoryDetailActivity
 
-
+@AndroidEntryPoint
 class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var viewModel: HistoryViewModel

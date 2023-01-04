@@ -1,60 +1,134 @@
 package id.ac.stiki.doleno.absenin.view.participant.ui.absent
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.google.common.util.concurrent.ListenableFuture
+import dagger.hilt.android.AndroidEntryPoint
 import id.ac.stiki.doleno.absenin.R
+import id.ac.stiki.doleno.absenin.databinding.FragmentAbsentBinding
+import id.ac.stiki.doleno.absenin.util.qrcode.QRCodeFoundListener
+import id.ac.stiki.doleno.absenin.util.qrcode.QRCodeImageAnalyzer
+import id.ac.stiki.doleno.absenin.util.qrcode.QRCodeResultStatus
+import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog
+import id.ac.stiki.doleno.absenin.view.dialog.LoadingDialog
+import id.ac.stiki.doleno.absenin.view.dialog.SuccessDialog
+import java.util.concurrent.ExecutionException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AbsentFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class AbsentFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentAbsentBinding
+    private lateinit var viewModel: AbsentViewModel
+    private lateinit var loadingDialog: LoadingDialog
+    private lateinit var successDialog: SuccessDialog
+    private lateinit var errorDialog: ErrorDialog
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var cameraView: PreviewView
+    private lateinit var processCameraProvider: ProcessCameraProvider
+    private lateinit var cameraProvider: ListenableFuture<ProcessCameraProvider>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_absent, container, false)
-    }
+    ): View {
+        binding = FragmentAbsentBinding.inflate(inflater, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AbsentFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AbsentFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        viewModel = ViewModelProvider(this)[AbsentViewModel::class.java]
+
+        cameraView = binding.mainCameraView
+        loadingDialog = LoadingDialog(this.activity)
+        successDialog = SuccessDialog(this.activity)
+        errorDialog = ErrorDialog(
+            this.activity
+        ) {
+            it.dismiss()
+            startCamera()
+        }
+
+        cameraProvider = ProcessCameraProvider.getInstance(this.requireContext())
+
+        startCamera()
+
+        viewModel.resultStatus.observeForever {
+            kotlin.run {
+                when (it) {
+                    QRCodeResultStatus.VALID -> {
+                        loadingDialog.dismiss()
+                        successDialog.show()
+                    }
+                    QRCodeResultStatus.INVALID -> {
+                        loadingDialog.dismiss()
+                        errorDialog.show(getString(R.string.invalid_code_title_text))
+                    }
+                    QRCodeResultStatus.INVALID_LOCATION -> {
+                        loadingDialog.dismiss()
+                        errorDialog.show(getString(R.string.invalid_location_text))
+                    }
                 }
             }
+        }
+
+        return binding.root
+    }
+
+    private fun startCamera() {
+        cameraProvider.addListener({
+            try {
+                processCameraProvider = cameraProvider.get()
+                bindCameraPreview(processCameraProvider)
+            } catch (e: ExecutionException) {
+                Toast.makeText(
+                    this.context,
+                    "Error starting camera " + e.message,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            } catch (e: InterruptedException) {
+                Toast.makeText(
+                    this.context,
+                    "Error starting camera " + e.message,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+        }, ContextCompat.getMainExecutor(this.requireContext()))
+    }
+
+    private fun bindCameraPreview(cameraProvider: ProcessCameraProvider) {
+        cameraView.implementationMode = PreviewView.ImplementationMode.PERFORMANCE
+        val preview = Preview.Builder().build()
+        val cameraSelector = CameraSelector.Builder()
+            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+            .build()
+        preview.setSurfaceProvider(cameraView.surfaceProvider)
+        val imageAnalysis = ImageAnalysis.Builder()
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .build()
+        imageAnalysis.setAnalyzer(
+            ContextCompat.getMainExecutor(this.requireContext()),
+            QRCodeImageAnalyzer(object : QRCodeFoundListener {
+                override fun onQRCodeFound(result: String) {
+                    cameraProvider.unbindAll()
+                    viewModel.doAbsent(result)
+                    loadingDialog.show()
+                }
+
+                override fun qrCodeNotFound() {
+                    Log.d("Scan result", "Qr code not found")
+                }
+            })
+        )
+        cameraProvider.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
     }
 }

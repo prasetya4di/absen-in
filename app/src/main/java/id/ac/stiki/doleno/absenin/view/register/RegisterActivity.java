@@ -16,7 +16,7 @@ import id.ac.stiki.doleno.absenin.util.enums.Role;
 import id.ac.stiki.doleno.absenin.view.admin.AdminActivity;
 import id.ac.stiki.doleno.absenin.view.dialog.ErrorDialog;
 import id.ac.stiki.doleno.absenin.view.dialog.LoadingDialog;
-import id.ac.stiki.doleno.absenin.view.main.MainActivity;
+import id.ac.stiki.doleno.absenin.view.participant.ParticipantActivity;
 
 @AndroidEntryPoint
 public class RegisterActivity extends AppCompatActivity {
@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (viewModel.getUserRole() == Role.EVENT_PLANNER) {
                         intent = new Intent(RegisterActivity.this, AdminActivity.class);
                     } else {
-                        intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        intent = new Intent(RegisterActivity.this, ParticipantActivity.class);
                     }
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

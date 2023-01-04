@@ -21,6 +21,13 @@
         android:theme="@style/Theme.AbsenIn"
         tools:targetApi="31">
         <activity
+            android:name=".ParticipantActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.map_picker.MapPickerActivity"
             android:exported="false">
             <meta-data

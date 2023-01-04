@@ -56,4 +56,6 @@
     <string name="placeholder_description">Deskripsi</string>
     <string name="placeholder_date">Tanggal</string>
     <string name="placeholder_location">Lokasi</string>
+    <string name="txt_empty_all_event">Ooopss... ternyata masih belum ada event yang akan hadir di sekitar anda, silahkan coba lagi nanti</string>
+    <string name="txt_general_empty_data">Ooopss... data masih belum ditemukan, mohon coba beberapa saat lagi ya</string>
 </resources>

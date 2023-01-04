@@ -26,6 +26,7 @@ public interface Column {
         TITLE("event_title"),
         DESCRIPTION("event_description"),
         ORGANIZER("event_organizer"),
+        ORGANIZER_MAIL("event_organizer_mail"),
         DATE("event_date"),
         LOCATION("location"),
         LOCATION_NAME("location_name");
@@ -47,6 +48,7 @@ public interface Column {
         TITLE("event_title"),
         DESCRIPTION("event_description"),
         ORGANIZER("event_organizer"),
+        ORGANIZER_MAIL("event_organizer_mail"),
         DATE("event_date"),
         LOCATION("location"),
         LOCATION_NAME("location_name");

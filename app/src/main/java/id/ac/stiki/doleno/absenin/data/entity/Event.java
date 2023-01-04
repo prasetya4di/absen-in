@@ -43,6 +43,9 @@ public class Event implements Serializable, Parcelable {
     @SerializedName("event_organizer")
     @ColumnInfo(name = "event_organizer")
     public String eventOrganizer;
+    @SerializedName("event_organizer_mail")
+    @ColumnInfo(name = "event_organizer_mail")
+    public String eventOrganizerMail;
     @SerializedName("event_date")
     @ColumnInfo(name = "event_date")
     public Date eventDate;
@@ -54,20 +57,22 @@ public class Event implements Serializable, Parcelable {
     public Event() {
     }
 
-    public Event(int uid, String eventTitle, String eventDescription, String eventOrganizer, Date eventDate, LatLng location, String locationName) {
+    public Event(int uid, String eventTitle, String eventDescription, String eventOrganizer, String eventOrganizerMail, Date eventDate, LatLng location, String locationName) {
         this.uid = uid;
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;
         this.eventOrganizer = eventOrganizer;
+        this.eventOrganizerMail = eventOrganizerMail;
         this.eventDate = eventDate;
         this.location = location;
         this.locationName = locationName;
     }
 
-    public Event(String eventTitle, String eventDescription, String eventOrganizer, Date eventDate, LatLng location, String locationName) {
+    public Event(String eventTitle, String eventDescription, String eventOrganizer, String eventOrganizerMail, Date eventDate, LatLng location, String locationName) {
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;
         this.eventOrganizer = eventOrganizer;
+        this.eventOrganizerMail = eventOrganizerMail;
         this.eventDate = eventDate;
         this.location = location;
         this.locationName = locationName;
@@ -78,6 +83,7 @@ public class Event implements Serializable, Parcelable {
         this.eventTitle = (String) data.get(Column.Event.TITLE.getColumnName());
         this.eventDescription = (String) data.get(Column.Event.DESCRIPTION.getColumnName());
         this.eventOrganizer = (String) data.get(Column.Event.ORGANIZER.getColumnName());
+        this.eventOrganizerMail = (String) data.get(Column.Event.ORGANIZER_MAIL.getColumnName());
         Timestamp eventDate = (Timestamp) data.get(Column.Event.DATE.getColumnName());
         this.eventDate = eventDate.toDate();
         HashMap location = (HashMap) data.get(Column.Event.LOCATION.getColumnName());
@@ -90,6 +96,7 @@ public class Event implements Serializable, Parcelable {
         eventTitle = in.readString();
         eventDescription = in.readString();
         eventOrganizer = in.readString();
+        eventOrganizerMail = in.readString();
         location = in.readParcelable(LatLng.class.getClassLoader());
         locationName = in.readString();
     }
@@ -105,6 +112,7 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(eventTitle);
         dest.writeString(eventDescription);
         dest.writeString(eventOrganizer);
+        dest.writeString(eventOrganizerMail);
         dest.writeParcelable(location, flags);
         dest.writeString(locationName);
     }
@@ -119,6 +127,7 @@ public class Event implements Serializable, Parcelable {
         event.put(Column.Event.TITLE.getColumnName(), eventTitle);
         event.put(Column.Event.DESCRIPTION.getColumnName(), eventDescription);
         event.put(Column.Event.ORGANIZER.getColumnName(), eventOrganizer);
+        event.put(Column.Event.ORGANIZER_MAIL.getColumnName(), eventOrganizerMail);
         event.put(Column.Event.DATE.getColumnName(), eventDate);
         event.put(Column.Event.LOCATION.getColumnName(), location);
         event.put(Column.Event.LOCATION_NAME.getColumnName(), locationName);

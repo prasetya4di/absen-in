@@ -36,6 +36,10 @@ public class Absent implements Serializable, Parcelable {
     @ColumnInfo(name = "absent_organizer")
     public String absentOrganizer;
 
+    @SerializedName("absent_organizer_mail")
+    @ColumnInfo(name = "absent_organizer_mail")
+    public String absentOrganizerMail;
+
     @SerializedName("absent_date")
     @ColumnInfo(name = "absent_date")
     public Date absentDate;
@@ -60,11 +64,12 @@ public class Absent implements Serializable, Parcelable {
     public Absent() {
     }
 
-    public Absent(int uid, String absentTitle, String absentDescription, String absentOrganizer, Date absentDate, LatLng location, String locationName) {
+    public Absent(int uid, String absentTitle, String absentDescription, String absentOrganizer, String absentOrganizerMail, Date absentDate, LatLng location, String locationName) {
         this.uid = uid;
         this.absentTitle = absentTitle;
         this.absentDescription = absentDescription;
         this.absentOrganizer = absentOrganizer;
+        this.absentOrganizerMail = absentOrganizerMail;
         this.absentDate = absentDate;
         this.location = location;
         this.locationName = locationName;
@@ -75,6 +80,7 @@ public class Absent implements Serializable, Parcelable {
         this.absentTitle = (String) data.get(Column.Absent.TITLE.getColumnName());
         this.absentDescription = (String) data.get(Column.Absent.DESCRIPTION.getColumnName());
         this.absentOrganizer = (String) data.get(Column.Absent.ORGANIZER.getColumnName());
+        this.absentOrganizerMail = (String) data.get(Column.Absent.ORGANIZER_MAIL.getColumnName());
         Timestamp absentDate = (Timestamp) data.get(Column.Absent.DATE.getColumnName());
         this.absentDate = absentDate.toDate();
         HashMap location = (HashMap) data.get(Column.Absent.LOCATION.getColumnName());
@@ -87,6 +93,7 @@ public class Absent implements Serializable, Parcelable {
         absentTitle = in.readString();
         absentDescription = in.readString();
         absentOrganizer = in.readString();
+        absentOrganizerMail = in.readString();
         location = in.readParcelable(LatLng.class.getClassLoader());
         locationName = in.readString();
     }
@@ -102,6 +109,7 @@ public class Absent implements Serializable, Parcelable {
         dest.writeString(absentTitle);
         dest.writeString(absentDescription);
         dest.writeString(absentOrganizer);
+        dest.writeString(absentOrganizerMail);
         dest.writeParcelable(location, flags);
         dest.writeString(locationName);
     }
@@ -116,6 +124,7 @@ public class Absent implements Serializable, Parcelable {
         Absent.put(Column.Absent.TITLE.getColumnName(), absentTitle);
         Absent.put(Column.Absent.DESCRIPTION.getColumnName(), absentDescription);
         Absent.put(Column.Absent.ORGANIZER.getColumnName(), absentOrganizer);
+        Absent.put(Column.Absent.ORGANIZER_MAIL.getColumnName(), absentOrganizerMail);
         Absent.put(Column.Absent.DATE.getColumnName(), absentDate);
         Absent.put(Column.Absent.LOCATION.getColumnName(), location);
         Absent.put(Column.Absent.LOCATION_NAME.getColumnName(), locationName);

@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
 import id.ac.stiki.doleno.absenin.domain.AddEvent;
 import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
+import id.ac.stiki.doleno.absenin.domain.CheckRegisteredStatus;
 import id.ac.stiki.doleno.absenin.domain.DoAbsent;
 import id.ac.stiki.doleno.absenin.domain.DoLogin;
 import id.ac.stiki.doleno.absenin.domain.DoLogout;
@@ -26,6 +27,7 @@ import id.ac.stiki.doleno.absenin.domain.GetUserRole;
 import id.ac.stiki.doleno.absenin.domain.RegisterEvent;
 import id.ac.stiki.doleno.absenin.domain.impl.AddEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.CheckLoggedInStatusImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.CheckRegisteredStatusImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLogoutImpl;
@@ -140,5 +142,10 @@ public class DomainModule {
     @Provides
     public RegisterEvent provideRegisterEvent(AbsentRepository absentRepository, EventParticipantRepository eventParticipantRepository) {
         return new RegisterEventImpl(absentRepository, eventParticipantRepository);
+    }
+
+    @Provides
+    public CheckRegisteredStatus provideCheckRegisteredStatus(EventParticipantRepository eventParticipantRepository) {
+        return new CheckRegisteredStatusImpl(eventParticipantRepository);
     }
 }

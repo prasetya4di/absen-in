@@ -16,6 +16,8 @@ public interface AbsentRepository {
 
     LiveData<List<Absent>> read();
 
+    LiveData<List<Absent>> readByStatus(List<String> status);
+
     Absent read(int id);
 
     void delete();

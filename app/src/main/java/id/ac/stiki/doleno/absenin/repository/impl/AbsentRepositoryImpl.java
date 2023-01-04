@@ -43,6 +43,11 @@ public class AbsentRepositoryImpl implements AbsentRepository {
     }
 
     @Override
+    public LiveData<List<Absent>> readByStatus(List<String> status) {
+        return absentDao.getByStatus(status);
+    }
+
+    @Override
     public Absent read(int id) {
         return absentDao.getById(id);
     }

@@ -17,8 +17,8 @@ public interface AbsentDao {
     @Query("SELECT * FROM absent WHERE uid = :absentId")
     Absent getById(int absentId);
 
-    @Query("SELECT * FROM absent WHERE status = :absentStatus")
-    LiveData<List<Absent>> getByStatus(String absentStatus);
+    @Query("SELECT * FROM absent WHERE status in (:absentStatus)")
+    LiveData<List<Absent>> getByStatus(List<String> absentStatus);
 
     @Insert
     void insert(Absent absent);

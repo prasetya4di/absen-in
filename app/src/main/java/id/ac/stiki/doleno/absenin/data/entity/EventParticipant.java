@@ -47,6 +47,14 @@ public class EventParticipant implements Serializable {
         this.absentStatus = absentStatus;
     }
 
+    public EventParticipant(Event event, User user) {
+        this.eventId = event.uid;
+        this.eventTitle = event.eventTitle;
+        this.email = user.email;
+        this.name = user.name;
+        this.absentStatus = AbsentStatus.REGISTERED;
+    }
+
     public EventParticipant(Map<String, Object> data) {
         this.uid = (long) data.get(Column.EventParticipant.UID.getColumnName());
         this.eventId = (long) data.get(Column.EventParticipant.EVENT_ID.getColumnName());

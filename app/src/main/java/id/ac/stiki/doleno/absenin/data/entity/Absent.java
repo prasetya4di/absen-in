@@ -79,6 +79,28 @@ public class Absent implements Serializable, Parcelable {
         this.status = status;
     }
 
+    public Absent(String absentTitle, String absentDescription, String absentOrganizer, String absentOrganizerMail, Date absentDate, LatLng location, String locationName, AbsentStatus status) {
+        this.absentTitle = absentTitle;
+        this.absentDescription = absentDescription;
+        this.absentOrganizer = absentOrganizer;
+        this.absentOrganizerMail = absentOrganizerMail;
+        this.absentDate = absentDate;
+        this.location = location;
+        this.locationName = locationName;
+        this.status = status;
+    }
+
+    public Absent(Event event) {
+        this.absentTitle = event.eventTitle;
+        this.absentDescription = event.eventDescription;
+        this.absentOrganizer = event.eventOrganizer;
+        this.absentOrganizerMail = event.eventOrganizerMail;
+        this.absentDate = event.eventDate;
+        this.location = event.location;
+        this.locationName = event.locationName;
+        this.status = AbsentStatus.REGISTERED;
+    }
+
     public Absent(Map<String, Object> data) {
         this.uid = (long) data.get(Column.Absent.UID.getColumnName());
         this.absentTitle = (String) data.get(Column.Absent.TITLE.getColumnName());

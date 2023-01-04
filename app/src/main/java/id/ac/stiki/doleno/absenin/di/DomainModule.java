@@ -23,6 +23,7 @@ import id.ac.stiki.doleno.absenin.domain.GetCurrentLocation;
 import id.ac.stiki.doleno.absenin.domain.GetEventById;
 import id.ac.stiki.doleno.absenin.domain.GetUser;
 import id.ac.stiki.doleno.absenin.domain.GetUserRole;
+import id.ac.stiki.doleno.absenin.domain.RegisterEvent;
 import id.ac.stiki.doleno.absenin.domain.impl.AddEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.CheckLoggedInStatusImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
@@ -40,6 +41,7 @@ import id.ac.stiki.doleno.absenin.domain.impl.GetCurrentLocationImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetEventByIdImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetUserImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetUserRoleImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.RegisterEventImpl;
 import id.ac.stiki.doleno.absenin.repository.AbsentRepository;
 import id.ac.stiki.doleno.absenin.repository.AuthRepository;
 import id.ac.stiki.doleno.absenin.repository.EventParticipantRepository;
@@ -133,5 +135,10 @@ public class DomainModule {
     @Provides
     public FetchAllEventByEmail provideFetchAllEventByEmail(EventRepository eventRepository) {
         return new FetchAllEventByEmailImpl(eventRepository);
+    }
+
+    @Provides
+    public RegisterEvent provideRegisterEvent(AbsentRepository absentRepository, EventParticipantRepository eventParticipantRepository) {
+        return new RegisterEventImpl(absentRepository, eventParticipantRepository);
     }
 }

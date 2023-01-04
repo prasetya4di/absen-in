@@ -39,6 +39,7 @@ public class AddEventViewModel extends ViewModel {
                     title,
                     description,
                     user.name,
+                    user.email,
                     date,
                     selectedLocationModel.getLocation(),
                     selectedLocationModel.getLocationName()

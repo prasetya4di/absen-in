@@ -25,4 +25,6 @@ public interface EventRepository {
     Task<QuerySnapshot> get();
 
     Task<QuerySnapshot> getActiveEvent();
+
+    Task<QuerySnapshot> getAllEventByEmail(String email);
 }

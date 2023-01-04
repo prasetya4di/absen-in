@@ -60,4 +60,9 @@ public class EventRepositoryImpl implements EventRepository {
     public Task<QuerySnapshot> getActiveEvent() {
         return eventStore.getAllActiveEvent();
     }
+
+    @Override
+    public Task<QuerySnapshot> getAllEventByEmail(String email) {
+        return eventStore.getEventByEmail(email);
+    }
 }

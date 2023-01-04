@@ -1,4 +1,4 @@
-package id.ac.stiki.doleno.absenin.view.history;
+package id.ac.stiki.doleno.absenin.view.participant.ui.history;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

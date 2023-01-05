@@ -12,9 +12,9 @@ public class SuccessDialog {
         activity = myactivity;
     }
 
-    public void show() {
+    public void show(String text) {
         SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.SUCCESS_TYPE);
-        loadingDialog.setTitleText(activity.getString(R.string.success_text));
+        loadingDialog.setTitleText(text);
         loadingDialog.setCancelable(false);
         loadingDialog.setConfirmButton(activity.getString(R.string.exit_text), sweetAlertDialog -> {
             activity.onBackPressed();

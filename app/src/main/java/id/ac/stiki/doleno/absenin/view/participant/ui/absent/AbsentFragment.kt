@@ -65,7 +65,7 @@ class AbsentFragment : Fragment() {
                 when (it) {
                     QRCodeResultStatus.VALID -> {
                         loadingDialog.dismiss()
-                        successDialog.show()
+                        successDialog.show(getString(R.string.success_text))
                     }
                     QRCodeResultStatus.INVALID -> {
                         loadingDialog.dismiss()

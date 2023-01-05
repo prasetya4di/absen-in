@@ -181,7 +181,7 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
-                (DatePickerDialog.OnDateSetListener) (view, year, month, dayOfMonth) -> {
+                (view, year, month, dayOfMonth) -> {
                     Calendar cal = Calendar.getInstance();
                     cal.set(Calendar.YEAR, year);
                     cal.set(Calendar.MONTH, month);

@@ -23,6 +23,11 @@ class DateUtil {
         fun getMonthName(month: Int): String {
             return monthName[month]
         }
+
+        fun defaultFormatDate(date: Date): String {
+            val dateFormat = SimpleDateFormat("dd MMMM yyyy")
+            return dateFormat.format(date)
+        }
     }
 }
 

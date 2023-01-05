@@ -1,6 +1,7 @@
 package id.ac.stiki.doleno.absenin.data.source.network.impl;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,13 +33,11 @@ public class EventParticipantStoreImpl implements EventParticipantStore {
     }
 
     @Override
-    public Long count(Event event, String email) {
+    public Task<AggregateQuerySnapshot> count(Event event, String email) {
         return getCollection(event.uid)
                 .whereEqualTo(Column.EventParticipant.EMAIL.getColumnName(), email)
                 .count()
-                .get(AggregateSource.SERVER)
-                .getResult()
-                .getCount();
+                .get(AggregateSource.SERVER);
     }
 
     private CollectionReference getCollection(long eventId) {

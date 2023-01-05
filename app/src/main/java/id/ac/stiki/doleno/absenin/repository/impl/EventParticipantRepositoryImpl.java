@@ -3,6 +3,7 @@ package id.ac.stiki.doleno.absenin.repository.impl;
 import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -49,7 +50,7 @@ public class EventParticipantRepositoryImpl implements EventParticipantRepositor
     }
 
     @Override
-    public Long count(Event event, String email) {
+    public Task<AggregateQuerySnapshot> count(Event event, String email) {
         return eventParticipantStore.count(event, email);
     }
 }

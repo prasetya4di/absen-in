@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import id.ac.stiki.doleno.absenin.data.database.table.Column;
+import id.ac.stiki.doleno.absenin.util.date.DateUtil;
 
 @Entity
 public class Event implements Serializable, Parcelable {
@@ -92,11 +93,12 @@ public class Event implements Serializable, Parcelable {
     }
 
     protected Event(Parcel in) {
-        uid = in.readInt();
+        uid = in.readLong();
         eventTitle = in.readString();
         eventDescription = in.readString();
         eventOrganizer = in.readString();
         eventOrganizerMail = in.readString();
+        eventDate = DateUtil.Companion.dateFromString(in.readString());
         location = in.readParcelable(LatLng.class.getClassLoader());
         locationName = in.readString();
     }
@@ -113,6 +115,7 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(eventDescription);
         dest.writeString(eventOrganizer);
         dest.writeString(eventOrganizerMail);
+        dest.writeString(DateUtil.Companion.dateToString(eventDate));
         dest.writeParcelable(location, flags);
         dest.writeString(locationName);
     }

@@ -1,6 +1,7 @@
 package id.ac.stiki.doleno.absenin.data.source.network;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -12,5 +13,5 @@ public interface EventParticipantStore {
 
     Task<QuerySnapshot> get(int eventId);
 
-    Long count(Event event, String email);
+    Task<AggregateQuerySnapshot> count(Event event, String email);
 }

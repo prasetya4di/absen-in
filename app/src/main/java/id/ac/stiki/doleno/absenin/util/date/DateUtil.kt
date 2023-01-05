@@ -24,9 +24,13 @@ class DateUtil {
             return monthName[month]
         }
 
-        fun defaultFormatDate(date: Date): String {
+        fun dateToString(date: Date): String {
             val dateFormat = SimpleDateFormat("dd MMMM yyyy")
             return dateFormat.format(date)
+        }
+
+        fun dateFromString(date: String): Date {
+            return SimpleDateFormat("dd MMMM yyyy").parse(date) ?: Date()
         }
     }
 }

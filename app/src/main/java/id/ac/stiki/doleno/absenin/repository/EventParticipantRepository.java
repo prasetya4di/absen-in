@@ -3,6 +3,7 @@ package id.ac.stiki.doleno.absenin.repository;
 import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -22,5 +23,5 @@ public interface EventParticipantRepository {
 
     Task<QuerySnapshot> get(int eventId);
 
-    Long count(Event event, String email);
+    Task<AggregateQuerySnapshot> count(Event event, String email);
 }

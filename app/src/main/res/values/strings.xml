@@ -58,4 +58,10 @@
     <string name="placeholder_location">Lokasi</string>
     <string name="txt_empty_all_event">Ooopss... ternyata masih belum ada event yang akan hadir di sekitar anda, silahkan coba lagi nanti</string>
     <string name="txt_general_empty_data">Ooopss... data masih belum ditemukan, mohon coba beberapa saat lagi ya</string>
+    <string name="txt_register_event">Daftar Event</string>
+    <string name="txt_detail_event">Detail Event</string>
+    <string name="txt_location_detail">Detail Lokasi</string>
+    <string name="txt_location_name">Nama Lokasi</string>
+    <string name="txt_map">Map</string>
+    <string name="txt_open_on_maps">Buka di Maps</string>
 </resources>

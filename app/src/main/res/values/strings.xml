@@ -64,4 +64,8 @@
     <string name="txt_location_name">Nama Lokasi</string>
     <string name="txt_map">Map</string>
     <string name="txt_open_on_maps">Buka di Maps</string>
+    <string name="txt_register_event_confirmation">Apakah anda yakin akan mendaftar pada event %1$s ?</string>
+    <string name="txt_success_register_event">Anda berhasil mendaftar pada event %1$s, Jangan lupa datang dan melakukan absensi pada tanggal %2$s ya</string>
+    <string name="txt_failed_register_event">Ooopss... Proses pendaftaran gagal, mohon coba beberapa saat lagi</string>
+    <string name="txt_registered_event">Ooopss... Anda sudah terdaftar pada acara ini, silahkan cek menu my event untuk informasi selengkapnya</string>
 </resources>

@@ -50,6 +50,8 @@ public class Absent implements Serializable, Parcelable {
     @ColumnInfo(name = "location_name")
     public String locationName;
 
+    @SerializedName("status")
+    @ColumnInfo(name = "status")
     public AbsentStatus status;
 
     public static final Creator<Absent> CREATOR = new Creator<Absent>() {

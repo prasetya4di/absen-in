@@ -22,7 +22,7 @@ import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 
 @Entity
 public class Absent implements Serializable, Parcelable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public long uid;
 
     @SerializedName("absent_title")

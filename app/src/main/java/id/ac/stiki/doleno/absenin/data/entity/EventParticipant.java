@@ -15,7 +15,7 @@ import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 
 @Entity(tableName = "event_participant")
 public class EventParticipant implements Serializable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public long uid;
     @SerializedName("event_id")
     @ColumnInfo(name = "event_id")
@@ -25,6 +25,8 @@ public class EventParticipant implements Serializable {
     public String eventTitle;
     public String email;
     public String name;
+    @SerializedName("absent_status")
+    @ColumnInfo(name = "absent_status")
     public AbsentStatus absentStatus;
 
     public EventParticipant() {

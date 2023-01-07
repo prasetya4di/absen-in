@@ -33,7 +33,7 @@ public class Event implements Serializable, Parcelable {
             return new Event[size];
         }
     };
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public long uid;
     @SerializedName("event_title")
     @ColumnInfo(name = "event_title")
@@ -58,7 +58,7 @@ public class Event implements Serializable, Parcelable {
     public Event() {
     }
 
-    public Event(int uid, String eventTitle, String eventDescription, String eventOrganizer, String eventOrganizerMail, Date eventDate, LatLng location, String locationName) {
+    public Event(long uid, String eventTitle, String eventDescription, String eventOrganizer, String eventOrganizerMail, Date eventDate, LatLng location, String locationName) {
         this.uid = uid;
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;

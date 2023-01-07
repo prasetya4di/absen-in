@@ -1,52 +1,53 @@
-package id.ac.stiki.doleno.absenin.view.add_event;
+package id.ac.stiki.doleno.absenin.view.add_event
 
-import android.os.AsyncTask;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import java.util.Date;
-
-import javax.inject.Inject;
-
-import dagger.hilt.android.lifecycle.HiltViewModel;
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-import id.ac.stiki.doleno.absenin.data.entity.User;
-import id.ac.stiki.doleno.absenin.domain.AddEvent;
-import id.ac.stiki.doleno.absenin.domain.GetUser;
-import id.ac.stiki.doleno.absenin.util.model.SelectedLocationModel;
-import id.ac.stiki.doleno.absenin.view.admin.ui.my_event.MyEventState;
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import id.ac.stiki.doleno.absenin.data.entity.Event
+import id.ac.stiki.doleno.absenin.domain.AddEvent
+import id.ac.stiki.doleno.absenin.domain.GetUser
+import id.ac.stiki.doleno.absenin.util.model.SelectedLocationModel
+import id.ac.stiki.doleno.absenin.view.admin.ui.my_event.MyEventState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
+import javax.inject.Inject
 
 @HiltViewModel
-public class AddEventViewModel extends ViewModel {
-    private final AddEvent addEvent;
-    private final GetUser getUser;
-    private final MutableLiveData<MyEventState> _myEventState = new MutableLiveData<>();
-    public LiveData<MyEventState> myEventState = _myEventState;
+class AddEventViewModel @Inject constructor(
+    private val addEvent: AddEvent,
+    private val getUser: GetUser
+) : ViewModel() {
+    private val _myEventState = MutableLiveData<MyEventState>()
 
-    @Inject
-    public AddEventViewModel(AddEvent addEvent, GetUser getUser) {
-        this.addEvent = addEvent;
-        this.getUser = getUser;
-    }
-
-    public void addEvent(String title, String description, Date date, SelectedLocationModel selectedLocationModel) {
-        _myEventState.postValue(MyEventState.LOADING);
-        AsyncTask.execute(() -> {
-            User user = getUser.execute();
-            Event event = new Event(
+    @JvmField
+    var myEventState: LiveData<MyEventState> = _myEventState
+    fun addEvent(
+        title: String,
+        description: String,
+        date: Date,
+        selectedLocationModel: SelectedLocationModel
+    ) {
+        _myEventState.postValue(MyEventState.LOADING)
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                val user = getUser.execute()
+                val event = Event(
                     title,
                     description,
                     user.name,
                     user.email,
                     date,
-                    selectedLocationModel.getLocation(),
-                    selectedLocationModel.getLocationName()
-            );
-            addEvent.execute(event)
-                    .addOnSuccessListener(success -> _myEventState.postValue(MyEventState.SUCCESS))
-                    .addOnFailureListener(failure -> _myEventState.postValue(MyEventState.FAILED));
-        });
+                    selectedLocationModel.location,
+                    selectedLocationModel.locationName
+                )
+                addEvent.execute(event)
+                    .addOnSuccessListener { _myEventState.postValue(MyEventState.SUCCESS) }
+                    .addOnFailureListener { _myEventState.postValue(MyEventState.FAILED) }
+            }
+        }
     }
 }

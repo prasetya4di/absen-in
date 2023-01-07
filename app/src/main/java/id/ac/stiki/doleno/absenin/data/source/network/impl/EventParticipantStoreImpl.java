@@ -41,6 +41,6 @@ public class EventParticipantStoreImpl implements EventParticipantStore {
     }
 
     private CollectionReference getCollection(long eventId) {
-        return firestore.collection(Table.EVENT_PARTICIPANT.getText() + eventId);
+        return firestore.collection(Table.EVENT_PARTICIPANT.getText() + "_" + eventId);
     }
 }

@@ -32,6 +32,6 @@ public class AbsentStoreImpl implements AbsentStore {
     }
 
     private CollectionReference getCollection(String email) {
-        return firestore.collection(Table.ABSENT.getText() + email);
+        return firestore.collection(Table.ABSENT.getText() + "_" + email);
     }
 }

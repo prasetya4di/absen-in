@@ -14,14 +14,14 @@ public interface EventDao {
     @Query("SELECT * FROM event")
     LiveData<List<Event>> getAll();
 
-    @Query("SELECT * FROM event WHERE uid = :EventId")
-    Event getById(int EventId);
+    @Query("SELECT * FROM event WHERE uid = :eventId")
+    Event getById(int eventId);
 
     @Insert
-    void insert(Event Event);
+    void insert(Event event);
 
-    @Insert
-    void insert(List<Event> Event);
+    @Insert(entity = Event.class)
+    void insert(List<Event> events);
 
     @Query("DELETE FROM event")
     void delete();

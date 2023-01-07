@@ -58,8 +58,8 @@ public class AbsentRepositoryImpl implements AbsentRepository {
     }
 
     @Override
-    public Task<Void> post(Absent absent) {
-        return absentStore.createAbsent(absent, userDao.getUser().email);
+    public Task<Void> post(Absent absent, String email) {
+        return absentStore.createAbsent(absent, email);
     }
 
     @Override

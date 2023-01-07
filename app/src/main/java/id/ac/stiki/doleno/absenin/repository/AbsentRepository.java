@@ -22,7 +22,7 @@ public interface AbsentRepository {
 
     void delete();
 
-    Task<Void> post(Absent absent);
+    Task<Void> post(Absent absent, String email);
 
     Task<QuerySnapshot> get();
 }

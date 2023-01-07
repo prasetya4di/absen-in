@@ -1,6 +1,8 @@
 package id.ac.stiki.doleno.absenin.view.participant.ui.all_event
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.ac.stiki.doleno.absenin.data.entity.Event
 import id.ac.stiki.doleno.absenin.databinding.FragmentAllEventBinding
 import id.ac.stiki.doleno.absenin.view.participant.ui.all_event.AllEventAdapter.AllEventAdapterCallback
+import id.ac.stiki.doleno.absenin.view.participant.ui.event_join.EventJoinActivity
 
 @AndroidEntryPoint
 class AllEventFragment : Fragment() {
@@ -28,35 +31,34 @@ class AllEventFragment : Fragment() {
 
         binding.rvAllevent.layoutManager = LinearLayoutManager(this.requireContext())
 
-        viewModel.myEventState.observeForever {
-            run {
-                binding.loading.layoutLoading.visibility = View.GONE
-                binding.empty.layoutEmpty.visibility = View.GONE
-                binding.error.layoutError.visibility = View.GONE
-                binding.rvAllevent.visibility = View.GONE
-                when (it) {
-                    AllEventState.LOADING -> binding.loading.layoutLoading.visibility = View.VISIBLE
-                    AllEventState.SUCCESS -> {
-                        if (viewModel.isListEventEmpty()) {
-                            binding.empty.layoutEmpty.visibility = View.VISIBLE
-                        } else {
-                            binding.rvAllevent.visibility = View.VISIBLE
-                        }
+        viewModel.myEventState.observe(viewLifecycleOwner) {
+            binding.loading.layoutLoading.visibility = View.GONE
+            binding.empty.layoutEmpty.visibility = View.GONE
+            binding.error.layoutError.visibility = View.GONE
+            binding.rvAllevent.visibility = View.GONE
+            when (it) {
+                AllEventState.LOADING -> binding.loading.layoutLoading.visibility = View.VISIBLE
+                AllEventState.SUCCESS -> {
+                    if (viewModel.isListEventEmpty()) {
+                        binding.empty.layoutEmpty.visibility = View.VISIBLE
+                    } else {
+                        binding.rvAllevent.visibility = View.VISIBLE
                     }
-                    AllEventState.FAILED -> binding.error.layoutError.visibility = View.VISIBLE
                 }
+                AllEventState.FAILED -> binding.error.layoutError.visibility = View.VISIBLE
             }
         }
 
-        viewModel.events.observeForever {
-            run {
-                val adapter = AllEventAdapter(it, object : AllEventAdapterCallback {
-                    override fun onClick(event: Event) {
-                        TODO("Not yet implemented")
-                    }
-                })
-                binding.rvAllevent.adapter = adapter
-            }
+        viewModel.events.observe(viewLifecycleOwner) {
+            val adapter = AllEventAdapter(it, object : AllEventAdapterCallback {
+                override fun onClick(event: Event) {
+                    val intent =
+                        Intent(this@AllEventFragment.activity, EventJoinActivity::class.java)
+                    intent.putExtra("selected_event", event as Parcelable)
+                    startActivity(intent)
+                }
+            })
+            binding.rvAllevent.adapter = adapter
         }
 
         return binding.root

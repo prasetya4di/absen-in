@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
+            android:id="@+id/txtTitle"
             app:layout_constraintLeft_toRightOf="@id/imgBack"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/txt_add_event" />
@@ -177,10 +178,10 @@
                     android:layout_height="250dp"
                     android:clickable="true"
                     android:contentDescription="@string/txt_location_detail"
-                    android:focusable="true"
-                    tools:layout="@layout/fragment_maps" />
+                    android:focusable="true" />
 
                 <Button
+                    android:id="@+id/btnOpenInMaps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_open_on_maps"

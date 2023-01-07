@@ -17,6 +17,7 @@ public class SuccessDialog {
         loadingDialog.setTitleText(text);
         loadingDialog.setCancelable(false);
         loadingDialog.setConfirmButton(activity.getString(R.string.exit_text), sweetAlertDialog -> {
+            sweetAlertDialog.dismiss();
             activity.onBackPressed();
         });
         loadingDialog.show();

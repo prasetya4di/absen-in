@@ -1,9 +1,8 @@
-package id.ac.stiki.doleno.absenin.domain;
+package id.ac.stiki.doleno.absenin.domain
 
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Task
+import id.ac.stiki.doleno.absenin.data.entity.Event
 
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-
-public interface AddEvent {
-    Task<Void> execute(Event event);
+interface AddEvent {
+    suspend fun execute(event: Event): Task<Void>
 }

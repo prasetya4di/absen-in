@@ -6,6 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
+import id.ac.stiki.doleno.absenin.data.source.network.GlobalStore;
 import id.ac.stiki.doleno.absenin.domain.AddEvent;
 import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
 import id.ac.stiki.doleno.absenin.domain.CheckRegisteredStatus;
@@ -87,8 +88,8 @@ public class DomainModule {
     }
 
     @Provides
-    public AddEvent provideAddEvent(EventRepository eventRepository) {
-        return new AddEventImpl(eventRepository);
+    public AddEvent provideAddEvent(EventRepository eventRepository, GlobalStore globalStore) {
+        return new AddEventImpl(eventRepository, globalStore);
     }
 
     @Provides

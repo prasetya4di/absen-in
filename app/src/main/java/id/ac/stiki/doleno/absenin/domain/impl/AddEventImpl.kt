@@ -14,7 +14,7 @@ class AddEventImpl @Inject constructor(
     private val globalStore: GlobalStore
 ) : AddEvent {
     override suspend fun execute(event: Event): Task<Void> {
-        val id = globalStore.getLatestId(Table.ABSENT.text)
+        val id = globalStore.getLatestId(Table.EVENT.text).plus(1)
         event.uid = id
         return repository
             .post(event)

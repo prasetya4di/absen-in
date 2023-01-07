@@ -143,8 +143,8 @@ public class DomainModule {
     }
 
     @Provides
-    public RegisterEvent provideRegisterEvent(AbsentRepository absentRepository, EventParticipantRepository eventParticipantRepository) {
-        return new RegisterEventImpl(absentRepository, eventParticipantRepository);
+    public RegisterEvent provideRegisterEvent(AbsentRepository absentRepository, EventParticipantRepository eventParticipantRepository, GlobalStore globalStore) {
+        return new RegisterEventImpl(absentRepository, eventParticipantRepository, globalStore);
     }
 
     @Provides

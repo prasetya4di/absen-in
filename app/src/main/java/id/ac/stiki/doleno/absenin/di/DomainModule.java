@@ -18,6 +18,7 @@ import id.ac.stiki.doleno.absenin.domain.FetchAllAbsentHistory;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEvent;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEventByEmail;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEventParticipant;
+import id.ac.stiki.doleno.absenin.domain.GenerateQrBitmap;
 import id.ac.stiki.doleno.absenin.domain.GetAbsentByStatus;
 import id.ac.stiki.doleno.absenin.domain.GetAbsentHistoryById;
 import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
@@ -38,6 +39,7 @@ import id.ac.stiki.doleno.absenin.domain.impl.FetchAllAbsentHistoryImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventByEmailImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventParticipantImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.GenerateQrBitmapImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentByStatusImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentHistoryByIdImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAllAbsentHistoryImpl;
@@ -155,5 +157,10 @@ public class DomainModule {
     @Provides
     public CheckRegisteredStatus provideCheckRegisteredStatus(EventParticipantRepository eventParticipantRepository) {
         return new CheckRegisteredStatusImpl(eventParticipantRepository);
+    }
+
+    @Provides
+    public GenerateQrBitmap provideGenerateQrBitmap() {
+        return new GenerateQrBitmapImpl();
     }
 }

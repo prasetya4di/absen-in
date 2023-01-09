@@ -1,11 +1,14 @@
 package id.ac.stiki.doleno.absenin.di;
 
+import android.content.Context;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ViewModelComponent;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import id.ac.stiki.doleno.absenin.data.source.network.GlobalStore;
 import id.ac.stiki.doleno.absenin.domain.AddEvent;
 import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
@@ -14,6 +17,7 @@ import id.ac.stiki.doleno.absenin.domain.DoAbsent;
 import id.ac.stiki.doleno.absenin.domain.DoLogin;
 import id.ac.stiki.doleno.absenin.domain.DoLogout;
 import id.ac.stiki.doleno.absenin.domain.DoRegister;
+import id.ac.stiki.doleno.absenin.domain.DownloadQrCode;
 import id.ac.stiki.doleno.absenin.domain.FetchAllAbsentHistory;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEvent;
 import id.ac.stiki.doleno.absenin.domain.FetchAllEventByEmail;
@@ -36,6 +40,7 @@ import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoLogoutImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.DoRegisterImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.DownloadQrCodeImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllAbsentHistoryImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventByEmailImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventImpl;
@@ -169,5 +174,10 @@ public class DomainModule {
     @Provides
     public GetEventParticipant provideGetEventParticipant(EventParticipantRepository eventParticipantRepository) {
         return new GetEventParticipantImpl(eventParticipantRepository);
+    }
+
+    @Provides
+    public DownloadQrCode provideDownloadQrCode(@ApplicationContext Context context) {
+        return new DownloadQrCodeImpl(context);
     }
 }

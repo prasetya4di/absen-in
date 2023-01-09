@@ -25,6 +25,7 @@ import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
 import id.ac.stiki.doleno.absenin.domain.GetAllEvent;
 import id.ac.stiki.doleno.absenin.domain.GetCurrentLocation;
 import id.ac.stiki.doleno.absenin.domain.GetEventById;
+import id.ac.stiki.doleno.absenin.domain.GetEventParticipant;
 import id.ac.stiki.doleno.absenin.domain.GetUser;
 import id.ac.stiki.doleno.absenin.domain.GetUserRole;
 import id.ac.stiki.doleno.absenin.domain.RegisterEvent;
@@ -46,6 +47,7 @@ import id.ac.stiki.doleno.absenin.domain.impl.GetAllAbsentHistoryImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetAllEventImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetCurrentLocationImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetEventByIdImpl;
+import id.ac.stiki.doleno.absenin.domain.impl.GetEventParticipantImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetUserImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.GetUserRoleImpl;
 import id.ac.stiki.doleno.absenin.domain.impl.RegisterEventImpl;
@@ -162,5 +164,10 @@ public class DomainModule {
     @Provides
     public GenerateQrBitmap provideGenerateQrBitmap() {
         return new GenerateQrBitmapImpl();
+    }
+
+    @Provides
+    public GetEventParticipant provideGetEventParticipant(EventParticipantRepository eventParticipantRepository) {
+        return new GetEventParticipantImpl(eventParticipantRepository);
     }
 }

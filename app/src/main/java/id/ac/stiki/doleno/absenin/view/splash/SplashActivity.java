@@ -1,13 +1,24 @@
 package id.ac.stiki.doleno.absenin.view.splash;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
+
 import dagger.hilt.android.AndroidEntryPoint;
+import id.ac.stiki.doleno.absenin.R;
 import id.ac.stiki.doleno.absenin.databinding.ActivitySplashBinding;
 import id.ac.stiki.doleno.absenin.util.enums.Role;
 import id.ac.stiki.doleno.absenin.view.admin.AdminActivity;
@@ -15,7 +26,7 @@ import id.ac.stiki.doleno.absenin.view.login.LoginActivity;
 import id.ac.stiki.doleno.absenin.view.participant.ParticipantActivity;
 
 @AndroidEntryPoint
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements MultiplePermissionsListener {
     private ActivitySplashBinding binding;
     private SplashViewModel viewModel;
 
@@ -27,7 +38,17 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(view);
 
         viewModel = new ViewModelProvider(this).get(SplashViewModel.class);
-        viewModel.checkLoggedInStatus();
+
+        Dexter.withContext(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                )
+                .withListener(this)
+                .check();
 
         viewModel.splashState.observeForever(splashState -> {
             Intent intent;
@@ -50,5 +71,18 @@ public class SplashActivity extends AppCompatActivity {
                     break;
             }
         });
+    }
+
+    @Override
+    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+        if (!multiplePermissionsReport.areAllPermissionsGranted()) {
+            Toast.makeText(this, R.string.permission_denied_text, Toast.LENGTH_SHORT).show();
+        }
+        viewModel.checkLoggedInStatus();
+    }
+
+    @Override
+    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+        permissionToken.continuePermissionRequest();
     }
 }

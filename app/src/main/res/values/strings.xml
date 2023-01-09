@@ -68,4 +68,10 @@
     <string name="txt_success_register_event">Anda berhasil mendaftar pada event %1$s, Jangan lupa datang dan melakukan absensi pada tanggal %2$s ya</string>
     <string name="txt_failed_register_event">Ooopss... Proses pendaftaran gagal, mohon coba beberapa saat lagi</string>
     <string name="txt_registered_event">Ooopss... Anda sudah terdaftar pada acara ini, silahkan cek menu my event untuk informasi selengkapnya</string>
+    <string name="txt_qr_code">Qr Code</string>
+    <string name="txt_download_qr_code">Download Qr Code</string>
+    <string name="txt_participants">Peserta</string>
+    <string name="txt_total_participants">Total : %1$d</string>
+    <string name="txt_total_participants_and_attendance">Kehadiran : %1$d/%2$d</string>
+    <string name="txt_qr_code_downloaded">Qr Code telah di download, anda dapet melihat melalui galeri atau file manager</string>
 </resources>

@@ -1,183 +1,143 @@
-package id.ac.stiki.doleno.absenin.di;
+package id.ac.stiki.doleno.absenin.di
 
-import android.content.Context;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-
-import dagger.Module;
-import dagger.Provides;
-import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ViewModelComponent;
-import dagger.hilt.android.qualifiers.ApplicationContext;
-import id.ac.stiki.doleno.absenin.data.source.network.GlobalStore;
-import id.ac.stiki.doleno.absenin.domain.AddEvent;
-import id.ac.stiki.doleno.absenin.domain.CheckLoggedInStatus;
-import id.ac.stiki.doleno.absenin.domain.CheckRegisteredStatus;
-import id.ac.stiki.doleno.absenin.domain.DoAbsent;
-import id.ac.stiki.doleno.absenin.domain.DoLogin;
-import id.ac.stiki.doleno.absenin.domain.DoLogout;
-import id.ac.stiki.doleno.absenin.domain.DoRegister;
-import id.ac.stiki.doleno.absenin.domain.DownloadQrCode;
-import id.ac.stiki.doleno.absenin.domain.FetchAllAbsentHistory;
-import id.ac.stiki.doleno.absenin.domain.FetchAllEvent;
-import id.ac.stiki.doleno.absenin.domain.FetchAllEventByEmail;
-import id.ac.stiki.doleno.absenin.domain.FetchAllEventParticipant;
-import id.ac.stiki.doleno.absenin.domain.GenerateQrBitmap;
-import id.ac.stiki.doleno.absenin.domain.GetAbsentByStatus;
-import id.ac.stiki.doleno.absenin.domain.GetAbsentHistoryById;
-import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
-import id.ac.stiki.doleno.absenin.domain.GetAllEvent;
-import id.ac.stiki.doleno.absenin.domain.GetCurrentLocation;
-import id.ac.stiki.doleno.absenin.domain.GetEventById;
-import id.ac.stiki.doleno.absenin.domain.GetEventParticipant;
-import id.ac.stiki.doleno.absenin.domain.GetUser;
-import id.ac.stiki.doleno.absenin.domain.GetUserRole;
-import id.ac.stiki.doleno.absenin.domain.RegisterEvent;
-import id.ac.stiki.doleno.absenin.domain.impl.AddEventImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.CheckLoggedInStatusImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.CheckRegisteredStatusImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.DoAbsentImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.DoLoginImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.DoLogoutImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.DoRegisterImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.DownloadQrCodeImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.FetchAllAbsentHistoryImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventByEmailImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.FetchAllEventParticipantImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GenerateQrBitmapImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentByStatusImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetAbsentHistoryByIdImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetAllAbsentHistoryImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetAllEventImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetCurrentLocationImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetEventByIdImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetEventParticipantImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetUserImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.GetUserRoleImpl;
-import id.ac.stiki.doleno.absenin.domain.impl.RegisterEventImpl;
-import id.ac.stiki.doleno.absenin.repository.AbsentRepository;
-import id.ac.stiki.doleno.absenin.repository.AuthRepository;
-import id.ac.stiki.doleno.absenin.repository.EventParticipantRepository;
-import id.ac.stiki.doleno.absenin.repository.EventRepository;
-import id.ac.stiki.doleno.absenin.repository.UserRepository;
+import android.content.Context
+import com.google.android.gms.location.FusedLocationProviderClient
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import id.ac.stiki.doleno.absenin.data.source.network.GlobalStore
+import id.ac.stiki.doleno.absenin.domain.*
+import id.ac.stiki.doleno.absenin.domain.impl.*
+import id.ac.stiki.doleno.absenin.repository.*
 
 @Module
-@InstallIn(ViewModelComponent.class)
-public class DomainModule {
-
+@InstallIn(ViewModelComponent::class)
+class DomainModule {
     @Provides
-    public DoAbsent provideDoAbsent(AbsentRepository absentRepository) {
-        return new DoAbsentImpl(absentRepository);
+    fun provideDoAbsent(absentRepository: AbsentRepository): DoAbsent {
+        return DoAbsentImpl(absentRepository)
     }
 
     @Provides
-    public GetAllAbsentHistory provideGetAllAbsent(AbsentRepository absentRepository) {
-        return new GetAllAbsentHistoryImpl(absentRepository);
+    fun provideGetAllAbsent(absentRepository: AbsentRepository): GetAllAbsentHistory {
+        return GetAllAbsentHistoryImpl(absentRepository)
     }
 
     @Provides
-    public GetAbsentHistoryById provideGetAbsentById(AbsentRepository absentRepository) {
-        return new GetAbsentHistoryByIdImpl(absentRepository);
+    fun provideGetAbsentById(absentRepository: AbsentRepository): GetAbsentHistoryById {
+        return GetAbsentHistoryByIdImpl(absentRepository)
     }
 
     @Provides
-    public GetCurrentLocation provideGetCurrentLocation(FusedLocationProviderClient fusedLocationProviderClient) {
-        return new GetCurrentLocationImpl(fusedLocationProviderClient);
+    fun provideGetCurrentLocation(fusedLocationProviderClient: FusedLocationProviderClient): GetCurrentLocation {
+        return GetCurrentLocationImpl(fusedLocationProviderClient)
     }
 
     @Provides
-    public GetAllEvent provideGetAllEvent(EventRepository eventRepository) {
-        return new GetAllEventImpl(eventRepository);
+    fun provideGetAllEvent(eventRepository: EventRepository): GetAllEvent {
+        return GetAllEventImpl(eventRepository)
     }
 
     @Provides
-    public GetEventById provideGetEventById(EventRepository eventRepository) {
-        return new GetEventByIdImpl(eventRepository);
+    fun provideGetEventById(eventRepository: EventRepository): GetEventById {
+        return GetEventByIdImpl(eventRepository)
     }
 
     @Provides
-    public AddEvent provideAddEvent(EventRepository eventRepository, GlobalStore globalStore) {
-        return new AddEventImpl(eventRepository, globalStore);
+    fun provideAddEvent(eventRepository: EventRepository, globalStore: GlobalStore): AddEvent {
+        return AddEventImpl(eventRepository, globalStore)
     }
 
     @Provides
-    public DoLogin provideDoLogin(AuthRepository authRepository, UserRepository userRepository) {
-        return new DoLoginImpl(authRepository, userRepository);
+    fun provideDoLogin(authRepository: AuthRepository, userRepository: UserRepository): DoLogin {
+        return DoLoginImpl(authRepository, userRepository)
     }
 
     @Provides
-    public DoRegister provideDoRegister(AuthRepository authRepository, UserRepository userRepository) {
-        return new DoRegisterImpl(authRepository, userRepository);
+    fun provideDoRegister(
+        authRepository: AuthRepository,
+        userRepository: UserRepository
+    ): DoRegister {
+        return DoRegisterImpl(authRepository, userRepository)
     }
 
     @Provides
-    public CheckLoggedInStatus provideCheckLoggedIn(AuthRepository authRepository) {
-        return new CheckLoggedInStatusImpl(authRepository);
+    fun provideCheckLoggedIn(authRepository: AuthRepository): CheckLoggedInStatus {
+        return CheckLoggedInStatusImpl(authRepository)
     }
 
     @Provides
-    public DoLogout provideLogout(UserRepository userRepository, AbsentRepository absentRepository, EventRepository eventRepository) {
-        return new DoLogoutImpl(userRepository, absentRepository, eventRepository);
+    fun provideLogout(
+        userRepository: UserRepository,
+        absentRepository: AbsentRepository,
+        eventRepository: EventRepository
+    ): DoLogout {
+        return DoLogoutImpl(userRepository, absentRepository, eventRepository)
     }
 
     @Provides
-    public GetUserRole provideGetUserRole(UserRepository userRepository) {
-        return new GetUserRoleImpl(userRepository);
+    fun provideGetUserRole(userRepository: UserRepository): GetUserRole {
+        return GetUserRoleImpl(userRepository)
     }
 
     @Provides
-    public GetUser provideGetUser(UserRepository userRepository) {
-        return new GetUserImpl(userRepository);
+    fun provideGetUser(userRepository: UserRepository): GetUser {
+        return GetUserImpl(userRepository)
     }
 
     @Provides
-    public FetchAllAbsentHistory provideFetchAllAbsentHistory(AbsentRepository absentRepository) {
-        return new FetchAllAbsentHistoryImpl(absentRepository);
+    fun provideFetchAllAbsentHistory(absentRepository: AbsentRepository): FetchAllAbsentHistory {
+        return FetchAllAbsentHistoryImpl(absentRepository)
     }
 
     @Provides
-    public FetchAllEvent provideFetchAllEvent(EventRepository repository) {
-        return new FetchAllEventImpl(repository);
+    fun provideFetchAllEvent(repository: EventRepository): FetchAllEvent {
+        return FetchAllEventImpl(repository)
     }
 
     @Provides
-    public FetchAllEventParticipant provideFetchAllEventParticipant(EventParticipantRepository repository) {
-        return new FetchAllEventParticipantImpl(repository);
+    fun provideFetchAllEventParticipant(repository: EventParticipantRepository): FetchAllEventParticipant {
+        return FetchAllEventParticipantImpl(repository)
     }
 
     @Provides
-    public FetchAllEventByEmail provideFetchAllEventByEmail(EventRepository eventRepository) {
-        return new FetchAllEventByEmailImpl(eventRepository);
+    fun provideFetchAllEventByEmail(eventRepository: EventRepository): FetchAllEventByEmail {
+        return FetchAllEventByEmailImpl(eventRepository)
     }
 
     @Provides
-    public RegisterEvent provideRegisterEvent(AbsentRepository absentRepository, EventParticipantRepository eventParticipantRepository, GlobalStore globalStore) {
-        return new RegisterEventImpl(absentRepository, eventParticipantRepository, globalStore);
+    fun provideRegisterEvent(
+        absentRepository: AbsentRepository,
+        eventParticipantRepository: EventParticipantRepository,
+        globalStore: GlobalStore
+    ): RegisterEvent {
+        return RegisterEventImpl(absentRepository, eventParticipantRepository, globalStore)
     }
 
     @Provides
-    public GetAbsentByStatus provideGetAbsentByStatus(AbsentRepository absentRepository) {
-        return new GetAbsentByStatusImpl(absentRepository);
+    fun provideGetAbsentByStatus(absentRepository: AbsentRepository): GetAbsentByStatus {
+        return GetAbsentByStatusImpl(absentRepository)
     }
 
     @Provides
-    public CheckRegisteredStatus provideCheckRegisteredStatus(EventParticipantRepository eventParticipantRepository) {
-        return new CheckRegisteredStatusImpl(eventParticipantRepository);
+    fun provideCheckRegisteredStatus(eventParticipantRepository: EventParticipantRepository): CheckRegisteredStatus {
+        return CheckRegisteredStatusImpl(eventParticipantRepository)
     }
 
     @Provides
-    public GenerateQrBitmap provideGenerateQrBitmap() {
-        return new GenerateQrBitmapImpl();
+    fun provideGenerateQrBitmap(): GenerateQrBitmap {
+        return GenerateQrBitmapImpl()
     }
 
     @Provides
-    public GetEventParticipant provideGetEventParticipant(EventParticipantRepository eventParticipantRepository) {
-        return new GetEventParticipantImpl(eventParticipantRepository);
+    fun provideGetEventParticipant(eventParticipantRepository: EventParticipantRepository): GetEventParticipant {
+        return GetEventParticipantImpl(eventParticipantRepository)
     }
 
     @Provides
-    public DownloadQrCode provideDownloadQrCode(@ApplicationContext Context context) {
-        return new DownloadQrCodeImpl(context);
+    fun provideDownloadQrCode(@ApplicationContext context: Context): DownloadQrCode {
+        return DownloadQrCodeImpl(context)
     }
 }

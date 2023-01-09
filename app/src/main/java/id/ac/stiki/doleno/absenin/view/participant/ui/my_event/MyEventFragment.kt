@@ -39,20 +39,18 @@ class MyEventFragment : Fragment() {
                         if (viewModel.isAbsentsEmpty()) {
                             binding.empty.layoutEmpty.visibility = View.VISIBLE
                         } else {
+                            val adapter = MyEventAdapter(
+                                viewModel.absents,
+                                object : MyEventAdapter.MyEventAdapterCallback {
+                                    override fun onClick(absent: Absent) {
+                                        TODO("Not yet implemented")
+                                    }
+                                })
+                            binding.rvMyEvent.adapter = adapter
                             binding.rvMyEvent.visibility = View.VISIBLE
                         }
                     }
                 }
-            }
-        }
-
-        viewModel.absents.observeForever {
-            run {
-                val adapter = MyEventAdapter(it, object : MyEventAdapter.MyEventAdapterCallback {
-                    override fun onClick(absent: Absent) {
-                        TODO("Not yet implemented")
-                    }
-                })
             }
         }
 

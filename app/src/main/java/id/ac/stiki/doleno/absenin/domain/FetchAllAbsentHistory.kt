@@ -1,8 +1,8 @@
-package id.ac.stiki.doleno.absenin.domain;
+package id.ac.stiki.doleno.absenin.domain
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
 
-public interface FetchAllAbsentHistory {
-    Task<QuerySnapshot> execute();
+interface FetchAllAbsentHistory {
+    fun execute(email: String): Task<QuerySnapshot>
 }

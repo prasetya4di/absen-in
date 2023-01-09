@@ -30,8 +30,8 @@ import id.ac.stiki.doleno.absenin.repository.impl.UserRepositoryImpl;
 public class RepositoryModule {
 
     @Provides
-    public AbsentRepository provideAbsentRepository(AbsentDao absentDao, AbsentStore absentStore, UserDao userDao) {
-        return new AbsentRepositoryImpl(absentDao, userDao, absentStore);
+    public AbsentRepository provideAbsentRepository(AbsentDao absentDao, AbsentStore absentStore) {
+        return new AbsentRepositoryImpl(absentDao, absentStore);
     }
 
     @Provides

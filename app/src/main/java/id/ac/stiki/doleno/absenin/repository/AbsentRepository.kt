@@ -1,28 +1,16 @@
-package id.ac.stiki.doleno.absenin.repository;
+package id.ac.stiki.doleno.absenin.repository
 
-import androidx.lifecycle.LiveData;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
+import id.ac.stiki.doleno.absenin.data.entity.Absent
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.List;
-
-import id.ac.stiki.doleno.absenin.data.entity.Absent;
-
-public interface AbsentRepository {
-    void create(Absent absent);
-
-    void create(List<Absent> absent);
-
-    LiveData<List<Absent>> read();
-
-    LiveData<List<Absent>> readByStatus(List<String> status);
-
-    Absent read(int id);
-
-    void delete();
-
-    Task<Void> post(Absent absent, String email);
-
-    Task<QuerySnapshot> get();
+interface AbsentRepository {
+    fun create(absent: Absent)
+    fun create(absent: List<Absent>)
+    fun read(): List<Absent>
+    fun readByStatus(status: List<String>): List<Absent>
+    fun read(id: Int): Absent
+    fun delete()
+    fun post(absent: Absent, email: String): Task<Void>
+    fun get(email: String): Task<QuerySnapshot>
 }

@@ -1,25 +1,13 @@
-package id.ac.stiki.doleno.absenin.domain.impl;
+package id.ac.stiki.doleno.absenin.domain.impl
 
-import androidx.lifecycle.LiveData;
+import id.ac.stiki.doleno.absenin.data.entity.Absent
+import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory
+import id.ac.stiki.doleno.absenin.repository.AbsentRepository
+import javax.inject.Inject
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import id.ac.stiki.doleno.absenin.data.entity.Absent;
-import id.ac.stiki.doleno.absenin.domain.GetAllAbsentHistory;
-import id.ac.stiki.doleno.absenin.repository.AbsentRepository;
-
-public class GetAllAbsentHistoryImpl implements GetAllAbsentHistory {
-    private final AbsentRepository absentRepository;
-
-    @Inject
-    public GetAllAbsentHistoryImpl(AbsentRepository absentRepository) {
-        this.absentRepository = absentRepository;
-    }
-
-    @Override
-    public LiveData<List<Absent>> execute() {
-        return absentRepository.read();
+class GetAllAbsentHistoryImpl @Inject constructor(private val absentRepository: AbsentRepository) :
+    GetAllAbsentHistory {
+    override fun execute(): List<Absent> {
+        return absentRepository.read()
     }
 }

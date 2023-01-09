@@ -1,6 +1,5 @@
 package id.ac.stiki.doleno.absenin.view.participant.ui.history;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.Arrays;
@@ -16,7 +15,7 @@ import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 @HiltViewModel
 public class HistoryViewModel extends ViewModel {
 
-    LiveData<List<Absent>> listAbsent;
+    List<Absent> listAbsent;
 
     @Inject
     public HistoryViewModel(GetAbsentByStatus getAbsentByStatus) {

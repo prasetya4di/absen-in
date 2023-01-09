@@ -10,6 +10,6 @@ import id.ac.stiki.doleno.absenin.domain.GenerateQrBitmap
 class GenerateQrBitmapImpl : GenerateQrBitmap {
     override fun execute(event: Event): Bitmap {
         val barcodeEncoder = BarcodeEncoder()
-        return barcodeEncoder.encodeBitmap(event.uid.toString(), BarcodeFormat.QR_CODE, 400, 400)
+        return barcodeEncoder.encodeBitmap(event.uid.toString(), BarcodeFormat.QR_CODE, 800, 800)
     }
 }

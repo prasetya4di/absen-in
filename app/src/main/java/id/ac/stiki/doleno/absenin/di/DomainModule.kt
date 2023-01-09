@@ -140,4 +140,9 @@ class DomainModule {
     fun provideDownloadQrCode(@ApplicationContext context: Context): DownloadQrCode {
         return DownloadQrCodeImpl(context)
     }
+
+    @Provides
+    fun provideCheckEventAvailability(eventRepository: EventRepository): CheckEventAvailability {
+        return CheckEventAvailabilityImpl(eventRepository)
+    }
 }

@@ -42,25 +42,25 @@ class AllEventFragment : Fragment() {
                     if (viewModel.isListEventEmpty()) {
                         binding.empty.layoutEmpty.visibility = View.VISIBLE
                     } else {
+                        val adapter =
+                            AllEventAdapter(viewModel.events, object : AllEventAdapterCallback {
+                                override fun onClick(event: Event) {
+                                    val intent =
+                                        Intent(
+                                            this@AllEventFragment.activity,
+                                            EventJoinActivity::class.java
+                                        )
+                                    intent.putExtra("selected_event", event as Parcelable)
+                                    startActivity(intent)
+                                }
+                            })
+                        binding.rvAllevent.adapter = adapter
                         binding.rvAllevent.visibility = View.VISIBLE
                     }
                 }
                 AllEventState.FAILED -> binding.error.layoutError.visibility = View.VISIBLE
             }
         }
-
-        viewModel.events.observe(viewLifecycleOwner) {
-            val adapter = AllEventAdapter(it, object : AllEventAdapterCallback {
-                override fun onClick(event: Event) {
-                    val intent =
-                        Intent(this@AllEventFragment.activity, EventJoinActivity::class.java)
-                    intent.putExtra("selected_event", event as Parcelable)
-                    startActivity(intent)
-                }
-            })
-            binding.rvAllevent.adapter = adapter
-        }
-
         return binding.root
     }
 }

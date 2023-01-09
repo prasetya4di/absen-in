@@ -1,30 +1,17 @@
-package id.ac.stiki.doleno.absenin.repository;
+package id.ac.stiki.doleno.absenin.repository
 
-import androidx.lifecycle.LiveData;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
+import id.ac.stiki.doleno.absenin.data.entity.Event
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.List;
-
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-
-public interface EventRepository {
-    void create(Event Event);
-
-    void create(List<Event> Event);
-
-    LiveData<List<Event>> read();
-
-    Event readById(int id);
-
-    void delete();
-
-    Task<Void> post(Event event);
-
-    Task<QuerySnapshot> get();
-
-    Task<QuerySnapshot> getActiveEvent();
-
-    Task<QuerySnapshot> getAllEventByEmail(String email);
+interface EventRepository {
+    fun create(Event: Event)
+    fun create(Event: List<Event>)
+    fun read(): List<Event>
+    fun readById(id: Int): Event
+    fun delete()
+    fun post(event: Event?): Task<Void>
+    fun get(): Task<QuerySnapshot>
+    val activeEvent: Task<QuerySnapshot>
+    fun getAllEventByEmail(email: String): Task<QuerySnapshot>
 }

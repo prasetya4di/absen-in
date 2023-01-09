@@ -2,6 +2,7 @@ package id.ac.stiki.doleno.absenin.view.admin.ui.my_event;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import dagger.hilt.android.AndroidEntryPoint;
 import id.ac.stiki.doleno.absenin.databinding.FragmentMyEventBinding;
 import id.ac.stiki.doleno.absenin.view.add_event.AddEventActivity;
+import id.ac.stiki.doleno.absenin.view.admin.ui.my_event_detail.MyEventDetailActivity;
 
 @AndroidEntryPoint
 public class MyEventFragment extends Fragment {
@@ -45,17 +47,16 @@ public class MyEventFragment extends Fragment {
                     if (viewModel.isListEventEmpty()) {
                         binding.layoutEmpty.setVisibility(View.VISIBLE);
                     } else {
+                        MyEventAdapter adapter = new MyEventAdapter(viewModel.listMyEvent, event -> {
+                            Intent intent = new Intent(this.getActivity(), MyEventDetailActivity.class);
+                            intent.putExtra("selected_event", (Parcelable) event);
+                            startActivity(intent);
+                        });
+                        binding.rvMyEvent.setAdapter(adapter);
                         binding.rvMyEvent.setVisibility(View.VISIBLE);
                     }
                     break;
             }
-        });
-
-        viewModel.listMyEvent.observeForever(listEvent -> {
-            MyEventAdapter adapter = new MyEventAdapter(listEvent, event -> {
-                // TODO("Not yet implemented");
-            });
-            binding.rvMyEvent.setAdapter(adapter);
         });
 
         binding.btnAddEvent.setOnClickListener(v -> {

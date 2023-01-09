@@ -1,11 +1,7 @@
-package id.ac.stiki.doleno.absenin.domain;
+package id.ac.stiki.doleno.absenin.domain
 
-import androidx.lifecycle.LiveData;
+import id.ac.stiki.doleno.absenin.data.entity.Event
 
-import java.util.List;
-
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-
-public interface GetAllEvent {
-    LiveData<List<Event>> execute();
+interface GetAllEvent {
+    fun execute(): List<Event>
 }

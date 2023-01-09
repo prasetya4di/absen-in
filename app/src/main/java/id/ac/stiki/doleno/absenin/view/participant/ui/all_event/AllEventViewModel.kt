@@ -12,18 +12,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AllEventViewModel @Inject constructor(
-    getAllEvent: GetAllEvent,
+    private val getAllEvent: GetAllEvent,
     private val fetchAllEvent: FetchAllEvent
 ) : ViewModel() {
     private val _allEventState: MutableLiveData<AllEventState> = MutableLiveData()
     val myEventState: LiveData<AllEventState> = _allEventState
-    var events: LiveData<List<Event>> = getAllEvent.execute()
+    var events: List<Event> = emptyList()
 
     fun fetchMyEvent() {
         _allEventState.postValue(AllEventState.LOADING)
         Executors.newSingleThreadExecutor().execute {
             fetchAllEvent.execute()
                 .addOnSuccessListener {
+                    events = getAllEvent.execute()
                     _allEventState.postValue(AllEventState.SUCCESS)
                 }
                 .addOnFailureListener {
@@ -33,6 +34,6 @@ class AllEventViewModel @Inject constructor(
     }
 
     fun isListEventEmpty(): Boolean {
-        return events.value?.isEmpty() ?: true
+        return events.isEmpty()
     }
 }

@@ -28,8 +28,8 @@ public class EventParticipantStoreImpl implements EventParticipantStore {
     }
 
     @Override
-    public Task<QuerySnapshot> get(int eventId) {
-        return null;
+    public Task<QuerySnapshot> get(Long eventId) {
+        return getCollection(eventId).get();
     }
 
     @Override

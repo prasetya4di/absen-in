@@ -1,32 +1,25 @@
-package id.ac.stiki.doleno.absenin.domain.impl;
+package id.ac.stiki.doleno.absenin.domain.impl
 
-import android.os.AsyncTask;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
+import id.ac.stiki.doleno.absenin.data.entity.Event
+import id.ac.stiki.doleno.absenin.domain.FetchAllEvent
+import id.ac.stiki.doleno.absenin.repository.EventRepository
+import java.util.concurrent.Executors
+import javax.inject.Inject
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-import id.ac.stiki.doleno.absenin.domain.FetchAllEvent;
-import id.ac.stiki.doleno.absenin.repository.EventRepository;
-
-public class FetchAllEventImpl implements FetchAllEvent {
-    private final EventRepository eventRepository;
-
-    public FetchAllEventImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
-
-    @Override
-    public Task<QuerySnapshot> execute() {
+class FetchAllEventImpl @Inject constructor(private val eventRepository: EventRepository) :
+    FetchAllEvent {
+    override fun execute(): Task<QuerySnapshot> {
         return eventRepository.get()
-                .addOnSuccessListener(querySnapshots -> AsyncTask.execute(() -> {
-                    List<Event> listEvent = new ArrayList<>();
-                    eventRepository.delete();
-                    querySnapshots.getDocuments().forEach(document -> listEvent.add(new Event(document.getData())));
-                    eventRepository.create(listEvent);
-                }));
+            .addOnSuccessListener { querySnapshots: QuerySnapshot ->
+                Executors.newSingleThreadExecutor().execute {
+                    val listEvent: List<Event> = querySnapshots.documents.map { document ->
+                        Event(document.data)
+                    }
+                    eventRepository.delete()
+                    eventRepository.create(listEvent)
+                }
+            }
     }
 }

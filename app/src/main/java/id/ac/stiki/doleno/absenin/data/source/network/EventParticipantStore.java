@@ -11,7 +11,7 @@ import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
 public interface EventParticipantStore {
     Task<DocumentReference> create(EventParticipant eventParticipant);
 
-    Task<QuerySnapshot> get(int eventId);
+    Task<QuerySnapshot> get(Long eventId);
 
     Task<AggregateQuerySnapshot> count(Event event, String email);
 }

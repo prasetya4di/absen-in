@@ -10,8 +10,9 @@ interface EventRepository {
     fun read(): List<Event>
     fun readById(id: Int): Event
     fun delete()
-    fun post(event: Event?): Task<Void>
+    fun post(event: Event): Task<Void>
     fun get(): Task<QuerySnapshot>
     val activeEvent: Task<QuerySnapshot>
     fun getAllEventByEmail(email: String): Task<QuerySnapshot>
+    fun checkEventAvailability(id: Long): Boolean
 }

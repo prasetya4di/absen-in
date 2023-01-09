@@ -33,7 +33,7 @@ class EventRepositoryImpl @Inject constructor(
         eventDao.delete()
     }
 
-    override fun post(event: Event?): Task<Void> {
+    override fun post(event: Event): Task<Void> {
         return eventStore.createEvent(event)
     }
 
@@ -46,5 +46,9 @@ class EventRepositoryImpl @Inject constructor(
 
     override fun getAllEventByEmail(email: String): Task<QuerySnapshot> {
         return eventStore.getEventByEmail(email)
+    }
+
+    override fun checkEventAvailability(id: Long): Boolean {
+        return eventStore.checkEventAvailability(id)
     }
 }

@@ -1,50 +1,40 @@
-package id.ac.stiki.doleno.absenin.data.source.network.impl;
+package id.ac.stiki.doleno.absenin.data.source.network.impl
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import id.ac.stiki.doleno.absenin.data.database.table.Column
+import id.ac.stiki.doleno.absenin.data.database.table.Table
+import id.ac.stiki.doleno.absenin.data.entity.Event
+import id.ac.stiki.doleno.absenin.data.source.network.EventStore
+import java.util.*
+import javax.inject.Inject
 
-import java.util.Date;
-
-import id.ac.stiki.doleno.absenin.data.database.table.Column;
-import id.ac.stiki.doleno.absenin.data.database.table.Table;
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-import id.ac.stiki.doleno.absenin.data.source.network.EventStore;
-
-public class EventStoreImpl implements EventStore {
-    private final FirebaseFirestore firestore;
-
-    public EventStoreImpl(FirebaseFirestore firestore) {
-        this.firestore = firestore;
+open class EventStoreImpl @Inject constructor(
+    private val firestore: FirebaseFirestore
+) : EventStore {
+    override fun createEvent(event: Event): Task<Void> {
+        return collection.document(event.documentPath).set(event.toMap())
     }
 
-    @Override
-    public Task<Void> createEvent(Event event) {
-        return getCollection().document(event.getDocumentPath()).set(event.toMap());
+    override fun updateEvent(event: Event): Task<Void> {
+        return collection.document(event.documentPath).set(event.toMap())
     }
 
-    @Override
-    public Task<Void> updateEvent(Event event) {
-        return getCollection().document(event.getDocumentPath()).set(event.toMap());
+    override val allEvent: Task<QuerySnapshot>
+        get() = collection.get()
+    override val allActiveEvent: Task<QuerySnapshot>
+        get() = collection.whereGreaterThan("event_date", Date()).get()
+
+    override fun getEventByEmail(email: String): Task<QuerySnapshot> {
+        return collection.whereEqualTo(Column.Event.ORGANIZER_MAIL.columnName, email).get()
     }
 
-    @Override
-    public Task<QuerySnapshot> getAllEvent() {
-        return getCollection().get();
+    override fun checkEventAvailability(id: Long): Boolean {
+        return collection.document("${Table.EVENT.text}_$id").get().result.exists()
     }
 
-    @Override
-    public Task<QuerySnapshot> getAllActiveEvent() {
-        return getCollection().whereGreaterThan("event_date", new Date()).get();
-    }
-
-    @Override
-    public Task<QuerySnapshot> getEventByEmail(String email) {
-        return getCollection().whereEqualTo(Column.Event.ORGANIZER_MAIL.getColumnName(), email).get();
-    }
-
-    private CollectionReference getCollection() {
-        return firestore.collection(Table.EVENT.getText());
-    }
+    private val collection: CollectionReference
+        private get() = firestore.collection(Table.EVENT.text)
 }

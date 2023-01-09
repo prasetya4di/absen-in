@@ -1,18 +1,14 @@
-package id.ac.stiki.doleno.absenin.data.source.network;
+package id.ac.stiki.doleno.absenin.data.source.network
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
+import id.ac.stiki.doleno.absenin.data.entity.Event
 
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-
-public interface EventStore {
-    Task<Void> createEvent(Event event);
-
-    Task<Void> updateEvent(Event event);
-
-    Task<QuerySnapshot> getAllEvent();
-
-    Task<QuerySnapshot> getAllActiveEvent();
-
-    Task<QuerySnapshot> getEventByEmail(String email);
+interface EventStore {
+    fun createEvent(event: Event): Task<Void>
+    fun updateEvent(event: Event): Task<Void>
+    val allEvent: Task<QuerySnapshot>
+    val allActiveEvent: Task<QuerySnapshot>
+    fun getEventByEmail(email: String): Task<QuerySnapshot>
+    fun checkEventAvailability(id: Long): Boolean
 }

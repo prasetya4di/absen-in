@@ -6,8 +6,12 @@ import id.ac.stiki.doleno.absenin.data.entity.Event
 import id.ac.stiki.doleno.absenin.data.source.local.EventDao
 import id.ac.stiki.doleno.absenin.data.source.network.EventStore
 import id.ac.stiki.doleno.absenin.repository.EventRepository
+import javax.inject.Inject
 
-class EventRepositoryImpl(private val eventDao: EventDao, private val eventStore: EventStore) :
+class EventRepositoryImpl @Inject constructor(
+    private val eventDao: EventDao,
+    private val eventStore: EventStore
+) :
     EventRepository {
     override fun create(event: Event) {
         eventDao.insert(event)

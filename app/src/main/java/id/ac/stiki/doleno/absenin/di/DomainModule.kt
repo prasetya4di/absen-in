@@ -16,8 +16,12 @@ import id.ac.stiki.doleno.absenin.repository.*
 @InstallIn(ViewModelComponent::class)
 class DomainModule {
     @Provides
-    fun provideDoAbsent(absentRepository: AbsentRepository): DoAbsent {
-        return DoAbsentImpl(absentRepository)
+    fun provideDoAbsent(
+        absentRepository: AbsentRepository,
+        userRepository: UserRepository,
+        eventParticipantRepository: EventParticipantRepository
+    ): DoAbsent {
+        return DoAbsentImpl(absentRepository, userRepository, eventParticipantRepository)
     }
 
     @Provides

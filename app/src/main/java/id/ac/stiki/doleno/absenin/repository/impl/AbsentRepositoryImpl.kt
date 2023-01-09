@@ -40,7 +40,15 @@ class AbsentRepositoryImpl @Inject constructor(
         return absentStore.createAbsent(absent, email)
     }
 
+    override fun put(absent: Absent, email: String): Task<Void> {
+        return absentStore.updateAbsent(absent, email)
+    }
+
     override fun get(email: String): Task<QuerySnapshot> {
-        return absentStore.get(email)
+        return absentStore[email]
+    }
+
+    override fun getById(id: Long, email: String): Absent {
+        return absentStore[id, email]
     }
 }

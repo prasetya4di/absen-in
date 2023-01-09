@@ -31,8 +31,16 @@ class EventParticipantRepositoryImpl @Inject constructor(
         return eventParticipantStore.create(eventParticipant)
     }
 
+    override fun put(eventParticipant: EventParticipant): Task<QuerySnapshot> {
+        return eventParticipantStore.update(eventParticipant)
+    }
+
     override fun get(eventId: Long): Task<QuerySnapshot> {
-        return eventParticipantStore.get(eventId)
+        return eventParticipantStore[eventId]
+    }
+
+    override fun get(eventId: Long, email: String): Task<QuerySnapshot> {
+        return eventParticipantStore[eventId, email]
     }
 
     override fun count(event: Event, email: String): Task<AggregateQuerySnapshot> {

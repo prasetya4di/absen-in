@@ -19,7 +19,7 @@ class RepositoryModule {
     @Provides
     fun provideAbsentRepository(
         absentDao: AbsentDao,
-        absentStore: AbsentStore
+        absentStore: AbsentStore,
     ): AbsentRepository {
         return AbsentRepositoryImpl(absentDao, absentStore)
     }

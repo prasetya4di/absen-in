@@ -1,46 +1,50 @@
-package id.ac.stiki.doleno.absenin.data.source.network.impl;
+package id.ac.stiki.doleno.absenin.data.source.network.impl
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.AggregateQuerySnapshot;
-import com.google.firebase.firestore.AggregateSource;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.*
+import id.ac.stiki.doleno.absenin.data.database.table.Column
+import id.ac.stiki.doleno.absenin.data.database.table.Table
+import id.ac.stiki.doleno.absenin.data.entity.Event
+import id.ac.stiki.doleno.absenin.data.entity.EventParticipant
+import id.ac.stiki.doleno.absenin.data.source.network.EventParticipantStore
+import javax.inject.Inject
 
-import id.ac.stiki.doleno.absenin.data.database.table.Column;
-import id.ac.stiki.doleno.absenin.data.database.table.Table;
-import id.ac.stiki.doleno.absenin.data.entity.Event;
-import id.ac.stiki.doleno.absenin.data.entity.EventParticipant;
-import id.ac.stiki.doleno.absenin.data.source.network.EventParticipantStore;
-
-public class EventParticipantStoreImpl implements EventParticipantStore {
-    private final FirebaseFirestore firestore;
-
-    public EventParticipantStoreImpl(FirebaseFirestore firestore) {
-        this.firestore = firestore;
-    }
-
-    @Override
-    public Task<DocumentReference> create(EventParticipant eventParticipant) {
+class EventParticipantStoreImpl @Inject constructor(private val firestore: FirebaseFirestore) :
+    EventParticipantStore {
+    override fun create(eventParticipant: EventParticipant): Task<DocumentReference> {
         return getCollection(eventParticipant.eventId)
-                .add(eventParticipant.toMap());
+            .add(eventParticipant.toMap())
     }
 
-    @Override
-    public Task<QuerySnapshot> get(Long eventId) {
-        return getCollection(eventId).get();
+    override fun get(eventId: Long): Task<QuerySnapshot> {
+        return getCollection(eventId).get()
     }
 
-    @Override
-    public Task<AggregateQuerySnapshot> count(Event event, String email) {
+    override fun get(eventId: Long, email: String): Task<QuerySnapshot> {
+        return getCollection(eventId)
+            .whereEqualTo("email", email)
+            .get()
+    }
+
+    override fun update(eventParticipant: EventParticipant): Task<QuerySnapshot> {
+        return getCollection(eventParticipant.eventId)
+            .whereEqualTo("uid", eventParticipant.uid)
+            .get()
+            .addOnSuccessListener {
+                for (document in it.documents) {
+                    getCollection(eventParticipant.eventId).document(document.id)
+                        .set(eventParticipant.toMap())
+                }
+            }
+    }
+
+    override fun count(event: Event, email: String): Task<AggregateQuerySnapshot> {
         return getCollection(event.uid)
-                .whereEqualTo(Column.EventParticipant.EMAIL.getColumnName(), email)
-                .count()
-                .get(AggregateSource.SERVER);
+            .whereEqualTo(Column.EventParticipant.EMAIL.columnName, email)
+            .count()[AggregateSource.SERVER]
     }
 
-    private CollectionReference getCollection(long eventId) {
-        return firestore.collection(Table.EVENT_PARTICIPANT.getText() + "_" + eventId);
+    private fun getCollection(eventId: Long): CollectionReference {
+        return firestore.collection(Table.EVENT_PARTICIPANT.text + "_" + eventId)
     }
 }

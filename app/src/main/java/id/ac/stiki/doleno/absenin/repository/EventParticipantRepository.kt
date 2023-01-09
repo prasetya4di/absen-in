@@ -12,6 +12,8 @@ interface EventParticipantRepository {
     fun create(eventParticipant: EventParticipant)
     fun create(eventParticipant: List<EventParticipant>)
     fun post(eventParticipant: EventParticipant): Task<DocumentReference>
+    fun put(eventParticipant: EventParticipant): Task<QuerySnapshot>
     fun get(eventId: Long): Task<QuerySnapshot>
+    fun get(eventId: Long, email: String): Task<QuerySnapshot>
     fun count(event: Event, email: String): Task<AggregateQuerySnapshot>
 }

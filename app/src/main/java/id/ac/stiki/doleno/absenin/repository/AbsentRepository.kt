@@ -12,5 +12,7 @@ interface AbsentRepository {
     fun read(id: Int): Absent
     fun delete()
     fun post(absent: Absent, email: String): Task<Void>
+    fun put(absent: Absent, email: String): Task<Void>
     fun get(email: String): Task<QuerySnapshot>
+    fun getById(id: Long, email: String): Absent
 }

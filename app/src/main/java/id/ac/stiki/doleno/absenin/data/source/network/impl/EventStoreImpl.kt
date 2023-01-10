@@ -27,7 +27,10 @@ open class EventStoreImpl @Inject constructor(
     override val allEvent: Task<QuerySnapshot>
         get() = collection.get()
     override val allActiveEvent: Task<QuerySnapshot>
-        get() = collection.whereGreaterThanOrEqualTo("event_date", DateUtil.removeTime(Date()))
+        get() = collection.whereGreaterThanOrEqualTo(
+            Column.Event.DATE.columnName,
+            DateUtil.removeTime(Date())
+        )
             .get()
     override fun getEventByEmail(email: String): Task<QuerySnapshot> {
         return collection.whereEqualTo(Column.Event.ORGANIZER_MAIL.columnName, email).get()

@@ -22,13 +22,13 @@ class EventParticipantStoreImpl @Inject constructor(private val firestore: Fireb
 
     override fun get(eventId: Long, email: String): Task<QuerySnapshot> {
         return getCollection(eventId)
-            .whereEqualTo("email", email)
+            .whereEqualTo(Column.EventParticipant.EMAIL.columnName, email)
             .get()
     }
 
     override fun update(eventParticipant: EventParticipant): Task<QuerySnapshot> {
         return getCollection(eventParticipant.eventId)
-            .whereEqualTo("uid", eventParticipant.uid)
+            .whereEqualTo(Column.EventParticipant.UID.columnName, eventParticipant.uid)
             .get()
             .addOnSuccessListener {
                 for (document in it.documents) {

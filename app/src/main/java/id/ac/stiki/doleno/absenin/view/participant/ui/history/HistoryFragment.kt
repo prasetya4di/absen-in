@@ -30,21 +30,34 @@ class HistoryFragment : Fragment() {
         viewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
         viewModel.getAbsent()
 
-        if (viewModel.listAbsent.isEmpty()) {
-            binding.empty.layoutEmpty.visibility = View.VISIBLE
-            binding.rvHistory.visibility = View.GONE
-        } else {
+        viewModel.historyViewState.observe(viewLifecycleOwner) {
+            binding.loading.layoutLoading.visibility = View.GONE
             binding.empty.layoutEmpty.visibility = View.GONE
-            binding.rvHistory.visibility = View.VISIBLE
-            val historyAdapter = HistoryAdapter(viewModel.listAbsent) { absent: Absent? ->
-                val intent = Intent(
-                    this.activity,
-                    HistoryDetailActivity::class.java
-                )
-                intent.putExtra("absent_data", absent as Parcelable?)
-                startActivity(intent)
+            binding.error.layoutError.visibility = View.GONE
+            binding.rvHistory.visibility = View.GONE
+            when (it) {
+                HistoryViewState.LOADING -> binding.loading.layoutLoading.visibility = View.VISIBLE
+                HistoryViewState.SUCCESS -> {
+                    if (viewModel.listAbsent.isEmpty()) {
+                        binding.empty.layoutEmpty.visibility = View.VISIBLE
+                        binding.rvHistory.visibility = View.GONE
+                    } else {
+                        binding.empty.layoutEmpty.visibility = View.GONE
+                        binding.rvHistory.visibility = View.VISIBLE
+                        val historyAdapter =
+                            HistoryAdapter(viewModel.listAbsent) { absent: Absent? ->
+                                val intent = Intent(
+                                    this.activity,
+                                    HistoryDetailActivity::class.java
+                                )
+                                intent.putExtra("absent_data", absent as Parcelable?)
+                                startActivity(intent)
+                            }
+                        binding.rvHistory.adapter = historyAdapter
+                    }
+                }
+                HistoryViewState.FAILED -> binding.error.layoutError.visibility = View.VISIBLE
             }
-            binding.rvHistory.adapter = historyAdapter
         }
 
         return binding.root

@@ -18,4 +18,12 @@
         android:id="@+id/empty"
         layout="@layout/general_layout_empty" />
 
+    <include
+        android:id="@+id/error"
+        layout="@layout/general_layout_error" />
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/general_layout_loading" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

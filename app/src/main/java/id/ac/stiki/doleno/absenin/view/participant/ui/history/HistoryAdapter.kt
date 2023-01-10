@@ -1,60 +1,55 @@
-package id.ac.stiki.doleno.absenin.view.participant.ui.history;
+package id.ac.stiki.doleno.absenin.view.participant.ui.history
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import id.ac.stiki.doleno.absenin.data.entity.Absent
+import id.ac.stiki.doleno.absenin.databinding.ItemHistoryBinding
+import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus.*
+import java.text.SimpleDateFormat
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import id.ac.stiki.doleno.absenin.data.entity.Absent;
-import id.ac.stiki.doleno.absenin.databinding.ItemHistoryBinding;
-
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
-    private final List<Absent> absentList;
-    private final HistoryAdapterCallback historyAdapterCallback;
-
-    public HistoryAdapter(List<Absent> absentList, HistoryAdapterCallback historyAdapterCallback) {
-        this.absentList = absentList;
-        this.historyAdapterCallback = historyAdapterCallback;
+class HistoryAdapter(
+    private val absentList: List<Absent>,
+    private val historyAdapterCallback: HistoryAdapterCallback
+) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            ItemHistoryBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    @NonNull
-    @Override
-    public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemHistoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val absent = absentList[position]
+        val dateFormat = SimpleDateFormat("dd MMMM yyyy")
+        val formattedDate = dateFormat.format(absent.absentDate)
+        holder.binding.eventTitle.text = absent.absentTitle
+        holder.binding.eventDescription.text = absent.absentDescription
+        holder.binding.eventDate.text = formattedDate
+        holder.binding.cardAbsent.setOnClickListener {
+            historyAdapterCallback.onClick(
+                absent
+            )
+        }
+        when (absent.status) {
+            REGISTERED -> {}
+            DID_NOT_ATTEND -> holder.binding.txtDidNotAttend.cardViewDidNotAttend.visibility =
+                View.VISIBLE
+            ATTENDED -> holder.binding.txtAttend.cardViewAttend.visibility = View.VISIBLE
+        }
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
-        Absent absent = absentList.get(position);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
-        String formattedDate = dateFormat.format(absent.absentDate);
-        holder.binding.eventTitle.setText(absent.absentTitle);
-        holder.binding.eventDescription.setText(absent.absentDescription);
-        holder.binding.eventDate.setText(formattedDate);
-        holder.binding.cardAbsent.setOnClickListener(v -> {
-            historyAdapterCallback.onClick(absent);
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return absentList.size();
+    override fun getItemCount(): Int {
+        return absentList.size
     }
 
     interface HistoryAdapterCallback {
-        void onClick(Absent absent);
+        fun onClick(absent: Absent)
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemHistoryBinding binding;
-
-        public ViewHolder(ItemHistoryBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-    }
+    inner class ViewHolder(val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root)
 }

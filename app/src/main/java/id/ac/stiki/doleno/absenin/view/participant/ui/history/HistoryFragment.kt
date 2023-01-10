@@ -45,14 +45,18 @@ class HistoryFragment : Fragment() {
                         binding.empty.layoutEmpty.visibility = View.GONE
                         binding.rvHistory.visibility = View.VISIBLE
                         val historyAdapter =
-                            HistoryAdapter(viewModel.listAbsent) { absent: Absent ->
-                                val intent = Intent(
-                                    this.activity,
-                                    HistoryDetailActivity::class.java
-                                )
-                                intent.putExtra("absent_data", absent as Parcelable)
-                                startActivity(intent)
-                            }
+                            HistoryAdapter(
+                                viewModel.listAbsent,
+                                object : HistoryAdapter.HistoryAdapterCallback {
+                                    override fun onClick(absent: Absent) {
+                                        val intent = Intent(
+                                            this@HistoryFragment.activity,
+                                            HistoryDetailActivity::class.java
+                                        )
+                                        intent.putExtra("absent_data", absent as Parcelable)
+                                        startActivity(intent)
+                                    }
+                                })
                         binding.rvHistory.adapter = historyAdapter
                     }
                 }

@@ -75,6 +75,10 @@ class AbsentFragment : Fragment() {
                         loadingDialog.dismiss()
                         errorDialog.show(getString(R.string.invalid_location_text))
                     }
+                    QRCodeResultStatus.REGISTERED -> {
+                        loadingDialog.dismiss()
+                        errorDialog.show(getString(R.string.txt_absent_duplicate))
+                    }
                 }
             }
         }
@@ -92,15 +96,13 @@ class AbsentFragment : Fragment() {
                     this.context,
                     "Error starting camera " + e.message,
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             } catch (e: InterruptedException) {
                 Toast.makeText(
                     this.context,
                     "Error starting camera " + e.message,
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
         }, ContextCompat.getMainExecutor(this.requireContext()))
     }
@@ -120,8 +122,8 @@ class AbsentFragment : Fragment() {
             QRCodeImageAnalyzer(object : QRCodeFoundListener {
                 override fun onQRCodeFound(result: String) {
                     cameraProvider.unbindAll()
-                    viewModel.doAbsent(result)
                     loadingDialog.show()
+                    viewModel.doAbsent(result)
                 }
 
                 override fun qrCodeNotFound() {

@@ -28,6 +28,8 @@ class HistoryFragment : Fragment() {
         binding.rvHistory.layoutManager = LinearLayoutManager(this.activity)
 
         viewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
+        viewModel.getAbsent()
+
         if (viewModel.listAbsent.isEmpty()) {
             binding.empty.layoutEmpty.visibility = View.VISIBLE
             binding.rvHistory.visibility = View.GONE

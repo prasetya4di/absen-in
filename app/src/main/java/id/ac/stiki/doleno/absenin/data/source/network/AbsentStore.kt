@@ -8,5 +8,5 @@ interface AbsentStore {
     fun createAbsent(absent: Absent, email: String): Task<Void>
     fun updateAbsent(absent: Absent, email: String): Task<Void>
     operator fun get(email: String): Task<QuerySnapshot>
-    operator fun get(id: Long, email: String): Absent
+    suspend fun get(id: Long, email: String): Absent
 }

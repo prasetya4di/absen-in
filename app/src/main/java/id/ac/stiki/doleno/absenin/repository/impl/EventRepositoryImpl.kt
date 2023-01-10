@@ -48,7 +48,7 @@ class EventRepositoryImpl @Inject constructor(
         return eventStore.getEventByEmail(email)
     }
 
-    override fun checkEventAvailability(id: Long): Boolean {
+    override suspend fun checkEventAvailability(id: Long): Boolean {
         return eventStore.checkEventAvailability(id)
     }
 }

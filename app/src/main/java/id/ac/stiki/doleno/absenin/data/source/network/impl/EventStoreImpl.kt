@@ -8,6 +8,7 @@ import id.ac.stiki.doleno.absenin.data.database.table.Column
 import id.ac.stiki.doleno.absenin.data.database.table.Table
 import id.ac.stiki.doleno.absenin.data.entity.Event
 import id.ac.stiki.doleno.absenin.data.source.network.EventStore
+import kotlinx.coroutines.tasks.await
 import java.util.*
 import javax.inject.Inject
 
@@ -31,8 +32,8 @@ open class EventStoreImpl @Inject constructor(
         return collection.whereEqualTo(Column.Event.ORGANIZER_MAIL.columnName, email).get()
     }
 
-    override fun checkEventAvailability(id: Long): Boolean {
-        return collection.document("${Table.EVENT.text}_$id").get().result.exists()
+    override suspend fun checkEventAvailability(id: Long): Boolean {
+        return collection.document("${Table.EVENT.text}_$id").get().await().data.isNullOrEmpty()
     }
 
     private val collection: CollectionReference

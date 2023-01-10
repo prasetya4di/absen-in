@@ -20,7 +20,7 @@ class RegisterEventImpl @Inject constructor(
 ) : RegisterEvent {
     override suspend fun execute(event: Event, user: User): Task<Void> {
         val idParticipant = globalStore.getLatestId(Table.EVENT_PARTICIPANT.text).plus(1)
-        val idAbsent = globalStore.getLatestId(Table.ABSENT.text).plus(1)
+        val idAbsent = event.uid
         val eventParticipant = EventParticipant(event, user).apply { uid = idParticipant }
         val absent = Absent(event).apply { uid = idAbsent }
         return eventParticipantRepository

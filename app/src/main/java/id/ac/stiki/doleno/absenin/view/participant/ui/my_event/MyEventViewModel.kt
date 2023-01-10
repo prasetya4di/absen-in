@@ -29,8 +29,10 @@ class MyEventViewModel @Inject constructor(
             val user = getUser.execute()
             fetchAllAbsent.execute(user.email)
                 .addOnSuccessListener {
-                    absents = getAbsentByStatus.execute(listOf(AbsentStatus.REGISTERED.text))
-                    _myEventState.postValue(MyEventState.SUCCESS)
+                    Executors.newSingleThreadExecutor().execute {
+                        absents = getAbsentByStatus.execute(listOf(AbsentStatus.REGISTERED.text))
+                        _myEventState.postValue(MyEventState.SUCCESS)
+                    }
                 }
                 .addOnFailureListener {
                     _myEventState.postValue(MyEventState.FAILED)

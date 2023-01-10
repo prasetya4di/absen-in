@@ -1,27 +1,28 @@
-package id.ac.stiki.doleno.absenin.view.participant.ui.history;
+package id.ac.stiki.doleno.absenin.view.participant.ui.history
 
-import androidx.lifecycle.ViewModel;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import dagger.hilt.android.lifecycle.HiltViewModel;
-import id.ac.stiki.doleno.absenin.data.entity.Absent;
-import id.ac.stiki.doleno.absenin.domain.GetAbsentByStatus;
-import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import id.ac.stiki.doleno.absenin.data.entity.Absent
+import id.ac.stiki.doleno.absenin.domain.GetAbsentByStatus
+import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @HiltViewModel
-public class HistoryViewModel extends ViewModel {
+class HistoryViewModel @Inject constructor(private val getAbsentByStatus: GetAbsentByStatus) :
+    ViewModel() {
+    var listAbsent: List<Absent> = emptyList()
 
-    List<Absent> listAbsent;
-
-    @Inject
-    public HistoryViewModel(GetAbsentByStatus getAbsentByStatus) {
-        listAbsent = getAbsentByStatus.execute(Arrays.asList(
-                AbsentStatus.ATTENDED.getText(),
-                AbsentStatus.DID_NOT_ATTEND.getText()
-        ));
+    fun getAbsent() {
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                listAbsent = getAbsentByStatus.execute(
+                    listOf(AbsentStatus.ATTENDED.text, AbsentStatus.DID_NOT_ATTEND.text)
+                )
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import id.ac.stiki.doleno.absenin.data.database.table.Table
 import id.ac.stiki.doleno.absenin.data.entity.Absent
 import id.ac.stiki.doleno.absenin.data.source.network.AbsentStore
+import kotlinx.coroutines.tasks.await
 
 class AbsentStoreImpl(private val firestore: FirebaseFirestore) : AbsentStore {
     override fun createAbsent(absent: Absent, email: String): Task<Void> {
@@ -21,8 +22,8 @@ class AbsentStoreImpl(private val firestore: FirebaseFirestore) : AbsentStore {
         return getCollection(email).get()
     }
 
-    override fun get(id: Long, email: String): Absent {
-        return Absent(getCollection(email).document("${Table.ABSENT.text}-$id").get().result.data)
+    override suspend fun get(id: Long, email: String): Absent {
+        return Absent(getCollection(email).document("${Table.ABSENT.text}-$id").get().await().data)
     }
 
     private fun getCollection(email: String): CollectionReference {

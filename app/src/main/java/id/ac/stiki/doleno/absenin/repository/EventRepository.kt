@@ -14,5 +14,5 @@ interface EventRepository {
     fun get(): Task<QuerySnapshot>
     val activeEvent: Task<QuerySnapshot>
     fun getAllEventByEmail(email: String): Task<QuerySnapshot>
-    fun checkEventAvailability(id: Long): Boolean
+    suspend fun checkEventAvailability(id: Long): Boolean
 }

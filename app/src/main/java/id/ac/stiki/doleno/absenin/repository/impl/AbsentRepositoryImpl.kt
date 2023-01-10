@@ -48,7 +48,7 @@ class AbsentRepositoryImpl @Inject constructor(
         return absentStore[email]
     }
 
-    override fun getById(id: Long, email: String): Absent {
-        return absentStore[id, email]
+    override suspend fun getById(id: Long, email: String): Absent {
+        return absentStore.get(id, email)
     }
 }

@@ -30,18 +30,19 @@ class AbsentViewModel @Inject constructor(
     fun doAbsent(result: String) {
         viewModelScope.launch {
             runCatching {
-                val eventAvailable = checkEventAvailability.execute(result.toLong())
-                if (eventAvailable) {
-                    getCurrentLocation.execute()
-                        .addOnSuccessListener { location: Location ->
-                            val currentLoc = LatLng(location.latitude, location.longitude)
-                            doAbsent(result, currentLoc)
-                        }
-                        .addOnFailureListener { e: Exception ->
-                            e.printStackTrace()
-                            _resultStatus.postValue(QRCodeResultStatus.INVALID_LOCATION)
-                        }
-                } else throw NotFoundException.getNotFoundInstance()
+                checkEventAvailability.execute(result.toLong()).collectLatest {
+                    if (it) {
+                        getCurrentLocation.execute()
+                            .addOnSuccessListener { location: Location ->
+                                val currentLoc = LatLng(location.latitude, location.longitude)
+                                doAbsent(result, currentLoc)
+                            }
+                            .addOnFailureListener { e: Exception ->
+                                e.printStackTrace()
+                                _resultStatus.postValue(QRCodeResultStatus.INVALID_LOCATION)
+                            }
+                    } else throw NotFoundException.getNotFoundInstance()
+                }
             }.onFailure {
                 _resultStatus.postValue(QRCodeResultStatus.INVALID)
             }

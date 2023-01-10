@@ -10,5 +10,5 @@ interface EventStore {
     val allEvent: Task<QuerySnapshot>
     val allActiveEvent: Task<QuerySnapshot>
     fun getEventByEmail(email: String): Task<QuerySnapshot>
-    fun checkEventAvailability(id: Long): Boolean
+    suspend fun checkEventAvailability(id: Long): Boolean
 }

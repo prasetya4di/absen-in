@@ -24,8 +24,10 @@ class AllEventViewModel @Inject constructor(
         Executors.newSingleThreadExecutor().execute {
             fetchAllEvent.execute()
                 .addOnSuccessListener {
-                    events = getAllEvent.execute()
-                    _allEventState.postValue(AllEventState.SUCCESS)
+                    Executors.newSingleThreadExecutor().execute {
+                        events = getAllEvent.execute()
+                        _allEventState.postValue(AllEventState.SUCCESS)
+                    }
                 }
                 .addOnFailureListener {
                     _allEventState.postValue(AllEventState.FAILED)

@@ -12,8 +12,14 @@
     <color name="primary_blue_200">#0077B6</color>
     <color name="light_blue_200">#CAF0F8</color>
     <color name="light_blue_400">#48CAE4</color>
+    <color name="red_100">#f8d7da</color>
+    <color name="red_200">#f5c2c7</color>
     <color name="red_400">#DC3545</color>
+    <color name="red_600">#842029</color>
+    <color name="green_100">#d1e7dd</color>
+    <color name="green_200">#badbcc</color>
     <color name="green_400">#198754</color>
+    <color name="green_600">#0f5132</color>
     <color name="gray_100">#E8E6E6</color>
     <color name="gray_400">#6C757D</color>
 </resources>

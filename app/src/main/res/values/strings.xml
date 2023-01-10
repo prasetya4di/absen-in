@@ -75,4 +75,6 @@
     <string name="txt_total_participants_and_attendance">Kehadiran : %1$d/%2$d</string>
     <string name="txt_qr_code_downloaded">Qr Code telah di download, anda dapet melihat melalui galeri atau file manager</string>
     <string name="txt_absent_duplicate">Ooopss... Anda sudah melakukan absensi pada event ini</string>
+    <string name="txt_attend">Hadir</string>
+    <string name="txt_did_not_attend">Tidak Hadir</string>
 </resources>

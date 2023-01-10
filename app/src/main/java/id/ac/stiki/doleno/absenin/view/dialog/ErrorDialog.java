@@ -31,14 +31,16 @@ public class ErrorDialog {
     }
 
     public void show(String errorText) {
-        SweetAlertDialog loadingDialog = new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE);
-        loadingDialog.setTitleText(errorText);
-        loadingDialog.setCancelable(false);
-        loadingDialog.setCancelButton(activity.getString(R.string.invalid_code_exit), cancelListener);
+        SweetAlertDialog errorDialog = new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE);
+        errorDialog.setTitleText(errorText);
+        errorDialog.setCancelable(false);
+        errorDialog.setCancelButton(activity.getString(R.string.invalid_code_exit), cancelListener);
         if (!confirmButtonText.isEmpty()) {
-            loadingDialog.setConfirmButton(confirmButtonText, confirmListener);
+            errorDialog.setConfirmButton(confirmButtonText, confirmListener);
+        } else {
+            errorDialog.hideConfirmButton();
         }
 
-        loadingDialog.show();
+        errorDialog.show();
     }
 }

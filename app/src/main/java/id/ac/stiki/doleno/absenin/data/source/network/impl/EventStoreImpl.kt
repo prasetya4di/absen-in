@@ -8,6 +8,7 @@ import id.ac.stiki.doleno.absenin.data.database.table.Column
 import id.ac.stiki.doleno.absenin.data.database.table.Table
 import id.ac.stiki.doleno.absenin.data.entity.Event
 import id.ac.stiki.doleno.absenin.data.source.network.EventStore
+import id.ac.stiki.doleno.absenin.util.date.DateUtil
 import kotlinx.coroutines.tasks.await
 import java.util.*
 import javax.inject.Inject
@@ -26,8 +27,8 @@ open class EventStoreImpl @Inject constructor(
     override val allEvent: Task<QuerySnapshot>
         get() = collection.get()
     override val allActiveEvent: Task<QuerySnapshot>
-        get() = collection.whereGreaterThanOrEqualTo("event_date", Date()).get()
-
+        get() = collection.whereGreaterThanOrEqualTo("event_date", DateUtil.removeTime(Date()))
+            .get()
     override fun getEventByEmail(email: String): Task<QuerySnapshot> {
         return collection.whereEqualTo(Column.Event.ORGANIZER_MAIL.columnName, email).get()
     }

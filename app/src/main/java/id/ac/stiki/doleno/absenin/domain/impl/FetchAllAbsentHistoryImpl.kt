@@ -15,6 +15,7 @@ class FetchAllAbsentHistoryImpl @Inject constructor(private val absentRepository
             .addOnSuccessListener { result: QuerySnapshot ->
                 Executors.newSingleThreadExecutor().execute {
                     val absents: List<Absent> = result.documents.map { Absent(it.data) }
+                    absentRepository.delete()
                     absentRepository.create(absents)
                 }
             }

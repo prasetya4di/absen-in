@@ -77,4 +77,5 @@
     <string name="txt_absent_duplicate">Ooopss... Anda sudah melakukan absensi pada event ini</string>
     <string name="txt_attend">Hadir</string>
     <string name="txt_did_not_attend">Tidak Hadir</string>
+    <string name="txt_registered">Terdaftar</string>
 </resources>

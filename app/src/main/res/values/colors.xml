@@ -20,6 +20,9 @@
     <color name="green_200">#badbcc</color>
     <color name="green_400">#198754</color>
     <color name="green_600">#0f5132</color>
+    <color name="yellow_100">#fff3cd</color>
+    <color name="yellow_200">#ffecb5</color>
+    <color name="yellow_600">#664d03</color>
     <color name="gray_100">#E8E6E6</color>
     <color name="gray_400">#6C757D</color>
 </resources>

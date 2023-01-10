@@ -11,7 +11,8 @@ import javax.inject.Inject
 class FetchAllEventImpl @Inject constructor(private val eventRepository: EventRepository) :
     FetchAllEvent {
     override fun execute(): Task<QuerySnapshot> {
-        return eventRepository.get()
+        return eventRepository
+            .activeEvent
             .addOnSuccessListener { querySnapshots: QuerySnapshot ->
                 Executors.newSingleThreadExecutor().execute {
                     val listEvent: List<Event> = querySnapshots.documents.map { document ->

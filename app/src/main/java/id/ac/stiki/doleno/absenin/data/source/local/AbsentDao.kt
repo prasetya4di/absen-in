@@ -1,31 +1,28 @@
-package id.ac.stiki.doleno.absenin.data.source.local;
+package id.ac.stiki.doleno.absenin.data.source.local
 
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-
-import java.util.List;
-
-import id.ac.stiki.doleno.absenin.data.entity.Absent;
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import id.ac.stiki.doleno.absenin.data.entity.Absent
 
 @Dao
-public interface AbsentDao {
-    @Query("SELECT * FROM absent")
-    List<Absent> getAll();
+interface AbsentDao {
+    @get:Query("SELECT * FROM absent")
+    val all: List<Absent>
 
     @Query("SELECT * FROM absent WHERE uid = :absentId")
-    Absent getById(int absentId);
+    fun getById(absentId: Int): Absent
 
     @Query("SELECT * FROM absent WHERE status in (:absentStatus)")
-    List<Absent> getByStatus(List<String> absentStatus);
+    fun getByStatus(absentStatus: List<String>): List<Absent>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Absent absent);
+    fun insert(absent: Absent)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<Absent> absent);
+    fun insert(absent: List<Absent>)
 
     @Query("DELETE FROM absent")
-    void delete();
+    fun delete()
 }

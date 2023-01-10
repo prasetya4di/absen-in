@@ -30,8 +30,7 @@ open class EventStoreImpl @Inject constructor(
         get() = collection.whereGreaterThanOrEqualTo(
             Column.Event.DATE.columnName,
             DateUtil.removeTime(Date())
-        )
-            .get()
+        ).get()
     override fun getEventByEmail(email: String): Task<QuerySnapshot> {
         return collection.whereEqualTo(Column.Event.ORGANIZER_MAIL.columnName, email).get()
     }

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import id.ac.stiki.doleno.absenin.data.database.table.Column;
+import id.ac.stiki.doleno.absenin.util.date.DateUtil;
 import id.ac.stiki.doleno.absenin.util.enums.AbsentStatus;
 
 @Entity
@@ -118,11 +119,12 @@ public class Absent implements Serializable, Parcelable {
     }
 
     protected Absent(Parcel in) {
-        uid = in.readInt();
+        uid = in.readLong();
         absentTitle = in.readString();
         absentDescription = in.readString();
         absentOrganizer = in.readString();
         absentOrganizerMail = in.readString();
+        absentDate = DateUtil.Companion.dateFromString(in.readString());
         location = in.readParcelable(LatLng.class.getClassLoader());
         locationName = in.readString();
         status = AbsentStatus.fromString(in.readString());
@@ -140,6 +142,7 @@ public class Absent implements Serializable, Parcelable {
         dest.writeString(absentDescription);
         dest.writeString(absentOrganizer);
         dest.writeString(absentOrganizerMail);
+        dest.writeString(DateUtil.Companion.dateToString(absentDate));
         dest.writeParcelable(location, flags);
         dest.writeString(locationName);
         dest.writeString(status.getText());

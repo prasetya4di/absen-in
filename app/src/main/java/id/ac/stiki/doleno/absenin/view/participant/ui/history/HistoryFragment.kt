@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.ac.stiki.doleno.absenin.data.entity.Absent
 import id.ac.stiki.doleno.absenin.databinding.FragmentHistoryBinding
-import id.ac.stiki.doleno.absenin.view.history_detail.HistoryDetailActivity
+import id.ac.stiki.doleno.absenin.view.participant.ui.history_detail.HistoryDetailActivity
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -45,12 +45,12 @@ class HistoryFragment : Fragment() {
                         binding.empty.layoutEmpty.visibility = View.GONE
                         binding.rvHistory.visibility = View.VISIBLE
                         val historyAdapter =
-                            HistoryAdapter(viewModel.listAbsent) { absent: Absent? ->
+                            HistoryAdapter(viewModel.listAbsent) { absent: Absent ->
                                 val intent = Intent(
                                     this.activity,
                                     HistoryDetailActivity::class.java
                                 )
-                                intent.putExtra("absent_data", absent as Parcelable?)
+                                intent.putExtra("absent_data", absent as Parcelable)
                                 startActivity(intent)
                             }
                         binding.rvHistory.adapter = historyAdapter

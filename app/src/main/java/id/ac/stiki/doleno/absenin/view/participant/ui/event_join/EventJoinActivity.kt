@@ -128,6 +128,8 @@ class EventJoinActivity : AppCompatActivity(), OnMapReadyCallback {
                 binding.btnRegisterEvent.isEnabled = !it
             }
         }
+
+        binding.imgBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     private fun setData() {

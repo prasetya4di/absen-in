@@ -139,6 +139,10 @@ public class AddEventActivity extends AppCompatActivity implements OnMapReadyCal
                 errorDialog.show(getString(R.string.txt_data_incomplete_error));
             }
         });
+
+        binding.imgBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 
     @Override

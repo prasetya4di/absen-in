@@ -72,6 +72,8 @@ class MyEventDetailActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+        binding.imgBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     private fun setData() {

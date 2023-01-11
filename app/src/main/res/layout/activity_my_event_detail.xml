@@ -175,6 +175,7 @@
                     android:id="@+id/btnDownloadQrCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="@string/txt_download_qr_code"
                     android:textAllCaps="false" />
             </LinearLayout>

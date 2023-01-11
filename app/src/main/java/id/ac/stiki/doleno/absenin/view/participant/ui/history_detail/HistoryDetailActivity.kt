@@ -44,6 +44,8 @@ class HistoryDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment =
             supportFragmentManager.findFragmentById(binding.mapDetailEvent.id) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.imgBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     override fun onMapReady(map: GoogleMap) {

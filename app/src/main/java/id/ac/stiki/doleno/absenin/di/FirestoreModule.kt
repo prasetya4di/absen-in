@@ -1,6 +1,7 @@
 package id.ac.stiki.doleno.absenin.di
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,7 +41,11 @@ class FirestoreModule {
         @JvmStatic
         @Provides
         fun provideFireStore(): FirebaseFirestore {
-            return FirebaseFirestore.getInstance()
+            val settings = FirebaseFirestoreSettings.Builder()
+            settings.isPersistenceEnabled = false
+            val firestore = FirebaseFirestore.getInstance()
+            firestore.firestoreSettings = settings.build()
+            return firestore
         }
     }
 }
